@@ -6,7 +6,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Lode Runner par Caroline Chagnon et Razvan Pruteanu</title>
-    <link rel="stylesheet" type="text/css" href="" />
+    <link rel="stylesheet" type="text/css" href="StyleProjet1.css" />
     <!-- Code JavaScript local -->
     <script type="text/javascript">
         var objCanvas = null;
@@ -20,6 +20,10 @@
             objCanvas = document.getElementById('monCanvas');
             objCanvas.focus();
             objC2D = objCanvas.getContext('2d');
+            tabObjets = new Array(17);
+            for (var i = 0; i < tabObjets.length; i++){
+                tabObjets[i] = new Array(25);
+            }
             //initPasserelles();
             //initMurs();
             //initBarres();
@@ -28,15 +32,15 @@
             //initPointage();
             //initTrajetBalle();
             dessiner(); // Dessiner une première fois
-            animer();  // animer
+            //animer();  // animer
         }
 
         // Construire les passerelles
         function initPasserelles(intX,intY) {
             var objPasserelle = new Object();
-            objPasserelle.strCouleur = 'yellow';
-            objPasserelle.intLargeur = 50;
-            objPasserelle.intHauteur = 50;
+            objPasserelle.strCouleur = 'red';
+            objPasserelle.intLargeur = 30;
+            objPasserelle.intHauteur = 30;
             objPasserelle.intX = intX;
             objPasserelle.intY = intY;
             tabObjets[intX][intY] = objPasserelle;
@@ -115,20 +119,16 @@
             tabTableau.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
             tabTableau.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
             tabTableau.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-            console.log(tabTableau);
 
-            /*
             for (var i = 0; i < tabTableau.length; i++) {
-                console.log("heyy");
-                for (var j = 0; i < tabTableau[i].length; j++) {
+                for (var j = 0; j < tabTableau[i].length; j++) {
                     switch (tabTableau[i][j]) {
                         case 1:
-                            initPasserelles(i,j);
+                            initPasserelles(j,i);
                             break;
                     }
                 }
             }
-            */
         }
 
         // Construire les sons
@@ -220,34 +220,26 @@
         // Pour dessiner le tableau
         function dessiner() {
             
+            
             for (var i = 0; i < tabTableau.length; i++) {
-                for (var j = 0; i < tabTableau[i].length; j++) {
-                    console.log("heyy");
-                }
-            }
-            /*
-            for (var i = 0; i < tabTableau.length; i++) {
-                console.log("heyy");
-                for (var j = 0; i < tabTableau[i].length; j++) {
+                for (var j = 0; j < tabTableau[i].length; j++) {
                     switch (tabTableau[i][j]) {
                         case 1:
-                            dessinerPasserelles(i,j);
+                            dessinerPasserelles(j,i);
                             break;
                     }
                 }
             }
-            */
         }
 
         // Pour dessiner l'image de fond
         function dessinerPasserelles(intX,intY) {
             objC2D.save();
-            console.log("pass");
-            var objPasserelle = tabObjets[intX,intY];
-            intPosX = objPasserelle.intX * 50;
-            intPosY = objPasserelle.intY * 50;
+            var objPasserelle = tabObjets[intX][intY];
+            intPosX = objPasserelle.intX * 30;
+            intPosY = objPasserelle.intY * 30;
             objC2D.fillStyle = objPasserelle.strCouleur;
-            objC2D.fillRect(intPosX,intPosY,objPasserelle.intLargeur,intHauteur);
+            objC2D.fillRect(intPosX,intPosY,objPasserelle.intLargeur,objPasserelle.intHauteur);
             objC2D.restore();
         }
 
@@ -255,7 +247,7 @@
 </head>
 
 <body onload="initAnimation()">
-    <canvas id="monCanvas" width="960" height="640" tabIndex="1" onkeydown="deplacerBaton(); return false">
+    <canvas id="monCanvas" width="750" height="510" tabIndex="1" class="sCanvas">
         Votre navigateur ne supporte pas la balise canvas
     </canvas>
 </body>
