@@ -40,7 +40,8 @@
         // Construire les passerelles
         function initPasserelles(intY,intX) {
             var objPasserelle = new Object();
-            objPasserelle.strCouleur = 'red';
+            objPasserelle.strCouleurPrim = '#8E443D';
+            objPasserelle.strCouleurSec = '#441F1E';
             objPasserelle.intLargeur = 30;
             objPasserelle.intHauteur = 30;
             objPasserelle.intX = intX;
@@ -48,59 +49,6 @@
             console.log(tabObjets[intY]);
             tabObjets[intY][intX] = objPasserelle;
         }
-
-        // Construire les murs
-        function initMurs() {
-            var objMur = null;
-            var objImageMurs = new Image();
-            objImageMurs.src = 'murs.jpg';
-
-            // Le mur de gauche (#0)
-            objMur = new Object();
-            objMur.intXDebut = 0;
-            objMur.intYDebut = 0;
-            objMur.intXFin = Math.floor(objCanvas.width / 60);
-            objMur.intYFin = objCanvas.height
-            objMur.strCouleur = 'midnightblue';
-            objMur.objImage = objImageMurs;
-            tabObjMurs.push(objMur);
-
-            // Le mur du centre (en haut) (#1)
-            objMur = new Object();
-            objMur.intXDebut = 0;
-            objMur.intYDebut = 0;
-            objMur.intXFin = objCanvas.width;
-            objMur.intYFin = Math.floor(objCanvas.width / 60);
-            objMur.strCouleur = 'midnightblue';
-            objMur.objImage = objImageMurs;
-            tabObjMurs.push(objMur);
-
-            // Le mur de droite (#2)
-            objMur = new Object();
-            objMur.intXDebut = objCanvas.width;
-            objMur.intYDebut = 0;
-            objMur.intXFin = objCanvas.width - Math.floor(objCanvas.width / 60);
-            objMur.intYFin = objCanvas.height;
-            objMur.strCouleur = 'midnightblue';
-            objMur.objImage = objImageMurs;
-            tabObjMurs.push(objMur);
-        }
-
-        // Construire le bâton
-        function initBarres() {
-            var objImageBaton = new Image();
-            objImageBaton.src = 'baton.png';
-            objBaton = new Object();
-            objBaton.objImage = objImageBaton;
-            objBaton.intLargeur = Math.floor(objCanvas.width / 10);
-            objBaton.intHauteur = Math.floor(objCanvas.height / 20);
-            objBaton.intX = (objCanvas.width - objBaton.intLargeur) / 2;
-            objBaton.intY = objCanvas.height - Math.floor(objCanvas.height / 5);
-            objBaton.intVitesse = Math.floor(objCanvas.width / 30);
-            objBaton.intDirection = 1;
-        }
-
-        // Construire la balle
 
         function initTableau() {
             /*0 nothing, 1 bricks, 2 ladders, 3 gold, 
@@ -245,8 +193,22 @@
             var objPasserelle = tabObjets[intY][intX];
             intPosX = objPasserelle.intX * 30;
             intPosY = objPasserelle.intY * 30;
-            objC2D.fillStyle = objPasserelle.strCouleur;
+            objC2D.fillStyle = objPasserelle.strCouleurPrim;
             objC2D.fillRect(intPosX,intPosY,objPasserelle.intLargeur,objPasserelle.intHauteur);
+            objC2D.strokeStyle = objPasserelle.strCouleurSec;
+            objC2D.fillStyle = objPasserelle.strCouleurSec;
+            objC2D.lineWidth = 2;
+            objC2D.translate(intPosX,intPosY);
+            objC2D.strokeRect(1,0,objPasserelle.intLargeur -2,objPasserelle.intHauteur/2);
+            objC2D.beginPath();
+            objC2D.moveTo(0,objPasserelle.intHauteur);
+            objC2D.lineTo(objPasserelle.intLargeur,objPasserelle.intHauteur);
+            objC2D.stroke();
+            objC2D.beginPath();
+            objC2D.moveTo(objPasserelle.intLargeur/2,objPasserelle.intHauteur/2);
+            objC2D.lineTo(objPasserelle.intLargeur/2,objPasserelle.intHauteur);
+            objC2D.stroke();
+            objC2D.fillRect(objPasserelle.intLargeur/2,objPasserelle.intHauteur/2,3,objPasserelle.intHauteur/2);
             objC2D.restore();
         }
 

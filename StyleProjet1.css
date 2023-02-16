@@ -1,4 +1,4 @@
-﻿BODY { font-family:arial; font-size:10pt; color:black; background-color: midnightblue}
+﻿BODY { font-family:arial; font-size:10pt; color:black; background-color: #3B5191}
 .sTexteCentre { text-align:center; }
 .sLargeurDiv { width:640px; padding-left:10px; padding-right:10px;}
 
@@ -6,7 +6,7 @@
 .sPiedDePage {margin-top:5px;  border-top-width:2px;  border-top-style:solid; }
 .sTitreApp { font-size:150%; font-weight:bold; text-decoration:underline; } 
 .sAuteurApp { font-variant:small-caps; font-style:italic; font-weight:bold;}    
-.sCanvas {background-color: black; position: absolute; left:30px; top:30px;}
+.sCanvas {background-color: #BBF2FF; position: absolute; left:30px; top:30px;}
 
 A:link IMG, A:visited IMG { border:none; }
 A:hover IMG { border-style:double; border-width:2px; border-color:Green;}
