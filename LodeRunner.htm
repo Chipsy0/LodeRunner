@@ -12,7 +12,7 @@
         var objCanvas = null;
         var objC2D = null;
         var objCycleAnimation = null;
-
+        var objRunner = null;
         var tabTableau = null;
         var tabObjets = null;
 
@@ -25,9 +25,10 @@
                 tabObjets[i] = new Array(28);
             }
 
-            initTableau();
+            initRunner();
+            initTableau();            
             dessiner(); // Dessiner une première fois
-            //animer();  // animer
+            animer();  // animer
         }
 
         // Construire les passerelles
@@ -72,6 +73,18 @@
             objSol.intLargeur = 30;
             objSol.intHauteur = 30;
             tabObjets[intY][intX] = objSol;
+        }
+
+        // Construire le runner
+        function initRunner() {
+            objRunner = new Object();
+            objRunner.strCouleur = 'white';
+            objRunner.intX = 14;
+            objRunner.intY = 14;
+            objRunner.intLargeur = 20;
+            objRunner.intHauteur = 25;
+            objRunner.intDirection = 1;
+            objRunner.intVitesse = Math.floor(objCanvas.width / 30);
         }
 
         function initTableau() {
@@ -155,7 +168,7 @@
 
 
         // Pour dessiner le tableau
-        function dessiner() {
+        function dessiner() {            
             for (var i = 0; i < tabTableau.length; i++) {
                 for (var j = 0; j < tabTableau[i].length; j++) {
                     switch (tabTableau[i][j]) {
@@ -180,6 +193,7 @@
                     }
                 }
             }
+            dessinerRunner();
         }
 
         // Pour dessiner les passerelles
@@ -252,11 +266,68 @@
             objC2D.restore();
         }
 
+        // Pour dessiner le runner
+        function dessinerRunner() {
+            objC2D.save();
+            intPosX = objRunner.intX * 30;
+            intPosY = objRunner.intY * 30;
+            objC2D.fillStyle = objRunner.strCouleur;
+            objC2D.fillRect(intPosX, intPosY + 5, objRunner.intLargeur, objRunner.intHauteur);
+            objC2D.restore();
+        }
+
+        // Pour déplacer le Runner
+        function deplacerRunner() {
+            switch (event.keyCode) {
+                case 39: // Flèche-à-droite                    
+                    objRunner.intDirection = 1;
+                    break;
+                case 37: // Flèche-à-gauche
+                    objRunner.intDirection = -1;
+                    break;
+                /*case 38: // Flèche-en-haut
+                    objBalle.binEnMouvement = true;
+                    break;*/
+            }
+            objRunner.intX += objRunner.intVitesse * objRunner.intDirection;
+
+
+        }
+
+        // Un cycle d'animation	
+        function animer() {
+            // Requête pour le prochain cycle
+            objCycleAnimation = requestAnimationFrame(animer);
+
+            // Le cycle d'animation
+            effacerDessin();
+            mettreAjourAnimation();
+            dessiner();
+        }
+
+        // Arrêter l'animation
+        function arreterAnimation() {
+            if (objCycleAnimation != null)
+                cancelAnimationFrame(objCycleAnimation);
+            objCycleAnimation = null;
+        }
+
+        // Pour effacer le dessin
+        function effacerDessin() {
+            objC2D.clearRect(0, 0, objCanvas.width, objCanvas.height);
+        }
+
+        // Pour mettre à jour l'animation
+        function mettreAjourAnimation() {
+
+        }
+
+
     </script>
 </head>
 
 <body onload="initAnimation()">
-    <canvas id="monCanvas" width="750" height="510" tabIndex="1" class="sCanvas">
+    <canvas id="monCanvas" width="750" height="510" tabIndex="1" class="sCanvas" onkeydown="deplacerRunner();">
         Votre navigateur ne supporte pas la balise canvas
     </canvas>
 </body>
