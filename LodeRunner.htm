@@ -24,13 +24,8 @@
             for (var i = 0; i < tabObjets.length; i++){
                 tabObjets[i] = new Array(28);
             }
-            //initPasserelles();
-            //initMurs();
-            //initBarres();
+
             initTableau();
-            //initSons();
-            //initPointage();
-            //initTrajetBalle();
             dessiner(); // Dessiner une première fois
             //animer();  // animer
         }
@@ -54,6 +49,17 @@
             objEchelle.intY = intY;
             tabObjets[intY][intX] = objEchelle;
         }    
+
+        // Construire le sol
+        function initSol(intY,intX) {
+            var objSol = new Object();
+            objSol.strCouleur = 'gray';
+            objSol.intX = intX;
+            objSol.intY = intY;
+            objSol.intLargeur = 30;
+            objSol.intHauteur = 30;
+            tabObjets[intY][intX] = objSol;
+        }  
     
 
         function initTableau() {
@@ -91,15 +97,15 @@
                             break;
 
                         case 3:
-                            console.log('3');
+                            
                             break;
 
                         case 4:
-                            console.log('4');
+                            initSol(i,j);
                             break;
 
                         case 5:
-                            console.log('5');
+                            
                             break;
 
                     }
@@ -205,6 +211,10 @@
                         case 2: 
                             dessinerEchelles(i,j);
                             break;
+
+                        case 4: 
+                            dessinerSol(i,j);
+                            break;
                         
                     }
                 }
@@ -238,6 +248,20 @@
             objC2D.fillStyle = "#f09218";
             objC2D.fillRect(intPosX,intPosY,5,30);
             objC2D.fillRect(intPosX +25,intPosY,5,30);
+            objC2D.restore();
+        }
+
+        // Pour dessiner le sol
+        function dessinerSol(intY,intX) {
+            objC2D.save();
+            var objSol = tabObjets[intY][intX];
+            intPosX = objSol.intX * 30;
+            intPosY = objSol.intY * 30;            
+            objC2D.strokeStyle = '#423e3d';
+            objC2D.lineWidth = 4;
+            objC2D.fillStyle = objSol.strCouleur;
+            objC2D.fillRect(intPosX,intPosY,objSol.intLargeur,objSol.intHauteur);
+            objC2D.strokeRect(intPosX,intPosY,objSol.intLargeur,objSol.intHauteur);
             objC2D.restore();
         }
 
