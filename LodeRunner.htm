@@ -20,10 +20,12 @@
             objCanvas = document.getElementById('monCanvas');
             objCanvas.focus();
             objC2D = objCanvas.getContext('2d');
+            console.log(tabObjets);
             tabObjets = new Array(17);
             for (var i = 0; i < tabObjets.length; i++){
-                tabObjets[i] = new Array(25);
+                tabObjets[i] = new Array(28);
             }
+            console.log(tabObjets);
             //initPasserelles();
             //initMurs();
             //initBarres();
@@ -36,14 +38,15 @@
         }
 
         // Construire les passerelles
-        function initPasserelles(intX,intY) {
+        function initPasserelles(intY,intX) {
             var objPasserelle = new Object();
             objPasserelle.strCouleur = 'red';
             objPasserelle.intLargeur = 30;
             objPasserelle.intHauteur = 30;
             objPasserelle.intX = intX;
             objPasserelle.intY = intY;
-            tabObjets[intX][intY] = objPasserelle;
+            console.log(tabObjets[intY]);
+            tabObjets[intY][intX] = objPasserelle;
         }
 
         // Construire les murs
@@ -121,12 +124,14 @@
             tabTableau.push([0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]);
             tabTableau.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
             tabTableau.push([4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]);
+            console.log(tabTableau);
 
             for (var i = 0; i < tabTableau.length; i++) {
                 for (var j = 0; j < tabTableau[i].length; j++) {
+                    console.log(tabTableau[i][j]);
                     switch (tabTableau[i][j]) {
                         case 1:
-                            initPasserelles(j,i);
+                            initPasserelles(i,j);
                             break;
                     }
                 }
@@ -227,7 +232,7 @@
                 for (var j = 0; j < tabTableau[i].length; j++) {
                     switch (tabTableau[i][j]) {
                         case 1:
-                            dessinerPasserelles(j,i);
+                            dessinerPasserelles(i,j);
                             break;
                     }
                 }
@@ -235,9 +240,9 @@
         }
 
         // Pour dessiner l'image de fond
-        function dessinerPasserelles(intX,intY) {
+        function dessinerPasserelles(intY,intX) {
             objC2D.save();
-            var objPasserelle = tabObjets[intX][intY];
+            var objPasserelle = tabObjets[intY][intX];
             intPosX = objPasserelle.intX * 30;
             intPosY = objPasserelle.intY * 30;
             objC2D.fillStyle = objPasserelle.strCouleur;
