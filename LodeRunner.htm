@@ -20,19 +20,12 @@
             objCanvas = document.getElementById('monCanvas');
             objCanvas.focus();
             objC2D = objCanvas.getContext('2d');
-            console.log(tabObjets);
             tabObjets = new Array(17);
             for (var i = 0; i < tabObjets.length; i++){
                 tabObjets[i] = new Array(28);
             }
-            console.log(tabObjets);
-            //initPasserelles();
-            //initMurs();
-            //initBarres();
+
             initTableau();
-            //initSons();
-            //initPointage();
-            //initTrajetBalle();
             dessiner(); // Dessiner une première fois
             //animer();  // animer
         }
@@ -46,7 +39,6 @@
             objPasserelle.intHauteur = 30;
             objPasserelle.intX = intX;
             objPasserelle.intY = intY;
-            console.log(tabObjets[intY]);
             tabObjets[intY][intX] = objPasserelle;
         }
 
@@ -71,76 +63,34 @@
             tabTableau.push([0, 0, 0, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2]);
             tabTableau.push([0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]);
             tabTableau.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
-            tabTableau.push([4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]);
-            console.log(tabTableau);
+            tabTableau.push([4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]);          
 
             for (var i = 0; i < tabTableau.length; i++) {
                 for (var j = 0; j < tabTableau[i].length; j++) {
-                    console.log(tabTableau[i][j]);
                     switch (tabTableau[i][j]) {
                         case 1:
                             initPasserelles(i,j);
                             break;
+
+                        case 2: 
+                            initEchelles(i,j);
+                            break;
+
+                        case 3:
+                            
+                            break;
+
+                        case 4:
+                            initSol(i,j);
+                            break;
+
+                        case 5:
+                            initCord(i,j);
+                            break;
+
                     }
                 }
             }
-        }
-
-        // Construire les sons
-        function initSons() {
-            objSons = new Object();
-
-            var objSon = document.createElement('audio');
-            objSon.setAttribute('src', 'SonBalleMur.mp3');
-            objSon.load();
-            objSons.balleMur = objSon;
-
-            objSon = document.createElement('audio');
-            objSon.setAttribute('src', 'SonBallePerdue.mp3');
-            objSon.load();
-            objSons.ballePerdue = objSon;
-
-            objSon = document.createElement('audio');
-            objSon.setAttribute('src', 'SonDisparitionVortex.mp3');
-            objSon.load();
-            objSons.disparitionVortex = objSon;
-
-            objSon = document.createElement('audio');
-            objSon.setAttribute('src', 'SonBalleBaton.mp3');
-            objSon.load();
-            objSons.balleBaton = objSon;
-        }
-
-        // Construire les cartes de pointage
-        function initPointage() {
-            objPointage = new Object();
-            objPointage.intX = tabObjMurs[0].intXFin + 4;
-            objPointage.intY = objBaton.intY + objBaton.intHauteur + 4;
-            objPointage.intLargeur = tabObjMurs[2].intXFin - objPointage.intX;
-            objPointage.intHauteur = objCanvas.height - objPointage.intY - 4;
-
-            objPointage.intNbBallesRestantes = 15;
-            objPointage.intNbBallesPerdues = 0;
-            objPointage.intNbBallesVortex = 0;
-
-            var objImage = new Image();
-            objImage.src = 'balle.jpg';
-            objPointage.objImageBalle = objImage;
-
-            objImage = new Image();
-            objImage.src = 'vortex.jpg';
-            objPointage.objImageVortex = objImage;
-
-            objImage = new Image();
-            objImage.src = 'Perdu.jpg';
-            objPointage.objImagePerdu = objImage;
-        }
-
-        function initTrajetBalle() {
-
-            objTrajetBalle = new Object();
-            objTrajetBalle.tabPositions = new Array();
-            objTrajetBalle.couleur = 'lightgreen';
         }
 
         // Un cycle d'animation	
@@ -173,21 +123,34 @@
 
 
         // Pour dessiner le tableau
-        function dessiner() {
-            
-            
+        function dessiner() {                        
             for (var i = 0; i < tabTableau.length; i++) {
                 for (var j = 0; j < tabTableau[i].length; j++) {
                     switch (tabTableau[i][j]) {
                         case 1:
                             dessinerPasserelles(i,j);
                             break;
+
+                        case 2: 
+                            dessinerEchelles(i,j);
+                            break;
+                        
+                        
+
+                        case 4: 
+                            dessinerSol(i,j);
+                            break;
+
+                        case 5: 
+                            dessinerCord(i,j);
+                            break;
+                        
                     }
                 }
             }
         }
 
-        // Pour dessiner l'image de fond
+        // Pour dessiner les passerelles
         function dessinerPasserelles(intY,intX) {
             objC2D.save();
             var objPasserelle = tabObjets[intY][intX];
@@ -209,6 +172,51 @@
             objC2D.lineTo(objPasserelle.intLargeur/2,objPasserelle.intHauteur);
             objC2D.stroke();
             objC2D.fillRect(objPasserelle.intLargeur/2,objPasserelle.intHauteur/2,3,objPasserelle.intHauteur/2);
+            objC2D.restore();
+        }
+
+        // Pour dessiner les echelles
+        function dessinerEchelles(intY,intX) {
+            objC2D.save();
+            var objEchelle = tabObjets[intY][intX];
+            intPosX = objEchelle.intX * 30;
+            intPosY = objEchelle.intY * 30;
+            
+            objC2D.fillStyle = "#f05518";
+            objC2D.fillRect(intPosX,intPosY+2,30,2);
+            objC2D.fillRect(intPosX,intPosY+9,30,2);
+            objC2D.fillRect(intPosX,intPosY+16,30,2);
+            objC2D.fillRect(intPosX,intPosY+24,30,2);
+
+            objC2D.fillStyle = "#f09218";
+            objC2D.fillRect(intPosX,intPosY,5,30);
+            objC2D.fillRect(intPosX +25,intPosY,5,30);
+            objC2D.restore();
+        }
+
+        // Pour dessiner le cord
+        function dessinerCord(intY,intX) {
+            objC2D.save();
+            var objCord = tabObjets[intY][intX];
+            intPosX = objCord.intX * 30;
+            intPosY = objCord.intY * 30;    
+            objC2D.fillStyle = objCord.strCouleur;
+            objC2D.fillRect(intPosX,intPosY+4,objCord.intLargeur,objCord.intHauteur);
+            objC2D.restore();
+        }
+
+
+        // Pour dessiner le sol
+        function dessinerSol(intY,intX) {
+            objC2D.save();
+            var objSol = tabObjets[intY][intX];
+            intPosX = objSol.intX * 30;
+            intPosY = objSol.intY * 30;            
+            objC2D.strokeStyle = '#3d3c3b';
+            objC2D.lineWidth = 4;
+            objC2D.fillStyle = objSol.strCouleur;
+            objC2D.fillRect(intPosX,intPosY,objSol.intLargeur,objSol.intHauteur);
+            objC2D.strokeRect(intPosX,intPosY,objSol.intLargeur,objSol.intHauteur);
             objC2D.restore();
         }
 
