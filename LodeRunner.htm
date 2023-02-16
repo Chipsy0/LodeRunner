@@ -21,7 +21,7 @@
             objCanvas.focus();
             objC2D = objCanvas.getContext('2d');
             tabObjets = new Array(17);
-            for (var i = 0; i < tabObjets.length; i++){
+            for (var i = 0; i < tabObjets.length; i++) {
                 tabObjets[i] = new Array(28);
             }
 
@@ -31,7 +31,7 @@
         }
 
         // Construire les passerelles
-        function initPasserelles(intY,intX) {
+        function initPasserelles(intY, intX) {
             var objPasserelle = new Object();
             objPasserelle.strCouleurPrim = '#8E443D';
             objPasserelle.strCouleurSec = '#441F1E';
@@ -42,9 +42,41 @@
             tabObjets[intY][intX] = objPasserelle;
         }
 
+        // Construire les echelles
+        function initEchelles(intY, intX) {
+            var objEchelle = new Object();
+            objEchelle.strCouleurPrim = "#FF0000";
+            objEchelle.strCouleurSec = "#FF9900";
+            objEchelle.intX = intX;
+            objEchelle.intY = intY;
+            tabObjets[intY][intX] = objEchelle;
+        }
+
+        // Construire la corde
+        function initCorde(intY, intX) {
+            var objCorde = new Object();
+            objCorde.strCouleur = '#441F1E';
+            objCorde.intX = intX;
+            objCorde.intY = intY;
+            objCorde.intLargeur = 30;
+            objCorde.intHauteur = 2.5;
+            tabObjets[intY][intX] = objCorde;
+        }
+
+        // Construire le sol
+        function initSol(intY, intX) {
+            var objSol = new Object();
+            objSol.strCouleur = 'gray';
+            objSol.intX = intX;
+            objSol.intY = intY;
+            objSol.intLargeur = 30;
+            objSol.intHauteur = 30;
+            tabObjets[intY][intX] = objSol;
+        }
+
         function initTableau() {
-            /*0 nothing, 1 bricks, 2 ladders, 3 gold, 
-            4 just bottom part legend so you know you can remove this, 5 rope shit*/
+            /*0 rien, 1 briques, 2 échelles, 3 lingots, 
+            4 sol, 5 cordes*/
 
             tabTableau = new Array();
             tabTableau.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
@@ -63,29 +95,29 @@
             tabTableau.push([0, 0, 0, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2]);
             tabTableau.push([0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]);
             tabTableau.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
-            tabTableau.push([4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]);          
+            tabTableau.push([4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]);
 
             for (var i = 0; i < tabTableau.length; i++) {
                 for (var j = 0; j < tabTableau[i].length; j++) {
                     switch (tabTableau[i][j]) {
                         case 1:
-                            initPasserelles(i,j);
+                            initPasserelles(i, j);
                             break;
 
-                        case 2: 
-                            initEchelles(i,j);
+                        case 2:
+                            initEchelles(i, j);
                             break;
 
                         case 3:
-                            
+
                             break;
 
                         case 4:
-                            initSol(i,j);
+                            initSol(i, j);
                             break;
 
                         case 5:
-                            initCord(i,j);
+                            initCorde(i, j);
                             break;
 
                     }
@@ -123,100 +155,100 @@
 
 
         // Pour dessiner le tableau
-        function dessiner() {                        
+        function dessiner() {
             for (var i = 0; i < tabTableau.length; i++) {
                 for (var j = 0; j < tabTableau[i].length; j++) {
                     switch (tabTableau[i][j]) {
                         case 1:
-                            dessinerPasserelles(i,j);
+                            dessinerPasserelles(i, j);
                             break;
 
-                        case 2: 
-                            dessinerEchelles(i,j);
-                            break;
-                        
-                        
-
-                        case 4: 
-                            dessinerSol(i,j);
+                        case 2:
+                            dessinerEchelles(i, j);
                             break;
 
-                        case 5: 
-                            dessinerCord(i,j);
+
+
+                        case 4:
+                            dessinerSol(i, j);
                             break;
-                        
+
+                        case 5:
+                            dessinerCorde(i, j);
+                            break;
+
                     }
                 }
             }
         }
 
         // Pour dessiner les passerelles
-        function dessinerPasserelles(intY,intX) {
+        function dessinerPasserelles(intY, intX) {
             objC2D.save();
             var objPasserelle = tabObjets[intY][intX];
             intPosX = objPasserelle.intX * 30;
             intPosY = objPasserelle.intY * 30;
             objC2D.fillStyle = objPasserelle.strCouleurPrim;
-            objC2D.fillRect(intPosX,intPosY,objPasserelle.intLargeur,objPasserelle.intHauteur);
+            objC2D.fillRect(intPosX, intPosY, objPasserelle.intLargeur, objPasserelle.intHauteur);
             objC2D.strokeStyle = objPasserelle.strCouleurSec;
             objC2D.fillStyle = objPasserelle.strCouleurSec;
             objC2D.lineWidth = 2;
-            objC2D.translate(intPosX,intPosY);
-            objC2D.strokeRect(1,0,objPasserelle.intLargeur -2,objPasserelle.intHauteur/2);
+            objC2D.translate(intPosX, intPosY);
+            objC2D.strokeRect(1, 0, objPasserelle.intLargeur - 2, objPasserelle.intHauteur / 2);
             objC2D.beginPath();
-            objC2D.moveTo(0,objPasserelle.intHauteur);
-            objC2D.lineTo(objPasserelle.intLargeur,objPasserelle.intHauteur);
+            objC2D.moveTo(0, objPasserelle.intHauteur);
+            objC2D.lineTo(objPasserelle.intLargeur, objPasserelle.intHauteur);
             objC2D.stroke();
             objC2D.beginPath();
-            objC2D.moveTo(objPasserelle.intLargeur/2,objPasserelle.intHauteur/2);
-            objC2D.lineTo(objPasserelle.intLargeur/2,objPasserelle.intHauteur);
+            objC2D.moveTo(objPasserelle.intLargeur / 2, objPasserelle.intHauteur / 2);
+            objC2D.lineTo(objPasserelle.intLargeur / 2, objPasserelle.intHauteur);
             objC2D.stroke();
-            objC2D.fillRect(objPasserelle.intLargeur/2,objPasserelle.intHauteur/2,3,objPasserelle.intHauteur/2);
+            objC2D.fillRect(objPasserelle.intLargeur / 2, objPasserelle.intHauteur / 2, 3, objPasserelle.intHauteur / 2);
             objC2D.restore();
         }
 
         // Pour dessiner les echelles
-        function dessinerEchelles(intY,intX) {
+        function dessinerEchelles(intY, intX) {
             objC2D.save();
             var objEchelle = tabObjets[intY][intX];
             intPosX = objEchelle.intX * 30;
             intPosY = objEchelle.intY * 30;
-            
-            objC2D.fillStyle = "#f05518";
-            objC2D.fillRect(intPosX,intPosY+2,30,2);
-            objC2D.fillRect(intPosX,intPosY+9,30,2);
-            objC2D.fillRect(intPosX,intPosY+16,30,2);
-            objC2D.fillRect(intPosX,intPosY+24,30,2);
 
-            objC2D.fillStyle = "#f09218";
-            objC2D.fillRect(intPosX,intPosY,5,30);
-            objC2D.fillRect(intPosX +25,intPosY,5,30);
+            objC2D.fillStyle = objEchelle.strCouleurPrim;
+            objC2D.fillRect(intPosX, intPosY + 2, 30, 2);
+            objC2D.fillRect(intPosX, intPosY + 9, 30, 2);
+            objC2D.fillRect(intPosX, intPosY + 16, 30, 2);
+            objC2D.fillRect(intPosX, intPosY + 24, 30, 2);
+
+            objC2D.fillStyle = objEchelle.strCouleurSec;
+            objC2D.fillRect(intPosX, intPosY, 5, 30);
+            objC2D.fillRect(intPosX + 25, intPosY, 5, 30);
             objC2D.restore();
         }
 
-        // Pour dessiner le cord
-        function dessinerCord(intY,intX) {
+        // Pour dessiner la corde
+        function dessinerCorde(intY, intX) {
             objC2D.save();
-            var objCord = tabObjets[intY][intX];
-            intPosX = objCord.intX * 30;
-            intPosY = objCord.intY * 30;    
-            objC2D.fillStyle = objCord.strCouleur;
-            objC2D.fillRect(intPosX,intPosY+4,objCord.intLargeur,objCord.intHauteur);
+            var objCorde = tabObjets[intY][intX];
+            intPosX = objCorde.intX * 30;
+            intPosY = objCorde.intY * 30;
+            objC2D.fillStyle = objCorde.strCouleur;
+            objC2D.fillRect(intPosX, intPosY + 4, objCorde.intLargeur, objCorde.intHauteur);
             objC2D.restore();
         }
 
 
         // Pour dessiner le sol
-        function dessinerSol(intY,intX) {
+        function dessinerSol(intY, intX) {
             objC2D.save();
             var objSol = tabObjets[intY][intX];
             intPosX = objSol.intX * 30;
-            intPosY = objSol.intY * 30;            
+            intPosY = objSol.intY * 30;
             objC2D.strokeStyle = '#3d3c3b';
             objC2D.lineWidth = 4;
             objC2D.fillStyle = objSol.strCouleur;
-            objC2D.fillRect(intPosX,intPosY,objSol.intLargeur,objSol.intHauteur);
-            objC2D.strokeRect(intPosX,intPosY,objSol.intLargeur,objSol.intHauteur);
+            objC2D.fillRect(intPosX, intPosY, objSol.intLargeur, objSol.intHauteur);
+            objC2D.strokeRect(intPosX, intPosY, objSol.intLargeur, objSol.intHauteur);
             objC2D.restore();
         }
 
