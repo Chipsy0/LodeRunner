@@ -20,12 +20,10 @@
             objCanvas = document.getElementById('monCanvas');
             objCanvas.focus();
             objC2D = objCanvas.getContext('2d');
-            console.log(tabObjets);
             tabObjets = new Array(17);
             for (var i = 0; i < tabObjets.length; i++){
                 tabObjets[i] = new Array(28);
             }
-            console.log(tabObjets);
             //initPasserelles();
             //initMurs();
             //initBarres();
@@ -45,62 +43,18 @@
             objPasserelle.intHauteur = 30;
             objPasserelle.intX = intX;
             objPasserelle.intY = intY;
-            console.log(tabObjets[intY]);
             tabObjets[intY][intX] = objPasserelle;
         }
 
-        // Construire les murs
-        function initMurs() {
-            var objMur = null;
-            var objImageMurs = new Image();
-            objImageMurs.src = 'murs.jpg';
-
-            // Le mur de gauche (#0)
-            objMur = new Object();
-            objMur.intXDebut = 0;
-            objMur.intYDebut = 0;
-            objMur.intXFin = Math.floor(objCanvas.width / 60);
-            objMur.intYFin = objCanvas.height
-            objMur.strCouleur = 'midnightblue';
-            objMur.objImage = objImageMurs;
-            tabObjMurs.push(objMur);
-
-            // Le mur du centre (en haut) (#1)
-            objMur = new Object();
-            objMur.intXDebut = 0;
-            objMur.intYDebut = 0;
-            objMur.intXFin = objCanvas.width;
-            objMur.intYFin = Math.floor(objCanvas.width / 60);
-            objMur.strCouleur = 'midnightblue';
-            objMur.objImage = objImageMurs;
-            tabObjMurs.push(objMur);
-
-            // Le mur de droite (#2)
-            objMur = new Object();
-            objMur.intXDebut = objCanvas.width;
-            objMur.intYDebut = 0;
-            objMur.intXFin = objCanvas.width - Math.floor(objCanvas.width / 60);
-            objMur.intYFin = objCanvas.height;
-            objMur.strCouleur = 'midnightblue';
-            objMur.objImage = objImageMurs;
-            tabObjMurs.push(objMur);
-        }
-
-        // Construire le bâton
-        function initBarres() {
-            var objImageBaton = new Image();
-            objImageBaton.src = 'baton.png';
-            objBaton = new Object();
-            objBaton.objImage = objImageBaton;
-            objBaton.intLargeur = Math.floor(objCanvas.width / 10);
-            objBaton.intHauteur = Math.floor(objCanvas.height / 20);
-            objBaton.intX = (objCanvas.width - objBaton.intLargeur) / 2;
-            objBaton.intY = objCanvas.height - Math.floor(objCanvas.height / 5);
-            objBaton.intVitesse = Math.floor(objCanvas.width / 30);
-            objBaton.intDirection = 1;
-        }
-
-        // Construire la balle
+         // Construire les echelles
+         function initEchelles(intY,intX) {
+            var objEchelle = new Object();
+            objEchelle.strCouleur = 'yellow';
+            objEchelle.intX = intX;
+            objEchelle.intY = intY;
+            tabObjets[intY][intX] = objEchelle;
+        }    
+    
 
         function initTableau() {
             /*0 nothing, 1 bricks, 2 ladders, 3 gold, 
@@ -123,16 +77,31 @@
             tabTableau.push([0, 0, 0, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2]);
             tabTableau.push([0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]);
             tabTableau.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
-            tabTableau.push([4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]);
-            console.log(tabTableau);
+            tabTableau.push([4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]);          
 
             for (var i = 0; i < tabTableau.length; i++) {
                 for (var j = 0; j < tabTableau[i].length; j++) {
-                    console.log(tabTableau[i][j]);
                     switch (tabTableau[i][j]) {
                         case 1:
                             initPasserelles(i,j);
                             break;
+
+                        case 2: 
+                            initEchelles(i,j);
+                            break;
+
+                        case 3:
+                            console.log('3');
+                            break;
+
+                        case 4:
+                            console.log('4');
+                            break;
+
+                        case 5:
+                            console.log('5');
+                            break;
+
                     }
                 }
             }
@@ -225,21 +194,24 @@
 
 
         // Pour dessiner le tableau
-        function dessiner() {
-            
-            
+        function dessiner() {                        
             for (var i = 0; i < tabTableau.length; i++) {
                 for (var j = 0; j < tabTableau[i].length; j++) {
                     switch (tabTableau[i][j]) {
                         case 1:
                             dessinerPasserelles(i,j);
                             break;
+
+                        case 2: 
+                            dessinerEchelles(i,j);
+                            break;
+                        
                     }
                 }
             }
         }
 
-        // Pour dessiner l'image de fond
+        // Pour dessiner les passerelles
         function dessinerPasserelles(intY,intX) {
             objC2D.save();
             var objPasserelle = tabObjets[intY][intX];
@@ -247,6 +219,25 @@
             intPosY = objPasserelle.intY * 30;
             objC2D.fillStyle = objPasserelle.strCouleur;
             objC2D.fillRect(intPosX,intPosY,objPasserelle.intLargeur,objPasserelle.intHauteur);
+            objC2D.restore();
+        }
+
+        // Pour dessiner les echelles
+        function dessinerEchelles(intY,intX) {
+            objC2D.save();
+            var objEchelle = tabObjets[intY][intX];
+            intPosX = objEchelle.intX * 30;
+            intPosY = objEchelle.intY * 30;
+            
+            objC2D.fillStyle = "#f05518";
+            objC2D.fillRect(intPosX,intPosY+2,30,2);
+            objC2D.fillRect(intPosX,intPosY+9,30,2);
+            objC2D.fillRect(intPosX,intPosY+16,30,2);
+            objC2D.fillRect(intPosX,intPosY+24,30,2);
+
+            objC2D.fillStyle = "#f09218";
+            objC2D.fillRect(intPosX,intPosY,5,30);
+            objC2D.fillRect(intPosX +25,intPosY,5,30);
             objC2D.restore();
         }
 
