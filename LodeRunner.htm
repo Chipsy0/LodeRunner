@@ -60,6 +60,17 @@
             objSol.intHauteur = 30;
             tabObjets[intY][intX] = objSol;
         }  
+
+        // Construire le cord
+        function initCord(intY,intX) {
+            var objCord = new Object();
+            objCord.strCouleur = '#8B4513';
+            objCord.intX = intX;
+            objCord.intY = intY;
+            objCord.intLargeur = 30;
+            objCord.intHauteur = 2.5;
+            tabObjets[intY][intX] = objCord;
+        }  
     
 
         function initTableau() {
@@ -105,69 +116,12 @@
                             break;
 
                         case 5:
-                            
+                            initCord(i,j);
                             break;
 
                     }
                 }
             }
-        }
-
-        // Construire les sons
-        function initSons() {
-            objSons = new Object();
-
-            var objSon = document.createElement('audio');
-            objSon.setAttribute('src', 'SonBalleMur.mp3');
-            objSon.load();
-            objSons.balleMur = objSon;
-
-            objSon = document.createElement('audio');
-            objSon.setAttribute('src', 'SonBallePerdue.mp3');
-            objSon.load();
-            objSons.ballePerdue = objSon;
-
-            objSon = document.createElement('audio');
-            objSon.setAttribute('src', 'SonDisparitionVortex.mp3');
-            objSon.load();
-            objSons.disparitionVortex = objSon;
-
-            objSon = document.createElement('audio');
-            objSon.setAttribute('src', 'SonBalleBaton.mp3');
-            objSon.load();
-            objSons.balleBaton = objSon;
-        }
-
-        // Construire les cartes de pointage
-        function initPointage() {
-            objPointage = new Object();
-            objPointage.intX = tabObjMurs[0].intXFin + 4;
-            objPointage.intY = objBaton.intY + objBaton.intHauteur + 4;
-            objPointage.intLargeur = tabObjMurs[2].intXFin - objPointage.intX;
-            objPointage.intHauteur = objCanvas.height - objPointage.intY - 4;
-
-            objPointage.intNbBallesRestantes = 15;
-            objPointage.intNbBallesPerdues = 0;
-            objPointage.intNbBallesVortex = 0;
-
-            var objImage = new Image();
-            objImage.src = 'balle.jpg';
-            objPointage.objImageBalle = objImage;
-
-            objImage = new Image();
-            objImage.src = 'vortex.jpg';
-            objPointage.objImageVortex = objImage;
-
-            objImage = new Image();
-            objImage.src = 'Perdu.jpg';
-            objPointage.objImagePerdu = objImage;
-        }
-
-        function initTrajetBalle() {
-
-            objTrajetBalle = new Object();
-            objTrajetBalle.tabPositions = new Array();
-            objTrajetBalle.couleur = 'lightgreen';
         }
 
         // Un cycle d'animation	
@@ -211,9 +165,15 @@
                         case 2: 
                             dessinerEchelles(i,j);
                             break;
+                        
+                        
 
                         case 4: 
                             dessinerSol(i,j);
+                            break;
+
+                        case 5: 
+                            dessinerCord(i,j);
                             break;
                         
                     }
@@ -251,13 +211,25 @@
             objC2D.restore();
         }
 
+        // Pour dessiner le cord
+        function dessinerCord(intY,intX) {
+            objC2D.save();
+            var objCord = tabObjets[intY][intX];
+            intPosX = objCord.intX * 30;
+            intPosY = objCord.intY * 30;    
+            objC2D.fillStyle = objCord.strCouleur;
+            objC2D.fillRect(intPosX,intPosY+4,objCord.intLargeur,objCord.intHauteur);
+            objC2D.restore();
+        }
+
+
         // Pour dessiner le sol
         function dessinerSol(intY,intX) {
             objC2D.save();
             var objSol = tabObjets[intY][intX];
             intPosX = objSol.intX * 30;
             intPosY = objSol.intY * 30;            
-            objC2D.strokeStyle = '#423e3d';
+            objC2D.strokeStyle = '#3d3c3b';
             objC2D.lineWidth = 4;
             objC2D.fillStyle = objSol.strCouleur;
             objC2D.fillRect(intPosX,intPosY,objSol.intLargeur,objSol.intHauteur);
