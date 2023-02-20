@@ -23,9 +23,9 @@
             objCanvas = document.getElementById('monCanvas');
             objCanvas.focus();
             objC2D = objCanvas.getContext('2d');
-            tabObjets = new Array(17);
+            tabObjets = new Array(22);
             for (var i = 0; i < tabObjets.length; i++) {
-                tabObjets[i] = new Array(28);
+                tabObjets[i] = new Array(30);
             }
 
             initRunner();
@@ -46,20 +46,32 @@
             tabObjets[intY][intX] = objPasserelle;
         }
 
-        // Construire les echelles
+        // Construire les échelles
         function initEchelles(intY, intX) {
             var objEchelle = new Object();
-            objEchelle.strCouleurPrim = "#FF0000";
+            objEchelle.strCouleurPrim = "#ffd900";
             objEchelle.strCouleurSec = "#FF9900";
             objEchelle.intX = intX;
             objEchelle.intY = intY;
             tabObjets[intY][intX] = objEchelle;
         }
 
-        // Construire la corde
+        // Construire les lingots d'or
+        function initLingots(intY, intX) {
+            var objLingot = new Object();
+            objLingot.strCouleurPrim = "#ffd900";
+            objLingot.strCouleurSec = "#c48900";
+            objLingot.intX = intX;
+            objLingot.intY = intY;
+            objLingot.intLargeur = 30;
+            objLingot.intHauteur = 20;
+            tabObjets[intY][intX] = objLingot;
+        }
+
+        // Construire les cordes
         function initCorde(intY, intX) {
             var objCorde = new Object();
-            objCorde.strCouleur = '#441F1E';
+            objCorde.strCouleur = "#ffd900";
             objCorde.intX = intX;
             objCorde.intY = intY;
             objCorde.intLargeur = 30;
@@ -93,28 +105,55 @@
             objRunner.intVitesse = Math.floor(objCanvas.width / 300);
         }
 
+        // Construire les murs
+        function initMurs(intY, intX) {
+            objMur = new Object();
+            objMur.strCouleur = '#0b2b02';
+            objMur.intX = intX;
+            objMur.intY = intY;
+            objMur.intLargeur = 30;
+            objMur.intHauteur = 30;
+            tabObjets[intY][intX] = objMur;
+        }
+
+        // Construire le panneau
+        function initPanneau(intY, intX) {
+            objPanneau = new Object();
+            objPanneau.strCouleur = 'black';
+            objPanneau.intX = intX;
+            objPanneau.intY = intY;
+            objPanneau.intLargeur = 30;
+            objPanneau.intHauteur = 30;
+            tabObjets[intY][intX] = objPanneau;
+        }
+
         function initTableau() {
             /*0 rien, 1 briques, 2 échelles, 3 lingots, 
             4 sol, 5 cordes*/
 
             tabTableau = new Array();
-            tabTableau.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-            tabTableau.push([0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-            tabTableau.push([1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-            tabTableau.push([0, 0, 0, 0, 0, 0, 0, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0]);
-            tabTableau.push([0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1]);
-            tabTableau.push([0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0]);
-            tabTableau.push([0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 2, 0, 0]);
-            tabTableau.push([1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1]);
-            tabTableau.push([0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0]);
-            tabTableau.push([0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0]);
-            tabTableau.push([1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0]);
-            tabTableau.push([0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0]);
-            tabTableau.push([0, 0, 0, 0, 0, 0, 3, 0, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 0, 0, 0, 3, 0, 0, 0]);
-            tabTableau.push([0, 0, 0, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2]);
-            tabTableau.push([0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]);
-            tabTableau.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
-            tabTableau.push([4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]);
+            tabTableau.push([6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]);
+            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]);
+            tabTableau.push([6, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]);
+            tabTableau.push([6, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]);
+            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 6]);
+            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 6]);
+            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 6]);
+            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 2, 0, 0, 6]);
+            tabTableau.push([6, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 6]);
+            tabTableau.push([6, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 6]);
+            tabTableau.push([6, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 6]);
+            tabTableau.push([6, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 6]);
+            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 6]);
+            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 3, 0, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 0, 0, 0, 3, 0, 0, 0, 6]);
+            tabTableau.push([6, 0, 0, 0, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 6]);
+            tabTableau.push([6, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6]);
+            tabTableau.push([6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6]);
+            tabTableau.push([6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6]);
+            tabTableau.push([6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6]);
+            tabTableau.push([6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6]);
+            tabTableau.push([6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6]);
+            tabTableau.push([6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]);
 
             for (var i = 0; i < tabTableau.length; i++) {
                 for (var j = 0; j < tabTableau[i].length; j++) {
@@ -128,7 +167,7 @@
                             break;
 
                         case 3:
-
+                            initLingots(i, j);
                             break;
 
                         case 4:
@@ -139,6 +178,13 @@
                             initCorde(i, j);
                             break;
 
+                        case 6:
+                            initMurs(i, j);
+                            break;
+
+                        case 7:
+                            initPanneau(i, j);
+                            break;
                     }
                 }
             }
@@ -186,19 +232,29 @@
                             dessinerEchelles(i, j);
                             break;
 
-
+                        case 3:
+                            dessinerLingots(i, j);
+                            break;
 
                         case 4:
                             dessinerSol(i, j);
                             break;
 
                         case 5:
-                            dessinerCorde(i, j);
+                            dessinerCordes(i, j);
                             break;
 
+                        case 6:
+                            dessinerMurs(i, j);
+                            break;
+
+                        case 7:
+                            dessinerPanneau(i, j);
+                            break;
                     }
                 }
             }
+            dessinerTitre();
             dessinerRunner();
 
         }
@@ -228,7 +284,7 @@
             objC2D.restore();
         }
 
-        // Pour dessiner les echelles
+        // Pour dessiner les échelles
         function dessinerEchelles(intY, intX) {
             objC2D.save();
             var objEchelle = tabObjets[intY][intX];
@@ -247,8 +303,30 @@
             objC2D.restore();
         }
 
-        // Pour dessiner la corde
-        function dessinerCorde(intY, intX) {
+        // Pour dessiner les lingots d'or
+        function dessinerLingots(intY, intX) {
+            objC2D.save();
+            var objLingot = tabObjets[intY][intX];
+            intPosX = objLingot.intX * 30;
+            intPosY = objLingot.intY * 30;
+            objC2D.translate(0, 30 - objLingot.intHauteur);
+            objC2D.fillStyle = objLingot.strCouleurPrim;
+            objC2D.strokeStyle = objLingot.strCouleurSec;
+            objC2D.lineWidth = 1.5;
+            objC2D.fillRect(intPosX + objLingot.intLargeur / 3, intPosY, objLingot.intLargeur / 3, objLingot.intHauteur / 3);
+            objC2D.strokeRect(intPosX + objLingot.intLargeur / 3, intPosY, objLingot.intLargeur / 3, objLingot.intHauteur / 3);
+            objC2D.fillRect(intPosX + objLingot.intLargeur / 6, intPosY + objLingot.intHauteur / 3, 2 * objLingot.intLargeur / 3, objLingot.intHauteur / 3);
+            objC2D.strokeRect(intPosX + objLingot.intLargeur / 6, intPosY + objLingot.intHauteur / 3, 2 * objLingot.intLargeur / 3, objLingot.intHauteur / 3);
+            objC2D.fillRect(intPosX, intPosY + 2 * objLingot.intHauteur / 3, objLingot.intLargeur, objLingot.intHauteur / 3);
+            objC2D.strokeRect(intPosX, intPosY + 2 * objLingot.intHauteur / 3, objLingot.intLargeur, objLingot.intHauteur / 3);
+            objC2D.fillStyle = "white";
+            objC2D.fillRect(intPosX + 2 * objLingot.intLargeur / 3 - 5, intPosY + objLingot.intHauteur / 20, 4, 2);
+            objC2D.fillRect(intPosX + 5 * objLingot.intLargeur / 6 - 6, intPosY + objLingot.intHauteur / 2.7, 5, 2);
+            objC2D.restore();
+        }
+
+        // Pour dessiner les cordes
+        function dessinerCordes(intY, intX) {
             objC2D.save();
             var objCorde = tabObjets[intY][intX];
             intPosX = objCorde.intX * 30;
@@ -270,6 +348,39 @@
             objC2D.fillStyle = objSol.strCouleur;
             objC2D.fillRect(intPosX, intPosY, objSol.intLargeur, objSol.intHauteur);
             objC2D.strokeRect(intPosX, intPosY, objSol.intLargeur, objSol.intHauteur);
+            objC2D.restore();
+        }
+
+        // Pour dessiner les murs
+        function dessinerMurs(intY, intX) {
+            objC2D.save();
+            var objMur = tabObjets[intY][intX];
+            intPosX = objMur.intX * 30;
+            intPosY = objMur.intY * 30;
+            objC2D.fillStyle = objMur.strCouleur;
+            objC2D.fillRect(intPosX, intPosY, objMur.intLargeur, objMur.intHauteur);
+            objC2D.restore();
+        }
+
+        // Pour dessiner le panneau
+        function dessinerPanneau(intY, intX) {
+            objC2D.save();
+            var objPanneau = tabObjets[intY][intX];
+            intPosX = objPanneau.intX * 30;
+            intPosY = objPanneau.intY * 30;
+            objC2D.fillStyle = objPanneau.strCouleur;
+            objC2D.fillRect(intPosX, intPosY, objPanneau.intLargeur, objPanneau.intHauteur);
+            objC2D.restore();
+        }
+
+        // Pour inscrire le titre
+        function dessinerTitre() {
+            objC2D.save();
+            objC2D.fillStyle = "#46753e";
+            objC2D.font = '30px Impact';
+            objC2D.textAlign = 'center';
+            objC2D.fillText("Lode Runner", objCanvas.width/2, 26);
+            objC2D.fillText("par Caroline Chagnon et Razvan Pruteanu", objCanvas.width/2, objCanvas.height - 4);
             objC2D.restore();
         }
 
