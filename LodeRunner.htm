@@ -42,7 +42,7 @@
             tabObjets[intY][intX] = objPasserelle;
         }
 
-        // Construire les echelles
+        // Construire les échelles
         function initEchelles(intY, intX) {
             var objEchelle = new Object();
             objEchelle.strCouleurPrim = "#FF0000";
@@ -52,10 +52,22 @@
             tabObjets[intY][intX] = objEchelle;
         }
 
+        // Construire les lingots d'or
+        function initLingots(intY, intX) {
+            var objLingot = new Object();
+            objLingot.strCouleurPrim = "#ffd900";
+            objLingot.strCouleurSec = "#c48900";
+            objLingot.intX = intX;
+            objLingot.intY = intY;
+            objLingot.intLargeur = 30;
+            objLingot.intHauteur = 20;
+            tabObjets[intY][intX] = objLingot;
+        }
+
         // Construire la corde
         function initCorde(intY, intX) {
             var objCorde = new Object();
-            objCorde.strCouleur = '#441F1E';
+            objCorde.strCouleur = "#ffd900";
             objCorde.intX = intX;
             objCorde.intY = intY;
             objCorde.intLargeur = 30;
@@ -109,7 +121,7 @@
                             break;
 
                         case 3:
-
+                            initLingots(i, j);
                             break;
 
                         case 4:
@@ -167,14 +179,16 @@
                             dessinerEchelles(i, j);
                             break;
 
-
+                        case 3:
+                            dessinerLingots(i, j);
+                            break;
 
                         case 4:
                             dessinerSol(i, j);
                             break;
 
                         case 5:
-                            dessinerCorde(i, j);
+                            dessinerCordes(i, j);
                             break;
 
                     }
@@ -207,7 +221,7 @@
             objC2D.restore();
         }
 
-        // Pour dessiner les echelles
+        // Pour dessiner les échelles
         function dessinerEchelles(intY, intX) {
             objC2D.save();
             var objEchelle = tabObjets[intY][intX];
@@ -226,8 +240,30 @@
             objC2D.restore();
         }
 
-        // Pour dessiner la corde
-        function dessinerCorde(intY, intX) {
+        // Pour dessiner les lingots d'or
+        function dessinerLingots(intY, intX) {
+            objC2D.save();
+            var objLingot = tabObjets[intY][intX];
+            intPosX = objLingot.intX * 30;
+            intPosY = objLingot.intY * 30;
+            objC2D.translate(0, 30 - objLingot.intHauteur);
+            objC2D.fillStyle = objLingot.strCouleurPrim;
+            objC2D.strokeStyle = objLingot.strCouleurSec;
+            objC2D.lineWidth = 1.5;
+            objC2D.fillRect(intPosX + objLingot.intLargeur/3, intPosY, objLingot.intLargeur/3, objLingot.intHauteur/3);
+            objC2D.strokeRect(intPosX + objLingot.intLargeur/3, intPosY, objLingot.intLargeur/3, objLingot.intHauteur/3);
+            objC2D.fillRect(intPosX + objLingot.intLargeur/6, intPosY + objLingot.intHauteur/3, 2*objLingot.intLargeur/3, objLingot.intHauteur/3);
+            objC2D.strokeRect(intPosX + objLingot.intLargeur/6, intPosY + objLingot.intHauteur/3, 2*objLingot.intLargeur/3, objLingot.intHauteur/3);
+            objC2D.fillRect(intPosX, intPosY + 2*objLingot.intHauteur/3, objLingot.intLargeur, objLingot.intHauteur/3);
+            objC2D.strokeRect(intPosX, intPosY + 2*objLingot.intHauteur/3, objLingot.intLargeur, objLingot.intHauteur/3);
+            objC2D.fillStyle = "white";
+            objC2D.fillRect(intPosX + 2*objLingot.intLargeur/3 - 5, intPosY + objLingot.intHauteur/20, 4, 2);
+            objC2D.fillRect(intPosX + 5*objLingot.intLargeur/6 - 6, intPosY + objLingot.intHauteur/2.7, 5, 2);
+            objC2D.restore();
+        }
+
+        // Pour dessiner les cordes
+        function dessinerCordes(intY, intX) {
             objC2D.save();
             var objCorde = tabObjets[intY][intX];
             intPosX = objCorde.intX * 30;
