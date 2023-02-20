@@ -94,15 +94,13 @@
         function initRunner() {
             objRunner = new Object();
             objRunner.strCouleur = 'black';
-
             objRunner.intLargeur = 18;
             objRunner.intHauteur = 28;
-            objRunner.intX = 14 * 30;
-            objRunner.intY = (15 * 30) - objRunner.intHauteur;
+            objRunner.intX = 15 * 30;
+            objRunner.intY = (16 * 30) - objRunner.intHauteur;
             objRunner.intDirectionX = 1;
             objRunner.intDirectionY = 1;
-
-            objRunner.intVitesse = Math.floor(objCanvas.width / 300);
+            objRunner.intVitesse = Math.floor(objCanvas.width / 360);
         }
 
         // Construire les murs
