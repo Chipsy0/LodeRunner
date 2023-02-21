@@ -64,7 +64,7 @@
             objLingot.intX = intX;
             objLingot.intY = intY;
             objLingot.intLargeur = 30;
-            objLingot.intHauteur = 20;
+            objLingot.intHauteur = 11.5;
             tabObjets[intY][intX] = objLingot;
         }
 
@@ -311,15 +311,13 @@
             objC2D.fillStyle = objLingot.strCouleurPrim;
             objC2D.strokeStyle = objLingot.strCouleurSec;
             objC2D.lineWidth = 1.5;
-            objC2D.fillRect(intPosX + objLingot.intLargeur / 3, intPosY, objLingot.intLargeur / 3, objLingot.intHauteur / 3);
-            objC2D.strokeRect(intPosX + objLingot.intLargeur / 3, intPosY, objLingot.intLargeur / 3, objLingot.intHauteur / 3);
-            objC2D.fillRect(intPosX + objLingot.intLargeur / 6, intPosY + objLingot.intHauteur / 3, 2 * objLingot.intLargeur / 3, objLingot.intHauteur / 3);
-            objC2D.strokeRect(intPosX + objLingot.intLargeur / 6, intPosY + objLingot.intHauteur / 3, 2 * objLingot.intLargeur / 3, objLingot.intHauteur / 3);
-            objC2D.fillRect(intPosX, intPosY + 2 * objLingot.intHauteur / 3, objLingot.intLargeur, objLingot.intHauteur / 3);
-            objC2D.strokeRect(intPosX, intPosY + 2 * objLingot.intHauteur / 3, objLingot.intLargeur, objLingot.intHauteur / 3);
+            objC2D.fillRect(intPosX + objLingot.intLargeur / 6, intPosY -2.25, 2 * objLingot.intLargeur / 3, objLingot.intHauteur / 2);
+            objC2D.strokeRect(intPosX + objLingot.intLargeur / 6, intPosY -2.25, 2 * objLingot.intLargeur / 3, objLingot.intHauteur / 2);
+            objC2D.fillRect(intPosX, intPosY + objLingot.intHauteur / 2 -1.5, objLingot.intLargeur, objLingot.intHauteur / 2);
+            objC2D.strokeRect(intPosX, intPosY + objLingot.intHauteur / 2 -1.5, objLingot.intLargeur, objLingot.intHauteur / 2);
             objC2D.fillStyle = "white";
-            objC2D.fillRect(intPosX + 2 * objLingot.intLargeur / 3 - 5, intPosY + objLingot.intHauteur / 20, 4, 2);
-            objC2D.fillRect(intPosX + 5 * objLingot.intLargeur / 6 - 6, intPosY + objLingot.intHauteur / 2.7, 5, 2);
+            objC2D.fillRect(intPosX + 5 * objLingot.intLargeur / 6 - 11.5, intPosY - 1.5, 10, 2);
+            objC2D.fillRect(intPosX + objLingot.intLargeur - 9.5, intPosY + objLingot.intHauteur/2, 8, 1.5);
             objC2D.restore();
         }
 
