@@ -16,8 +16,12 @@
         var tabTableau = null;
         var tabObjets = null;
         var binEnMouvementX = false;
-        var binEnMouvementY = false;
+        var binMouvementDOWN = false;
         var binMouvementUP = false;
+        var binFall = false;
+        var binMouvementLeft = false;
+        var binMouvementRight = false;
+        var binMouvementDir = false;
 
         function initAnimation() {
             objCanvas = document.getElementById('monCanvas');
@@ -100,8 +104,8 @@
             objRunner.intY = (16 * 30) - objRunner.intHauteur;
             objRunner.intDirectionX = 1;
             objRunner.intDirectionY = 1;
-            objRunner.intLargeurTab = (objRunner.intLargeur)/30;
-            objRunner.intHauteurTab = (objRunner.intHauteur)/30;
+            objRunner.intLargeurTab = (objRunner.intLargeur) / 30;
+            objRunner.intHauteurTab = (objRunner.intHauteur) / 30;
             objRunner.intVitesse = Math.floor(objCanvas.width / 360);
         }
 
@@ -398,22 +402,24 @@
             switch (event.keyCode) {
                 case 39: // Flèche-à-droite      
                     binEnMouvementX = true;
+                    binMouvementDir = false;
                     objRunner.intDirectionX = 1;
                     break;
 
                 case 37: // Flèche-à-gauche
                     binEnMouvementX = true;
+                    binMouvementDir = true;
                     objRunner.intDirectionX = -1;
                     break;
 
                 case 38: // Flèche-en-haut                    
-                    binEnMouvementY = true;
+                    binMouvementDOWN = false;
                     binMouvementUP = true;
                     objRunner.intDirectionY = 1;
                     break;
 
                 case 40: // Flèche-en-bas
-                    binEnMouvementY = true;
+                    binMouvementDOWN = true;
                     binMouvementUP = false;
                     objRunner.intDirectionY = 1;
                     break;
@@ -447,43 +453,75 @@
 
         // Pour mettre à jour l'animation
         function mettreAjourAnimation() {
-            if (binEnMouvementX == true) {
-                objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
-
-            }
-            if (binEnMouvementY == true) {
-                if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 2
-                    && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 2)
-                    || (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 2
-                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 2)) {
-
-                    if (binMouvementUP == true) {
-
-                        if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2
-                            || tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2) {
-                            objRunner.intY -= objRunner.intDirectionY * objRunner.intVitesse;
+            if (binFall == false) {
+                if (binEnMouvementX == true) {
+                    if (binMouvementDir == true) {
+                        if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 6
+                            || tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5)
+                            && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 1
+                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30)] != 1) {
+                            objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
                         }
+                    }
+                    if (binMouvementDir == false) {
+                        if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 6
+                            || tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5)
+                            && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1
+                                && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1)) {
 
-                    } else {
+                            objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
+                        }
+                    }
+                    if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 0
+                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0)
+                        && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 0
+                            && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0)) {
+                        binFall = true;
+                    }
+                }
+                if (binMouvementUP == true || binMouvementDOWN == true) {
+                    if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 2
+                        && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 2)
+                        || (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 2
+                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 2)) {
 
-                        if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab + 3 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] != 2
-                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2)
-                            || tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab + 3 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2) {
+                        if (binMouvementUP == true) {
+                            if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2
+                                || tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2) {
+                                objRunner.intY -= objRunner.intDirectionY * objRunner.intVitesse;
+                            }
+
+                        } else {
+                            if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab + 3 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] != 2
+                                && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2)
+                                || tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab + 3 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2) {
+
+                                objRunner.intY += objRunner.intDirectionY * objRunner.intVitesse;
+                            }
+                        }
+                    }
+                    if (binMouvementUP == false) {
+                        if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
+                            && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
+                            console.log("ye");
                             objRunner.intY += objRunner.intDirectionY * objRunner.intVitesse;
+                            binFall = true;
                         }
                     }
 
                 }
+            } else {
+                objRunner.intY += 1 * objRunner.intVitesse;
+
             }
         }
-
 
     </script>
 </head>
 
 <body onload="initAnimation()">
     <canvas id="monCanvas" width="900" height="660" tabIndex="1" class="sCanvas" onkeydown="deplacerRunner();"
-        onkeyup='binEnMouvementX=false; binEnMouvementY=false;'>
+        onkeyup='binEnMouvementX=false; binMouvementDOWN=false; binMouvementUP=false;'>
         Votre navigateur ne supporte pas la balise canvas
     </canvas>
 </body>
