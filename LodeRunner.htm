@@ -22,6 +22,14 @@
         var binMouvementLeft = false;
         var binMouvementRight = false;
         var binMouvementDir = false;
+        var intScore = 0;
+        var objDateDebut = null;
+        var binCommence = false;
+        var intMillisecondesTot = 0;
+        var intSecondes = 0;
+        var intMinutes = 0;
+        var intNiveau = 1;
+        var intNbVies = 5;
 
         function initAnimation() {
             objCanvas = document.getElementById('monCanvas');
@@ -92,6 +100,17 @@
             objSol.intLargeur = 30;
             objSol.intHauteur = 30;
             tabObjets[intY][intX] = objSol;
+        }
+
+        // Construire le panneau
+        function initPanneau(intY, intX) {
+            objPanneau = new Object();
+            objPanneau.strCouleur = 'black';
+            objPanneau.intX = intX;
+            objPanneau.intY = intY;
+            objPanneau.intLargeur = 30;
+            objPanneau.intHauteur = 30;
+            tabObjets[intY][intX] = objPanneau;
         }
 
         // Construire le runner
@@ -259,6 +278,7 @@
                 }
             }
             dessinerTitre();
+            dessinerDonnees();
             dessinerRunner();
 
         }
@@ -386,6 +406,19 @@
             objC2D.restore();
         }
 
+        // Pour incrire les données
+        function dessinerDonnees() {
+            objC2D.save();
+            objC2D.fillStyle = "#ffd900";
+            objC2D.font = '35px Impact';
+            objC2D.textAlign = 'left';
+            objC2D.fillText("Score: " + intScore.toString().padStart(7,'0'), 60, objCanvas.height - 60);
+            objC2D.fillText("Temps: " + intMinutes.toString().padStart(2,'0') + ':' + intSecondes.toString().padStart(2,'0'), 330, objCanvas.height - 60);
+            objC2D.fillText("Niveau: " + intNiveau, 570, objCanvas.height - 60);
+            objC2D.fillText("Vies: " + intNbVies, 740, objCanvas.height - 60);
+            objC2D.restore();
+        }
+
         // Pour dessiner le runner
         function dessinerRunner() {
             objC2D.save();
@@ -404,28 +437,43 @@
                     binEnMouvementX = true;
                     binMouvementDir = false;
                     objRunner.intDirectionX = 1;
+                    if (binCommence == false)
+                        debutChrono();
                     break;
 
                 case 37: // Flèche-à-gauche
                     binEnMouvementX = true;
                     binMouvementDir = true;
                     objRunner.intDirectionX = -1;
+                    if (binCommence == false)
+                        debutChrono();
                     break;
 
                 case 38: // Flèche-en-haut                    
                     binMouvementDOWN = false;
                     binMouvementUP = true;
                     objRunner.intDirectionY = 1;
+                    if (binCommence == false)
+                        debutChrono();
                     break;
 
                 case 40: // Flèche-en-bas
                     binMouvementDOWN = true;
                     binMouvementUP = false;
                     objRunner.intDirectionY = 1;
+                    if (binCommence == false)
+                        debutChrono();
                     break;
             }
 
 
+        }
+
+        // Pour debuter le chrono
+        function debutChrono() {
+            objDateDebut = new Date();
+            binCommence = true;
+            intMillisecondesTot = 0;
         }
 
         // Un cycle d'animation	
@@ -453,6 +501,17 @@
 
         // Pour mettre à jour l'animation
         function mettreAjourAnimation() {
+
+            if (binCommence == true) {
+                var objDateMaintenant = new Date();
+                var intMilEcoulees = objDateMaintenant - objDateDebut;
+                objDateDebut = objDateMaintenant;
+
+                intMillisecondesTot += intMilEcoulees;
+                intMinutes = Math.floor(intMillisecondesTot/1000/60);
+                intSecondes = Math.floor(intMillisecondesTot/1000) - intMinutes*60;
+            }
+
             if (binFall == false) {
                 if (binEnMouvementX == true) {
                     if (binMouvementDir == true) {
