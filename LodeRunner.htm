@@ -125,7 +125,7 @@
             objRunner.intDirectionY = 1;
             objRunner.intLargeurTab = (objRunner.intLargeur) / 30;
             objRunner.intHauteurTab = (objRunner.intHauteur) / 30;
-            objRunner.intVitesse = Math.floor(objCanvas.width / 360);
+            objRunner.intVitesse = objCanvas.width / 700;
         }
 
         // Construire les murs
@@ -561,8 +561,7 @@
                     }
                     if (binMouvementUP == false) {
                         if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
-                            && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
-                            console.log("ye");
+                            && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {                            
                             objRunner.intY += objRunner.intDirectionY * objRunner.intVitesse;
                             binFall = true;
                         }
@@ -572,6 +571,14 @@
             } else {
                 objRunner.intY += 1 * objRunner.intVitesse;
 
+                if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 0
+                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 0)
+                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 3
+                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 3)){
+                                
+                                binFall = false;
+
+                            }
             }
         }
 
