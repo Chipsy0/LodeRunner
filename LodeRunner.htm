@@ -8,6 +8,8 @@
     <title>Lode Runner par Caroline Chagnon et Razvan Pruteanu</title>
     <link rel="stylesheet" type="text/css" href="StyleProjet1.css" />
     <!-- Code JavaScript local -->
+    <script type = "text/javascript" src="initTableau.js"></script>  
+    <script type = "text/javascript" src="deplacerRunner.js"></script>  
     <script type="text/javascript">
         var objCanvas = null;
         var objC2D = null;
@@ -149,70 +151,7 @@
             objPanneau.intLargeur = 30;
             objPanneau.intHauteur = 30;
             tabObjets[intY][intX] = objPanneau;
-        }
-
-        function initTableau() {
-            /*0 rien, 1 briques, 2 échelles, 3 lingots, 
-            4 sol, 5 cordes*/
-
-            tabTableau = new Array();
-            tabTableau.push([6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]);
-            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]);
-            tabTableau.push([6, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]);
-            tabTableau.push([6, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]);
-            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 6]);
-            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 6]);
-            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 6]);
-            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 2, 0, 0, 6]);
-            tabTableau.push([6, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 6]);
-            tabTableau.push([6, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 6]);
-            tabTableau.push([6, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 6]);
-            tabTableau.push([6, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 6]);
-            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 6]);
-            tabTableau.push([6, 0, 0, 0, 0, 0, 0, 3, 0, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 0, 0, 0, 3, 0, 0, 0, 6]);
-            tabTableau.push([6, 0, 0, 0, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 6]);
-            tabTableau.push([6, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6]);
-            tabTableau.push([6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6]);
-            tabTableau.push([6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6]);
-            tabTableau.push([6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6]);
-            tabTableau.push([6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6]);
-            tabTableau.push([6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6]);
-            tabTableau.push([6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]);
-
-            for (var i = 0; i < tabTableau.length; i++) {
-                for (var j = 0; j < tabTableau[i].length; j++) {
-                    switch (tabTableau[i][j]) {
-                        case 1:
-                            initPasserelles(i, j);
-                            break;
-
-                        case 2:
-                            initEchelles(i, j);
-                            break;
-
-                        case 3:
-                            initLingots(i, j);
-                            break;
-
-                        case 4:
-                            initSol(i, j);
-                            break;
-
-                        case 5:
-                            initCorde(i, j);
-                            break;
-
-                        case 6:
-                            initMurs(i, j);
-                            break;
-
-                        case 7:
-                            initPanneau(i, j);
-                            break;
-                    }
-                }
-            }
-        }
+        }        
 
         // Un cycle d'animation	
         function animer() {
@@ -430,45 +369,7 @@
             objC2D.fillStyle = objRunner.strCouleur;
             objC2D.fillRect(intPosX, intPosY, objRunner.intLargeur, objRunner.intHauteur);
             objC2D.restore();
-        }
-
-        // Pour déplacer le Runner
-        function deplacerRunner() {
-
-            switch (event.keyCode) {
-                case 39: // Flèche-à-droite      
-                    binEnMouvementX = true;
-                    binMouvementDir = false;
-                    objRunner.intDirectionX = 1;
-                    if (binCommence == false)
-                        debutChrono();
-                    break;
-
-                case 37: // Flèche-à-gauche
-                    binEnMouvementX = true;
-                    binMouvementDir = true;
-                    objRunner.intDirectionX = -1;
-                    if (binCommence == false)
-                        debutChrono();
-                    break;
-
-                case 38: // Flèche-en-haut                    
-                    binMouvementDOWN = false;
-                    binMouvementUP = true;
-                    objRunner.intDirectionY = 1;
-                    if (binCommence == false)
-                        debutChrono();
-                    break;
-
-                case 40: // Flèche-en-bas
-                    binMouvementDOWN = true;
-                    binMouvementUP = false;
-                    objRunner.intDirectionY = 1;
-                    if (binCommence == false)
-                        debutChrono();
-                    break;
-            }
-
+            
 
         }
 
@@ -515,6 +416,7 @@
                 intSecondes = Math.floor(intMillisecondesTot/1000) - intMinutes*60;
             }
 
+            //mouvement droit et gauche
             if (binFall == false) {
                 if (binEnMouvementX == true) {
                     if (binMouvementDir == true) {
@@ -541,6 +443,7 @@
                         binFall = true;
                     }
                 }
+                //mouvement bas et haut
                 if (binMouvementUP == true || binMouvementDOWN == true) {
                     if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 2
                         && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 2)
@@ -564,24 +467,35 @@
                     }
                     if (binMouvementUP == false) {
                         if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
-                            && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {                            
-                            objRunner.intY += objRunner.intDirectionY * objRunner.intVitesse;
+                        && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5
+                            && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 0
+                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0) ) {
                             binFall = true;
                         }
                     }
 
                 }
+
+            //tomber
             } else {
                 objRunner.intY += 1 * objRunner.intVitesse;
+                console.log("bruh");               
 
                 if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 0
                     && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 0)
-                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 3
-                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 3)){
-                                
+                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 3   
+                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 3)
+                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 5
+                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 5)){                                
                                 binFall = false;
 
                             }
+
+                if (tabTableau[Math.floor(objRunner.intY / 30 - 2 / 30)][Math.floor(objRunner.intX / 30)] == 5
+                    && tabTableau[Math.floor(objRunner.intY / 30 - 2 / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
+                        
+                        binFall = false;
+                    }
             }
         }
 
