@@ -4,7 +4,7 @@ function deplacerRunner() {
     switch (event.keyCode) {
         case 39: // Flèche-à-droite      
         binEnMouvementX = true;
-        binMouvementDir = false;
+        binMouvementRight = true;
         objRunner.intDirectionX = 1;
         if (binCommence == false)
             debutChrono();
@@ -12,7 +12,7 @@ function deplacerRunner() {
 
     case 37: // Flèche-à-gauche
         binEnMouvementX = true;
-        binMouvementDir = true;
+        binMouvementLeft = true;
         objRunner.intDirectionX = -1;
         if (binCommence == false)
             debutChrono();
