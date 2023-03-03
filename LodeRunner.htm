@@ -8,8 +8,8 @@
     <title>Lode Runner par Caroline Chagnon et Razvan Pruteanu</title>
     <link rel="stylesheet" type="text/css" href="StyleProjet1.css" />
     <!-- Code JavaScript local -->
-    <script type = "text/javascript" src="initTableau.js"></script>  
-    <script type = "text/javascript" src="deplacerRunner.js"></script>  
+    <script type="text/javascript" src="initTableau.js"></script>
+    <script type="text/javascript" src="deplacerRunner.js"></script>
     <script type="text/javascript">
         var objCanvas = null;
         var objC2D = null;
@@ -31,6 +31,8 @@
         var intMinutes = 0;
         var intNiveau = 1;
         var intNbVies = 5;
+        var intPinxel = 0;
+
 
         function initAnimation() {
             objCanvas = document.getElementById('monCanvas');
@@ -150,7 +152,7 @@
             objPanneau.intLargeur = 30;
             objPanneau.intHauteur = 30;
             tabObjets[intY][intX] = objPanneau;
-        }        
+        }
 
         // Un cycle d'animation	
         function animer() {
@@ -260,10 +262,10 @@
             objC2D.restore();
 
             objC2D.fillStyle = objEchelle.strCouleurSec;
-            objC2D.fillRect(intPosX +3, intPosY + 2, 30 -6, 2);
-            objC2D.fillRect(intPosX +3, intPosY + objEchelle.intHauteur/4 + 2, 30 -6, 2);
-            objC2D.fillRect(intPosX +3, intPosY + 2*objEchelle.intHauteur/4 + 2, 30 -6, 2);
-            objC2D.fillRect(intPosX +3, intPosY + 3*objEchelle.intHauteur/4 + 2, 30 -6, 2);
+            objC2D.fillRect(intPosX + 3, intPosY + 2, 30 - 6, 2);
+            objC2D.fillRect(intPosX + 3, intPosY + objEchelle.intHauteur / 4 + 2, 30 - 6, 2);
+            objC2D.fillRect(intPosX + 3, intPosY + 2 * objEchelle.intHauteur / 4 + 2, 30 - 6, 2);
+            objC2D.fillRect(intPosX + 3, intPosY + 3 * objEchelle.intHauteur / 4 + 2, 30 - 6, 2);
         }
 
         // Pour dessiner les lingots d'or
@@ -309,7 +311,7 @@
             objC2D.fillStyle = objSol.strCouleur;
             objC2D.beginPath();
             objC2D.fillRect(intPosX, intPosY, objSol.intLargeur, objSol.intHauteur);
-            objC2D.strokeRect(intPosX +1, intPosY +1, objSol.intLargeur -2, objSol.intHauteur -2);
+            objC2D.strokeRect(intPosX + 1, intPosY + 1, objSol.intLargeur - 2, objSol.intHauteur - 2);
             objC2D.closePath();
             objC2D.restore();
         }
@@ -353,8 +355,8 @@
             objC2D.fillStyle = "#ffd900";
             objC2D.font = '35px Impact';
             objC2D.textAlign = 'left';
-            objC2D.fillText("Score: " + intScore.toString().padStart(7,'0'), 60, objCanvas.height - 60);
-            objC2D.fillText("Temps: " + intMinutes.toString().padStart(2,'0') + ':' + intSecondes.toString().padStart(2,'0'), 330, objCanvas.height - 60);
+            objC2D.fillText("Score: " + intScore.toString().padStart(7, '0'), 60, objCanvas.height - 60);
+            objC2D.fillText("Temps: " + intMinutes.toString().padStart(2, '0') + ':' + intSecondes.toString().padStart(2, '0'), 330, objCanvas.height - 60);
             objC2D.fillText("Niveau: " + intNiveau, 570, objCanvas.height - 60);
             objC2D.fillText("Vies: " + intNbVies, 740, objCanvas.height - 60);
             objC2D.restore();
@@ -368,7 +370,7 @@
             objC2D.fillStyle = objRunner.strCouleur;
             objC2D.fillRect(intPosX, intPosY, objRunner.intLargeur, objRunner.intHauteur);
             objC2D.restore();
-            
+
 
         }
 
@@ -411,36 +413,50 @@
                 objDateDebut = objDateMaintenant;
 
                 intMillisecondesTot += intMilEcoulees;
-                intMinutes = Math.floor(intMillisecondesTot/1000/60);
-                intSecondes = Math.floor(intMillisecondesTot/1000) - intMinutes*60;
+                intMinutes = Math.floor(intMillisecondesTot / 1000 / 60);
+                intSecondes = Math.floor(intMillisecondesTot / 1000) - intMinutes * 60;
             }
 
             //mouvement droit et gauche
             if (binFall == false) {
+                intPinxel = 0;   
+                //
+
+                if (((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 0
+                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0)
+                    && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 0
+                        && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0))
+                    || (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 5
+                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5)) {
+                    binFall = true;
+                }
+                
                 if (binMouvementLeft == true || binMouvementRight == true) {
+                    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5 
+                       && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5){ 
+                        var locY = Math.floor(objRunner.intY / 30); 
+                          if (Math.floor(objRunner.intY) != locY * 30 + 2){           
+                            binFall = true;                 
+                          }
+
+                        }
+
                     if (binMouvementLeft == true) {
-                        if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 6
-                            || tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5)
+                        if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 6                            
                             && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 1
                             && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30)] != 1) {
                             objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
-                        }
+                        }  
                     }
                     if (binMouvementRight == true) {
-                        if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 6
-                            || tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5)
+                        if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 6
                             && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1
                                 && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1)) {
 
                             objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
                         }
                     }
-                    if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 0
-                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0)
-                        && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 0
-                            && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0)) {
-                        binFall = true;
-                    }
+                   
                 }
                 //mouvement bas et haut
                 if (binMouvementUP == true || binMouvementDOWN == true) {
@@ -466,35 +482,37 @@
                     }
                     if (binMouvementUP == false) {
                         if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
-                        && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5
+                            && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5
                             && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 0
-                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0) ) {
+                                && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0)) {
                             binFall = true;
                         }
                     }
 
                 }
 
-            //tomber
+                //tomber
             } else {
                 objRunner.intY += 1 * objRunner.intVitesse;
-                console.log("bruh");               
+                intPinxel++;
+                console.log(intPinxel);
 
                 if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 0
-                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 0)
-                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 3   
-                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 3)
-                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 5
-                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 5)){                                
-                                binFall = false;
-
-                            }
-
-                if (tabTableau[Math.floor(objRunner.intY / 30 - 2 / 30)][Math.floor(objRunner.intX / 30)] == 5
-                    && tabTableau[Math.floor(objRunner.intY / 30 - 2 / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
-                        
+                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 0)
+                        && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 3
+                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 3)
+                        && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 5
+                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 5)) {
                         binFall = false;
                     }
+
+                    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5 
+                       && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5){ 
+                        var locY = Math.floor(objRunner.intY / 30); 
+                          if (Math.floor(objRunner.intY) == locY * 30 + 2){           
+                            binFall = false;                 
+                          }
+                        }
             }
         }
 
