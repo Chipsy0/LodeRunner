@@ -33,7 +33,7 @@
         var intNbVies = 5;
         var fltAnim = 0;
         var binInverseAnim = false;
-        var intPinxel = 0;
+        var intnbLingot = 0;
 
         function initAnimation() {
             objCanvas = document.getElementById('monCanvas');
@@ -373,7 +373,7 @@
             if (fltAnim > 3) {
                 binInverseAnim = true;
             }
-            if (fltAnim < -3){
+            if (fltAnim < -3) {
                 binInverseAnim = false;
             }
             if (binInverseAnim == false) {
@@ -392,10 +392,10 @@
                 objC2D.fillStyle = 'white';
                 objC2D.fillRect(objRunner.intLargeur / 2 - 3, 8, 6, 13); // corps
                 objC2D.fillStyle = '#FF1A1A';
-                objC2D.fillRect(3, 17 + fltAnim/2, 4, 4); // jambe gauche
-                objC2D.fillRect(0, 21 + fltAnim/2, 4, 4); // jambe gauche
-                objC2D.fillRect(objRunner.intLargeur - 7, 17 - fltAnim/2, 4, 4); // jambe droite
-                objC2D.fillRect(objRunner.intLargeur - 4, 21 - fltAnim/2, 4, 4); // jambe droite
+                objC2D.fillRect(3, 17 + fltAnim / 2, 4, 4); // jambe gauche
+                objC2D.fillRect(0, 21 + fltAnim / 2, 4, 4); // jambe gauche
+                objC2D.fillRect(objRunner.intLargeur - 7, 17 - fltAnim / 2, 4, 4); // jambe droite
+                objC2D.fillRect(objRunner.intLargeur - 4, 21 - fltAnim / 2, 4, 4); // jambe droite
                 objC2D.fillRect(objRunner.intLargeur / 2 - 6, 8, 4, 4); // bras gauche
                 objC2D.fillRect(0, 7 - fltAnim, 4, 4); // bras gauche
                 objC2D.fillRect(objRunner.intLargeur / 2 + 2, 8, 4, 4); // bras droit
@@ -409,21 +409,21 @@
                 objC2D.fillStyle = '#C91515';
                 objC2D.fillRect(objRunner.intLargeur / 2 - 0.5, 6, 3, 2); // cou
 
-                objC2D.fillRect(objRunner.intLargeur / 2 - 2 - fltAnim, 8 - 3/4 - fltAnim/4, 4, 4); // bras gauche
-                objC2D.fillRect(objRunner.intLargeur / 2 - 2 - 2.5*fltAnim, 10 - fltAnim/2, 4, 4); // bras gauche
+                objC2D.fillRect(objRunner.intLargeur / 2 - 2 - fltAnim, 8 - 3 / 4 - fltAnim / 4, 4, 4); // bras gauche
+                objC2D.fillRect(objRunner.intLargeur / 2 - 2 - 2.5 * fltAnim, 10 - fltAnim / 2, 4, 4); // bras gauche
 
-                objC2D.fillRect(objRunner.intLargeur/2 + fltAnim, 18 - fltAnim/3, 4, 6); // jambe gauche
-                objC2D.fillRect(objRunner.intLargeur/2 + 2*fltAnim, 24 - 2 - 2*fltAnim/3, 4, 4); // jambe gauche
+                objC2D.fillRect(objRunner.intLargeur / 2 + fltAnim, 18 - fltAnim / 3, 4, 6); // jambe gauche
+                objC2D.fillRect(objRunner.intLargeur / 2 + 2 * fltAnim, 24 - 2 - 2 * fltAnim / 3, 4, 4); // jambe gauche
                 objC2D.fillStyle = 'white';
-                objC2D.fillRect(objRunner.intLargeur / 2 - 1, 8 + fltAnim/6, 6, 12); // corps
+                objC2D.fillRect(objRunner.intLargeur / 2 - 1, 8 + fltAnim / 6, 6, 12); // corps
                 objC2D.fillStyle = '#FF1A1A';
-                objC2D.fillRect(objRunner.intLargeur / 2 - 2+ fltAnim, 8 + 3/4 + fltAnim/4, 4, 4); // bras droit
-                objC2D.fillRect(objRunner.intLargeur / 2 - 2 + 2.5*fltAnim, 10 +fltAnim/2, 4, 4); // bras droit
+                objC2D.fillRect(objRunner.intLargeur / 2 - 2 + fltAnim, 8 + 3 / 4 + fltAnim / 4, 4, 4); // bras droit
+                objC2D.fillRect(objRunner.intLargeur / 2 - 2 + 2.5 * fltAnim, 10 + fltAnim / 2, 4, 4); // bras droit
 
-                objC2D.fillRect(objRunner.intLargeur/2 - fltAnim, 18 - fltAnim/3, 4, 6); // jambe droite
-                objC2D.fillRect(objRunner.intLargeur/2 - 2*fltAnim, 24 - 2 - 2*fltAnim/3, 4, 4); // jambe droite
+                objC2D.fillRect(objRunner.intLargeur / 2 - fltAnim, 18 - fltAnim / 3, 4, 6); // jambe droite
+                objC2D.fillRect(objRunner.intLargeur / 2 - 2 * fltAnim, 24 - 2 - 2 * fltAnim / 3, 4, 4); // jambe droite
                 objC2D.fillStyle = 'black';
-                objC2D.fillRect(objRunner.intLargeur / 2 - 1, 1/2 + fltAnim/6, 6, 6); // tête
+                objC2D.fillRect(objRunner.intLargeur / 2 - 1, 1 / 2 + fltAnim / 6, 6, 6); // tête
                 objC2D.restore();
             }
             else {
@@ -493,10 +493,43 @@
                 intSecondes = Math.floor(intMillisecondesTot / 1000) - intMinutes * 60;
             }
 
-            //mouvement droit et gauche
+            if (intnbLingot == 6) {
+                tabTableau[1][19] = 2;
+                tabTableau[2][19] = 2;
+                tabTableau[3][19] = 2;
+                tabTableau[4][19] = 2;
+                initEchelles(1, 19);
+                initEchelles(2, 19);
+                initEchelles(3, 19);
+                initEchelles(4, 19);
+            }
+
+            //mouvement 
             if (binFall == false) {
-                intPinxel = 0;   
-                //
+
+                if (Math.floor(objRunner.intY / 30) == 0 && Math.floor(objRunner.intX / 30) == 19) {
+                    intScore += 1500;
+                    intNiveau++;
+                    tabTableau[1][19] = 0;
+                    tabTableau[2][19] = 0;
+                    tabTableau[3][19] = 0;
+                    tabTableau[4][19] = 0;
+                    for (var i = 0; i < tabObjets.length; i++) {
+                        tabObjets[i] = new Array(30);
+                    }
+
+                    initRunner();
+                    initTableau();
+                }
+
+                if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 3
+                    || tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 3)) {
+                    intScore += 250;
+                    tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] = 0;
+                    tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] = 0;
+                    intnbLingot++;
+
+                }
 
                 if (((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 0
                     && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0)
@@ -506,23 +539,24 @@
                         && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5)) {
                     binFall = true;
                 }
-                
-                if (binMouvementLeft == true || binMouvementRight == true) {
-                    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5 
-                       && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5){ 
-                        var locY = Math.floor(objRunner.intY / 30); 
-                          if (Math.floor(objRunner.intY) != locY * 30 + 2){           
-                            binFall = true;                 
-                          }
 
+                //mouvement droit et gauche
+                if (binMouvementLeft == true || binMouvementRight == true) {
+                    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
+                        && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
+                        var locY = Math.floor(objRunner.intY / 30);
+                        if (Math.floor(objRunner.intY) != locY * 30 + 2) {
+                            binFall = true;
                         }
 
+                    }
+
                     if (binMouvementLeft == true) {
-                        if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 6                            
+                        if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 6
                             && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 1
                             && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30)] != 1) {
                             objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
-                        }  
+                        }
                     }
                     if (binMouvementRight == true) {
                         if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 6
@@ -532,7 +566,7 @@
                             objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
                         }
                     }
-                   
+
                 }
                 //mouvement bas et haut
                 if (binMouvementUP == true || binMouvementDOWN == true) {
@@ -570,25 +604,23 @@
                 //tomber
             } else {
                 objRunner.intY += 1 * objRunner.intVitesse;
-                intPinxel++;
-                console.log(intPinxel);
 
                 if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 0
-                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 0)
-                        && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 3
-                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 3)
-                        && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 5
-                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 5)) {
+                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 0)
+                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 3
+                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 3)
+                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 5
+                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 5)) {
+                    binFall = false;
+                }
+
+                if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
+                    && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
+                    var locY = Math.floor(objRunner.intY / 30);
+                    if (Math.floor(objRunner.intY) == locY * 30 + 2) {
                         binFall = false;
                     }
-
-                    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5 
-                       && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5){ 
-                        var locY = Math.floor(objRunner.intY / 30); 
-                          if (Math.floor(objRunner.intY) == locY * 30 + 2){           
-                            binFall = false;                 
-                          }
-                        }
+                }
             }
         }
 

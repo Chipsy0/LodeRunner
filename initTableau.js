@@ -26,6 +26,8 @@ function initTableau() {
     tabTableau.push([6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6]);
     tabTableau.push([6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]);
 
+    
+
     for (var i = 0; i < tabTableau.length; i++) {
         for (var j = 0; j < tabTableau[i].length; j++) {
             switch (tabTableau[i][j]) {
