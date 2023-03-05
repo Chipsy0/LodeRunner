@@ -102,3 +102,30 @@ function initPanneau(intY, intX) {
     objPanneau.intHauteur = 30;
     tabObjets[intY][intX] = objPanneau;
 }
+
+// Construire les sons
+function initSons() {
+    objSons = new Object();
+
+    /*var objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'SonBalleMur.mp3');
+    objSon.load();
+    objSons.balleMur = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'SonBallePerdue.mp3');
+    objSon.load();
+    objSons.ballePerdue = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'SonDisparitionVortex.mp3');
+    objSon.load();
+    objSons.disparitionVortex = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'SonBalleBaton.mp3');
+    objSon.load();
+    objSons.balleBaton = objSon;*/
+
+    
+}

@@ -325,6 +325,7 @@
             //mouvement 
             if (binFall == false) {
 
+                //check if won
                 if (Math.floor(objRunner.intY / 30) == 0 && Math.floor(objRunner.intX / 30) == 19) {
                     intScore += 1500;
                     intNiveau++;
@@ -342,7 +343,8 @@
                     initTableau();
                     intnbLingot = 0;
                 }
-
+                
+                //collect lingot 
                 if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 3
                     || tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 3)) {
                     intScore += 250;
@@ -351,6 +353,7 @@
                     intnbLingot++;
 
                 }
+                //check si il y a un trou pour tomber
                 if (((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 0
                     && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0)
                     && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 0
@@ -362,10 +365,11 @@
                     binFall = true;
                 }
                 binSurCorde = false;
+                //verify pour allez correctement sur corde
                 if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
                     && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
                     var locY = Math.floor(objRunner.intY / 30);
-                    // vérif pour animation si le bloc en dessous est une passerelle ou une échelle
+                    // vérifie pour animation si le bloc en dessous est une passerelle ou une échelle
                     if (tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30)] != 1
                         && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1
                         && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30)] != 2
@@ -374,6 +378,7 @@
                     }
                 }
                 if (binMouvementLeft == true || binMouvementRight == true) {
+                    //verify pour allez correctement sur corde
                     if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
                         && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
                         var locY = Math.floor(objRunner.intY / 30);
@@ -390,7 +395,8 @@
                     }
 
                 }
-
+                
+                //mouvement gauche
                 if (binMouvementLeft == true) {
                     if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 6
                         && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 1
@@ -398,6 +404,7 @@
                         objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
                     }
                 }
+                //mouvement droit
                 if (binMouvementRight == true) {
                     if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 6
                         && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1
@@ -410,13 +417,15 @@
                 //mouvement bas et haut
                 binDansEchelle = false;
                 if (binMouvementUP == true || binMouvementDOWN == true) {
+                    //check s'il est dans l'echelle
                     if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 2
                         && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 2)
                         || (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 2
                             && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 2)) {
 
                         binDansEchelle = true
-
+                        
+                        //mouvement en haut
                         if (binMouvementUP == true) {
                             if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2
                                 || tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2) {
@@ -424,6 +433,7 @@
                             }
 
                         } else {
+                            //mouvement en bas
                             if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab + 3 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] != 2
                                 && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2)
                                 || tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab + 3 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2) {
@@ -432,6 +442,7 @@
                             }
                         }
                     }
+                    //mouvement en bas check s'il y a un trou
                     if (binMouvementUP == false) {
                         if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
                             && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5
@@ -452,7 +463,9 @@
                     && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 3
                         && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 3)
                     && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 5
-                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 5)) {
+                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 5)
+                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 8
+                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 8)) {
                     binFall = false;
                 }
 
