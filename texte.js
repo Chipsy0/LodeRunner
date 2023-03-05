@@ -24,18 +24,12 @@ function dessinerDonnees() {
     objC2D.restore();
 }
 
-// Pour incrire les données
-function dessinerGameover() {
-    objC2D.save();
-    
-    objC2D.restore();
-}
-
 // Pour debuter le chrono
 function debutChrono() {
     objDateDebut = new Date();
-    binCommence = true;
     intMillisecondesTot = 0;
+    intMinutes = 0;
+    intSecondes = 0;
 }
 
 // Pour mettre à jour le temps du chrono
@@ -48,7 +42,6 @@ function updateChrono() {
     intMinutes = Math.floor(intMillisecondesTot / 1000 / 60);
     intSecondes = Math.floor(intMillisecondesTot / 1000) - intMinutes * 60;
 }
-
 
 // Pour afficher le texte game over et jouer le son
 var fltRotation = 0;
