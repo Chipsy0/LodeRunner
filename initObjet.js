@@ -117,12 +117,12 @@ function initSons() {
     objSon.load();
     objSons.falling = objSon;
 
-    /*objSon = document.createElement('audio');
-    objSon.setAttribute('src', 'SonDisparitionVortex.mp3');
-    objSon.load();
-    objSons.disparitionVortex = objSon;
-
     objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'digging.mp3');
+    objSon.load();
+    objSons.digging = objSon;
+
+    /*objSon = document.createElement('audio');
     objSon.setAttribute('src', 'SonBalleBaton.mp3');
     objSon.load();
     objSons.balleBaton = objSon;*/

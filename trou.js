@@ -10,6 +10,7 @@ function trou() {
                 initialiseObjects();
                 intTemp = intSecTrou;
                 //dessinerTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab), Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab))
+                objSons.digging.play();
 
             }
 
@@ -21,6 +22,7 @@ function trou() {
                 intTemp = intSecTrou;
                 initTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab), Math.ceil(objRunner.intX / 30 + objRunner.intLargeurTab), intTemp);
                 //dessinerTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab), Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab))
+                objSons.digging.play();
 
             }
             break;
