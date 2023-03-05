@@ -11,6 +11,7 @@
     <script type="text/javascript" src="initTableau.js"></script>
     <script type="text/javascript" src="deplacerRunner.js"></script>
     <script type="text/javascript" src="initObjet.js"></script>
+    <script type="text/javascript" src="trou.js"></script>
     <script type="text/javascript">
         var objCanvas = null;
         var objC2D = null;
@@ -38,6 +39,9 @@
         var binDansEchelle = false;
         var binSurCorde = false;
         var intnbLingot = 0;
+        var binTrouLeft = false;
+        var binTrouRight = false;    
+        var tabTrou = null;    
 
         function initAnimation() {
             objCanvas = document.getElementById('monCanvas');
@@ -617,8 +621,8 @@
 </head>
 
 <body onload="initAnimation()">
-    <canvas id="monCanvas" width="900" height="660" tabIndex="1" class="sCanvas" onkeydown="deplacerRunner();"
-        onkeyup='binMouvementLeft=false; binMouvementRight=false; binMouvementDOWN=false; binMouvementUP=false;'>
+    <canvas id="monCanvas" width="900" height="660" tabIndex="1" class="sCanvas" onkeydown="deplacerRunner(); trou();"
+        onkeyup='binMouvementLeft=false; binMouvementRight=false; binMouvementDOWN=false; binMouvementUP=false; binTrouRight=false; binTrouLeft=false;'>
         Votre navigateur ne supporte pas la balise canvas
     </canvas>
 </body>
