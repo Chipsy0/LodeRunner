@@ -11,7 +11,6 @@ function initEchelles(intY, intX) {
     tabObjets[intY][intX] = objEchelle;
 }
 
-
 // Pour dessiner les échelles
 function dessinerEchelles(intY, intX) {
     objC2D.save();
@@ -29,4 +28,15 @@ function dessinerEchelles(intY, intX) {
     objC2D.fillRect(intPosX + 3, intPosY + objEchelle.intHauteur / 4 + 2, 30 - 6, 2);
     objC2D.fillRect(intPosX + 3, intPosY + 2 * objEchelle.intHauteur / 4 + 2, 30 - 6, 2);
     objC2D.fillRect(intPosX + 3, intPosY + 3 * objEchelle.intHauteur / 4 + 2, 30 - 6, 2);
+}
+
+function apparitionEchelleDeFin() {
+    tabTableau[1][19] = 2;
+    tabTableau[2][19] = 2;
+    tabTableau[3][19] = 2;
+    tabTableau[4][19] = 2;
+    initEchelles(1, 19);
+    initEchelles(2, 19);
+    initEchelles(3, 19);
+    initEchelles(4, 19);
 }
