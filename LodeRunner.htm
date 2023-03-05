@@ -9,10 +9,9 @@
     <link rel="stylesheet" type="text/css" href="StyleProjet1.css" />
     <!-- Code JavaScript local -->
     <script type="text/javascript" src="initTableau.js"></script>
-    <script type="text/javascript" src="deplacerRunner.js"></script>
     <script type="text/javascript" src="initObjet.js"></script>
     <script type="text/javascript" src="trou.js"></script>
-    <script type="text/javascript" src="dessinerRunner.js"></script>
+    <script type="text/javascript" src="runner.js"></script>
     <script type="text/javascript">
         var objCanvas = null;
         var objC2D = null;
@@ -125,70 +124,6 @@
             dessinerDonnees();
             dessinerRunner();
 
-        }
-
-        // Pour dessiner les passerelles
-        function dessinerPasserelles(intY, intX) {
-            objC2D.save();
-            var objPasserelle = tabObjets[intY][intX];
-            intPosX = objPasserelle.intX * 30;
-            intPosY = objPasserelle.intY * 30;
-            objC2D.fillStyle = objPasserelle.strCouleurPrim;
-            objC2D.fillRect(intPosX, intPosY, objPasserelle.intLargeur, objPasserelle.intHauteur);
-            objC2D.strokeStyle = objPasserelle.strCouleurSec;
-            objC2D.fillStyle = objPasserelle.strCouleurSec;
-            objC2D.lineWidth = 2;
-            objC2D.translate(intPosX, intPosY);
-            objC2D.strokeRect(1, 0, objPasserelle.intLargeur - 2, objPasserelle.intHauteur / 2);
-            objC2D.beginPath();
-            objC2D.moveTo(0, objPasserelle.intHauteur);
-            objC2D.lineTo(objPasserelle.intLargeur, objPasserelle.intHauteur);
-            objC2D.stroke();
-            objC2D.beginPath();
-            objC2D.moveTo(objPasserelle.intLargeur / 2, objPasserelle.intHauteur / 2);
-            objC2D.lineTo(objPasserelle.intLargeur / 2, objPasserelle.intHauteur);
-            objC2D.stroke();
-            objC2D.fillRect(objPasserelle.intLargeur / 2, objPasserelle.intHauteur / 2, 3, objPasserelle.intHauteur / 2);
-            objC2D.restore();
-        }
-
-        // Pour dessiner les échelles
-        function dessinerEchelles(intY, intX) {
-            objC2D.save();
-            var objEchelle = tabObjets[intY][intX];
-            intPosX = objEchelle.intX * 30;
-            intPosY = objEchelle.intY * 30;
-
-            objC2D.fillStyle = objEchelle.strCouleurPrim;
-            objC2D.fillRect(intPosX, intPosY, 5, 30);
-            objC2D.fillRect(intPosX + 25, intPosY, 5, 30);
-            objC2D.restore();
-
-            objC2D.fillStyle = objEchelle.strCouleurSec;
-            objC2D.fillRect(intPosX + 3, intPosY + 2, 30 - 6, 2);
-            objC2D.fillRect(intPosX + 3, intPosY + objEchelle.intHauteur / 4 + 2, 30 - 6, 2);
-            objC2D.fillRect(intPosX + 3, intPosY + 2 * objEchelle.intHauteur / 4 + 2, 30 - 6, 2);
-            objC2D.fillRect(intPosX + 3, intPosY + 3 * objEchelle.intHauteur / 4 + 2, 30 - 6, 2);
-        }
-
-        // Pour dessiner les lingots d'or
-        function dessinerLingots(intY, intX) {
-            objC2D.save();
-            var objLingot = tabObjets[intY][intX];
-            intPosX = objLingot.intX * 30;
-            intPosY = objLingot.intY * 30;
-            objC2D.translate(0, 30 - objLingot.intHauteur);
-            objC2D.fillStyle = objLingot.strCouleurPrim;
-            objC2D.strokeStyle = objLingot.strCouleurSec;
-            objC2D.lineWidth = 1.5;
-            objC2D.fillRect(intPosX + objLingot.intLargeur / 6, intPosY - 2.25, 2 * objLingot.intLargeur / 3, objLingot.intHauteur / 2);
-            objC2D.strokeRect(intPosX + objLingot.intLargeur / 6, intPosY - 2.25, 2 * objLingot.intLargeur / 3, objLingot.intHauteur / 2);
-            objC2D.fillRect(intPosX, intPosY + objLingot.intHauteur / 2 - 1.5, objLingot.intLargeur, objLingot.intHauteur / 2);
-            objC2D.strokeRect(intPosX, intPosY + objLingot.intHauteur / 2 - 1.5, objLingot.intLargeur, objLingot.intHauteur / 2);
-            objC2D.fillStyle = "white";
-            objC2D.fillRect(intPosX + 5 * objLingot.intLargeur / 6 - 11.5, intPosY - 1.5, 10, 2);
-            objC2D.fillRect(intPosX + objLingot.intLargeur - 9.5, intPosY + objLingot.intHauteur / 2, 8, 1.5);
-            objC2D.restore();
         }
 
         // Pour dessiner les cordes
@@ -349,15 +284,10 @@
 
                 }
 
-                //collect lingot 
+                //collecter lingot 
                 if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 3
                     || tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 3)) {
-                    intScore += 250;
-                    tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] = 0;
-                    tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] = 0;
-                    intnbLingot++;
-                    objSons.coinpickup.play();
-
+                        collecterLingot(Math.floor(objRunner.intY / 30),Math.floor(objRunner.intX / 30));
                 }
                 //check si il y a un trou pour tomber
                 if (((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 0

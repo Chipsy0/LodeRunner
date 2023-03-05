@@ -1,15 +1,3 @@
- // Construire les passerelles
- function initPasserelles(intY, intX) {
-    var objPasserelle = new Object();
-    objPasserelle.strCouleurPrim = '#8E443D';
-    objPasserelle.strCouleurSec = '#441F1E';
-    objPasserelle.intLargeur = 30;
-    objPasserelle.intHauteur = 30;
-    objPasserelle.intX = intX;
-    objPasserelle.intY = intY;
-    tabObjets[intY][intX] = objPasserelle;
-}
-
 // Construire les échelles
 function initEchelles(intY, intX) {
     var objEchelle = new Object();
@@ -64,21 +52,6 @@ function initPanneau(intY, intX) {
     objPanneau.intLargeur = 30;
     objPanneau.intHauteur = 30;
     tabObjets[intY][intX] = objPanneau;
-}
-
-// Construire le runner
-function initRunner() {
-    objRunner = new Object();
-    objRunner.strCouleur = 'black';
-    objRunner.intLargeur = 18;
-    objRunner.intHauteur = 28;
-    objRunner.intX = 15 * 30;
-    objRunner.intY = (16 * 30) - objRunner.intHauteur;
-    objRunner.intDirectionX = 1;
-    objRunner.intDirectionY = 1;
-    objRunner.intLargeurTab = (objRunner.intLargeur) / 30;
-    objRunner.intHauteurTab = (objRunner.intHauteur) / 30;
-    objRunner.intVitesse = objCanvas.width / 1300;
 }
 
 // Construire les murs
