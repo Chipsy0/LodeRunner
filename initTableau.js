@@ -61,7 +61,7 @@ function initialiseObjects (){
                     break;
 
                 case 8:
-                    initTrou(i,j,new Date());
+                    initTrou(i,j);
                     break;
             }
         }

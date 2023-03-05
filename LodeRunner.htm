@@ -18,7 +18,6 @@
         var objC2D = null;
         var objCycleAnimation = null;
         var objRunner = null;
-        var objTrou = null
         var tabTableau = null;
         var tabObjets = null;
         var binEnMouvementX = false;
@@ -32,7 +31,6 @@
         var binCommence = false;
         var intMillisecondesTot = 0;
         var intSecondes = 0;
-        var intSecTrou = 0;
         var intMinutes = 0;
         var intNiveau = 1;
         var intNbVies = 5;
@@ -43,9 +41,8 @@
         var binSurCorde = false;
         var intnbLingot = 0;
         var binTrouLeft = false;
-        var binTrouRight = false;
-        var tabTrou = null;
-        var objSons = null;
+        var binTrouRight = false;    
+        var objSons = null; 
         var binMort = false;
 
         function initAnimation() {
@@ -119,8 +116,8 @@
                             dessinerPanneau(i, j);
                             break;
                         case 8:
-                            dessinerTrou(i, j);
-                            break;
+                           verifTrou(i,j);
+                           break;
                     }
                 }
             }
@@ -309,8 +306,6 @@
                 intMillisecondesTot += intMilEcoulees;
                 intMinutes = Math.floor(intMillisecondesTot / 1000 / 60);
                 intSecondes = Math.floor(intMillisecondesTot / 1000) - intMinutes * 60;
-                intSecTrou = Math.floor(intMillisecondesTot / 1000);
-                console.log(intSecTrou);
             }
 
             if (intnbLingot == 6) {
@@ -462,12 +457,9 @@
                             binFall = true;
                         }
                     }
-
-                }
-
-                //tomber
+                }               
             }
-
+             //tomber
             if (binFall == true) {
                 objSons.falling.play();
                 objRunner.intY += 1 * objRunner.intVitesse;
@@ -495,9 +487,13 @@
                     }
                 }
             }
-
+            
+            //si Lode runenr mort
             if (binMort == true) {
-                objRunner.intY += 1 * objRunner.intVitesse;
+                objRunner.intY -= 1 * objRunner.intVitesse;
+                if (Math.floor(objRunner.intY / 30) == 0){
+                    binMart = false
+                }
 
             }
         }
