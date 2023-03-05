@@ -17,6 +17,7 @@ function verifNiveauReussi() {
         tabObjets[4][19] = null;
 
         initRunner();
+        initGardes();
         initTableau();
         intnbLingot = 0;
         binCommence = false;
