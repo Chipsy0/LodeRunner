@@ -7,8 +7,8 @@ function trou() {
         case 90: // Z (trou gauche)   
             if (binFall == false && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab)] == 1) {
                 tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab)] = 8;
+                initialiseObjects();
                 intTemp = intSecTrou;
-                initTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab), Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab), intTemp);
                 //dessinerTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab), Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab))
 
             }
@@ -36,7 +36,7 @@ function initTrou(intY, intX, intTemp) {
     objTrou.intTemp = intTemp;
     objTrou.intLargeur = 30;
     objTrou.intHauteur = 30;
-    tabObjets[intY][intX] = objPanneau;
+    tabObjets[intY][intX] = objTrou;
 }
 
 // Pour dessiner les trou
