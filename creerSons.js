@@ -28,4 +28,9 @@ function initSons() {
     objSon.setAttribute('src', 'dead.mp3');
     objSon.load();
     objSons.dead = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'gameover.mp3');
+    objSon.load();
+    objSons.gameover = objSon;
 }

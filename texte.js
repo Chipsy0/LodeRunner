@@ -24,6 +24,13 @@ function dessinerDonnees() {
     objC2D.restore();
 }
 
+// Pour incrire les données
+function dessinerGameover() {
+    objC2D.save();
+    
+    objC2D.restore();
+}
+
 // Pour debuter le chrono
 function debutChrono() {
     objDateDebut = new Date();
