@@ -58,8 +58,9 @@ function verifDureeTrou(intY, intX){
     if (intNbSec >= 8){
         tabTableau[intY][intX] = 1;
         initPasserelles(intY,intX);
+        objSons.filling.play();
     }
     else{
-        dessinerTrou(intY,intX);
+        dessinerTrou(intY,intX);        
     }
 }
