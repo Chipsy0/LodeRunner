@@ -49,7 +49,6 @@ function verifTrou(intY, intX){
     var objTempsDebut = objVerifTrou.objTemps;
     var objTempsMaintenant = new Date();
     var intNbSec = (objTempsMaintenant - objTempsDebut)/1000;
-    console.log(intNbSec);
     if (intNbSec >= 8){
         tabTableau[intY][intX] = 1;
         initPasserelles(intY,intX);
