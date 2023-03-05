@@ -137,7 +137,7 @@ function dessinerRunner() {
         objC2D.fillRect(objRunner.intLargeur - 4, 7 + fltAnim, 4, 4); // bras droit
         objC2D.restore();
     }
-    else if (binMouvementLeft == true) {
+    else if (binMouvementLeft == true && binMort == false && binGameOver == false) {
         objC2D.translate(intPosX, intPosY);
         objC2D.fillStyle = '#C91515';
 
@@ -161,7 +161,7 @@ function dessinerRunner() {
         objC2D.fillStyle = 'black';
         objC2D.restore();
     }
-    else if (binMouvementRight == true) {
+    else if (binMouvementRight == true && binMort == false && binGameOver == false) {
         objC2D.translate(intPosX, intPosY);
         objC2D.fillStyle = '#C91515';
 
@@ -215,32 +215,32 @@ function deplacerRunner() {
             binEnMouvementX = true;
             binMouvementRight = true;
             objRunner.intDirectionX = 1;
-            if (binCommence == false)
+            if (binCommence == false) {
+                binCommence = true;
                 debutChrono();
+            }
             break;
 
         case 37: // Flèche-à-gauche
             binEnMouvementX = true;
             binMouvementLeft = true;
             objRunner.intDirectionX = -1;
-            if (binCommence == false)
+            if (binCommence == false) {
+                binCommence = true;
                 debutChrono();
+            }
             break;
 
         case 38: // Flèche-en-haut                    
             binMouvementDOWN = false;
             binMouvementUP = true;
             objRunner.intDirectionY = 1;
-            if (binCommence == false)
-                debutChrono();
             break;
 
         case 40: // Flèche-en-bas
             binMouvementDOWN = true;
             binMouvementUP = false;
             objRunner.intDirectionY = 1;
-            if (binCommence == false)
-                debutChrono();
             break;
     }
 }

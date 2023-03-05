@@ -18,8 +18,8 @@ function verifNiveauReussi() {
         initRunner();
         initTableau();
         intnbLingot = 0;
-        debutChrono();
         binCommence = false;
+        debutChrono();
         intScoreNiveau = 0;
         objSons.levelup.play();
     }

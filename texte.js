@@ -27,8 +27,9 @@ function dessinerDonnees() {
 // Pour debuter le chrono
 function debutChrono() {
     objDateDebut = new Date();
-    binCommence = true;
     intMillisecondesTot = 0;
+    intMinutes = 0;
+    intSecondes = 0;
 }
 
 // Pour mettre à jour le temps du chrono
@@ -42,12 +43,15 @@ function updateChrono() {
     intSecondes = Math.floor(intMillisecondesTot / 1000) - intMinutes * 60;
 }
 
-
 // Pour afficher le texte game over et jouer le son
 var fltRotation = 0;
 function dessinerGameOver() {
     if (fltRotation < 6*Math.PI) {
-        fltRotation += 1.5*Math.PI/360;
+        fltRotation += 2*Math.PI/360;
+        objSons.gameover.play();
+    }
+    else {
+        objSons.gameover.pause();
     }
     objC2D.save();
     objC2D.translate(objCanvas.width/2,objCanvas.height/2);
