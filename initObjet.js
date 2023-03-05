@@ -112,12 +112,12 @@ function initSons() {
     objSon.load();
     objSons.coinpickup = objSon;
 
-    /*objSon = document.createElement('audio');
-    objSon.setAttribute('src', 'SonBallePerdue.mp3');
-    objSon.load();
-    objSons.ballePerdue = objSon;
-
     objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'falling.mp3');
+    objSon.load();
+    objSons.falling = objSon;
+
+    /*objSon = document.createElement('audio');
     objSon.setAttribute('src', 'SonDisparitionVortex.mp3');
     objSon.load();
     objSons.disparitionVortex = objSon;
