@@ -21,6 +21,7 @@ function mouvementX() {
 
 //mouvement Veritcal (Y)
 function mouvementY() {
+    binDansEchelle = false;
     if (binMouvementUP == true || binMouvementDOWN == true) {
         //check s'il est dans l'echelle
         if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 2

@@ -1,6 +1,5 @@
 //tomber
 function tomber() {
-    if (binFall == true) {
         objSons.falling.play();
         objRunner.intY += 1 * objRunner.intVitesse;
 
@@ -26,5 +25,4 @@ function tomber() {
                 objSons.currentTime = 0;
             }
         }
-    }
 }

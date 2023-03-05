@@ -1,5 +1,7 @@
-//check if won
-function checkWin() {
+/* Toutes les vérifications nécessaires pour la bonne poursuite du jeu */
+
+// vérifie si le niveau est terminé
+function verifNiveauReussi() {
     if (Math.floor(objRunner.intY / 30) == 0 && Math.floor(objRunner.intX / 30) == 19) {
         intScore += 1500;
         intNiveau++;
@@ -22,26 +24,25 @@ function checkWin() {
     }
 }
 
-//check if dead
-function checkDead() {
+// vérifie si lode runner est mort
+function verifMort() {
     if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 1
         && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 1) {
         objSons.dead.play();
         binMort = true;
-
     }
 }
 
-//collecter lingot 
-function collectLingot() {
+// vérifie si le lode runner collecte un lingot 
+function verifCollecterLingot() {
     if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 3
         || tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 3)) {
         collecterLingot(Math.floor(objRunner.intY / 30), Math.floor(objRunner.intX / 30));
     }
 }
 
-//check si il y a un trou pour tomber
-function checkTrou() {
+// vérifie si il y a un trou pour tomber
+function verifTrou() {
     if (((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 0
         && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0)
         && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 0
@@ -55,9 +56,9 @@ function checkTrou() {
 }
 
 
-//verifie pour allez correctement sur corde
-function checkCorde() {
-    //verify pour allez correctement sur corde
+// vérifie si le lode runner se tient à une corde
+function verifCorde() {
+    binSurCorde = false;
     if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
         && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
         // vérifie pour animation si le bloc en dessous est une passerelle ou une échelle
@@ -70,7 +71,6 @@ function checkCorde() {
     }
 
     if (binMouvementLeft == true || binMouvementRight == true) {
-        //verify pour allez correctement sur corde
         if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
             && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
             var locY = Math.floor(objRunner.intY / 30);

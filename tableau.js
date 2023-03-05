@@ -103,7 +103,7 @@ function dessiner() {
                     dessinerPanneau(i, j);
                     break;
                 case 8:
-                    verifTrou(i, j);
+                    verifDureeTrou(i, j);
                     break;
             }
         }
@@ -111,5 +111,7 @@ function dessiner() {
     dessinerTitre();
     dessinerDonnees();
     dessinerRunner();
-
+    if (binGameOver == true){
+        dessinerGameOver();
+    }
 }

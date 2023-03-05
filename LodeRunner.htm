@@ -17,11 +17,11 @@
     <script type="text/javascript" src="passerelles.js"></script>
     <script type="text/javascript" src="runner.js"></script>
     <script type="text/javascript" src="sol.js"></script>
-    <script type="text/javascript" src="tableaux.js"></script>
+    <script type="text/javascript" src="tableau.js"></script>
     <script type="text/javascript" src="texte.js"></script>
     <script type="text/javascript" src="trou.js"></script>
     <script type="text/javascript" src="mouvementLodeRunner.js"></script>
-    <script type="text/javascript" src="check.js"></script>
+    <script type="text/javascript" src="verifs.js"></script>
     <script type="text/javascript" src="tomber.js"></script>
     <script type="text/javascript" src="mort.js"></script>
     <script type="text/javascript">
@@ -56,6 +56,7 @@
         var objSons = null; 
         var binMort = false;
         var intScoreNiveau = 0;
+        var binGameOver = false;
 
         function initAnimation() {
             objCanvas = document.getElementById('monCanvas');
@@ -110,23 +111,25 @@
                 objSons.gameover.play();
             }
 
-            //mouvement && checks pour annimation && collect lingot
+            // mouvements && vérifs pour animations && collecter lingots
             if (binFall == false && binMort == false) {
-                checkWin();
-                checkDead();
-                collectLingot();
-                checkTrou();
-                binSurCorde = false;
-                checkCorde();
-                mouvementX();             
-                binDansEchelle = false;
+                verifNiveauReussi();
+                verifMort();
+                verifCollecterLingot();
+                verifTrou();
+                verifCorde();
+                mouvementX();
                 mouvementY();
             }
             //tomber
-            tomber();
-            
+            else if (binFall == true){
+                tomber();
+            }
+
             //mort
-            briquedeath();
+            else {
+                mortBrique();
+            }
         }
 
     </script>

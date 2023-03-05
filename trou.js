@@ -50,7 +50,7 @@ function dessinerTrou(intY, intX) {
 }
 
 // Pour vérifier si il faut remplir le trou
-function verifTrou(intY, intX){
+function verifDureeTrou(intY, intX){
     var objVerifTrou = tabObjets[intY][intX];
     var objTempsDebut = objVerifTrou.objTemps;
     var objTempsMaintenant = new Date();
