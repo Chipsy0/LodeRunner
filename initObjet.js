@@ -107,12 +107,12 @@ function initPanneau(intY, intX) {
 function initSons() {
     objSons = new Object();
 
-    /*var objSon = document.createElement('audio');
-    objSon.setAttribute('src', 'SonBalleMur.mp3');
+    var objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'coinpickup.mp3');
     objSon.load();
-    objSons.balleMur = objSon;
+    objSons.coinpickup = objSon;
 
-    objSon = document.createElement('audio');
+    /*objSon = document.createElement('audio');
     objSon.setAttribute('src', 'SonBallePerdue.mp3');
     objSon.load();
     objSons.ballePerdue = objSon;

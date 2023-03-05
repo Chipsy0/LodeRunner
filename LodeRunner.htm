@@ -44,7 +44,8 @@
         var intnbLingot = 0;
         var binTrouLeft = false;
         var binTrouRight = false;    
-        var tabTrou = null;    
+        var tabTrou = null;   
+        var objSons = null; 
 
         function initAnimation() {
             objCanvas = document.getElementById('monCanvas');
@@ -54,7 +55,7 @@
             for (var i = 0; i < tabObjets.length; i++) {
                 tabObjets[i] = new Array(30);
             }
-
+            initSons();
             initRunner();
             initTableau();
             dessiner(); // Dessiner une première fois
@@ -351,6 +352,7 @@
                     tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] = 0;
                     tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] = 0;
                     intnbLingot++;
+                    objSons.coinpickup.play();
 
                 }
                 //check si il y a un trou pour tomber
