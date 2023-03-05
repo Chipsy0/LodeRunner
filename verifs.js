@@ -53,7 +53,9 @@ function verifTrou() {
         || (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 8
             && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 8)
         || (tabTableau[Math.floor(objRunner.intY / 30 )][Math.floor(objRunner.intX / 30)] == 8
-            && tabTableau[Math.floor(objRunner.intY / 30 )][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 8)) {
+            && tabTableau[Math.floor(objRunner.intY / 30 )][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 8 
+            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] !=4
+            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] !=4 )) {
         binFall = true;
     }
 }
