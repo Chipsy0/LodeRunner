@@ -17,6 +17,7 @@
         var objC2D = null;
         var objCycleAnimation = null;
         var objRunner = null;
+        var objTrou = null
         var tabTableau = null;
         var tabObjets = null;
         var binEnMouvementX = false;
@@ -119,6 +120,9 @@
                         case 7:
                             dessinerPanneau(i, j);
                             break;
+                        case 8:
+                           dessinerTrou(i,j);
+                           break;
                     }
                 }
             }
@@ -498,9 +502,6 @@
                     tabObjets[2][19] = null;
                     tabObjets[3][19] = null;
                     tabObjets[4][19] = null;
-                   /* for (var i = 0; i < tabObjets.length; i++) {
-                        tabObjets[i] = new Array(30);
-                    }*/
 
                     initRunner();
                     initTableau();
@@ -521,7 +522,9 @@
                     && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 0
                         && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0))
                     || (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 5
-                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5)) {
+                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5)
+                    || (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 8
+                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 8)) {
                     binFall = true;
                 }
                 if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5

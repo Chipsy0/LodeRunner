@@ -78,7 +78,7 @@ function initRunner() {
     objRunner.intDirectionY = 1;
     objRunner.intLargeurTab = (objRunner.intLargeur) / 30;
     objRunner.intHauteurTab = (objRunner.intHauteur) / 30;
-    objRunner.intVitesse = objCanvas.width / 800;
+    objRunner.intVitesse = objCanvas.width / 1300;
 }
 
 // Construire les murs
