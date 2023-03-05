@@ -30,3 +30,14 @@ function debutChrono() {
     binCommence = true;
     intMillisecondesTot = 0;
 }
+
+// Pour mettre à jour le temps du chrono
+function updateChrono() {
+    var objDateMaintenant = new Date();
+    var intMilEcoulees = objDateMaintenant - objDateDebut;
+    objDateDebut = objDateMaintenant;
+
+    intMillisecondesTot += intMilEcoulees;
+    intMinutes = Math.floor(intMillisecondesTot / 1000 / 60);
+    intSecondes = Math.floor(intMillisecondesTot / 1000) - intMinutes * 60;
+}

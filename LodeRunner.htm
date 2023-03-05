@@ -94,24 +94,11 @@
         function mettreAjourAnimation() {
 
             if (binCommence == true) {
-                var objDateMaintenant = new Date();
-                var intMilEcoulees = objDateMaintenant - objDateDebut;
-                objDateDebut = objDateMaintenant;
-
-                intMillisecondesTot += intMilEcoulees;
-                intMinutes = Math.floor(intMillisecondesTot / 1000 / 60);
-                intSecondes = Math.floor(intMillisecondesTot / 1000) - intMinutes * 60;
+                updateChrono();
             }
 
             if (intnbLingot == 6) {
-                tabTableau[1][19] = 2;
-                tabTableau[2][19] = 2;
-                tabTableau[3][19] = 2;
-                tabTableau[4][19] = 2;
-                initEchelles(1, 19);
-                initEchelles(2, 19);
-                initEchelles(3, 19);
-                initEchelles(4, 19);
+                apparitionEchelleDeFin();
             }
 
             //mouvement 
