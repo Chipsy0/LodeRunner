@@ -51,6 +51,7 @@
         var binTrouRight = false;    
         var objSons = null; 
         var binMort = false;
+        var intScoreNiveau = 0;
 
         function initAnimation() {
             objCanvas = document.getElementById('monCanvas');
@@ -134,6 +135,9 @@
                     initRunner();
                     initTableau();
                     intnbLingot = 0;
+                    binCommence = false;
+                    intScoreNiveau = 0;
+                    debutChrono();
                 }
 
                 //check if dead
@@ -287,6 +291,11 @@
                     initRunner();
                     initTableau();
                     intnbLingot = 0;
+                    binCommence = false;
+                    debutChrono();
+                    console.log(intScoreNiveau);
+                    intScore -= intScoreNiveau;
+                    intScoreNiveau = 0;
 
                 }
 

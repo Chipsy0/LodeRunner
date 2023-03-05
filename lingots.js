@@ -33,7 +33,9 @@ function dessinerLingots(intY, intX) {
 }
 
 function collecterLingot(intY,intX){
-    intScore += 250;
+    intScoreNiveau += 250;
+    intScore += 250;   
+    console.log(intScoreNiveau);
     tabTableau[intY][intX] = 0;
     tabTableau[intY][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] = 0;
     intnbLingot++;

@@ -2,7 +2,10 @@
 function trou() {
     switch (event.keyCode) {
         case 90: // Z (trou gauche)   
-            if (binFall == false && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab)] == 1) {
+            if (binFall == false 
+                && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab)] == 1
+                && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab)] == 0) {
+
                 tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab)] = 8;
                 initTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab),Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab));
                 objSons.digging.play();
@@ -11,7 +14,10 @@ function trou() {
             break;
 
         case 88: // X (trou droit)
-            if (binFall == false && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.ceil(objRunner.intX / 30 + objRunner.intLargeurTab)] == 1) {
+            if (binFall == false 
+                && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.ceil(objRunner.intX / 30 + objRunner.intLargeurTab)] == 1
+                && tabTableau[Math.floor(objRunner.intY / 30 )][Math.ceil(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0) {
+
                 tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.ceil(objRunner.intX / 30 + objRunner.intLargeurTab)] = 8;
                 initTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab),Math.ceil(objRunner.intX / 30 + objRunner.intLargeurTab));
                 objSons.digging.play();
