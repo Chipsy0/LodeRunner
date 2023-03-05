@@ -32,6 +32,7 @@
         var binCommence = false;
         var intMillisecondesTot = 0;
         var intSecondes = 0;
+        var intSecTrou = 0;
         var intMinutes = 0;
         var intNiveau = 1;
         var intNbVies = 5;
@@ -306,6 +307,8 @@
                 intMillisecondesTot += intMilEcoulees;
                 intMinutes = Math.floor(intMillisecondesTot / 1000 / 60);
                 intSecondes = Math.floor(intMillisecondesTot / 1000) - intMinutes * 60;
+                intSecTrou = Math.floor(intMillisecondesTot / 1000);
+                console.log(intSecTrou);
             }
 
             if (intnbLingot == 6) {

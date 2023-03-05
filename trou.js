@@ -7,7 +7,7 @@ function trou() {
         case 90: // Z (trou gauche)   
             if (binFall == false && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab)] == 1) {
                 tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab)] = 8;
-                intTemp = intSecondes;
+                intTemp = intSecTrou;
                 initTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab), Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab), intTemp);
                 //dessinerTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab), Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab))
 
@@ -16,10 +16,10 @@ function trou() {
             break;
 
         case 88: // X (trou droit)
-            if (binFall == false && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 1) {
-                tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] = 8;
-                intTemp = intSecondes;
-                initTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab), Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab), intTemp);
+            if (binFall == false && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.ceil(objRunner.intX / 30 + objRunner.intLargeurTab)] == 1) {
+                tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.ceil(objRunner.intX / 30 + objRunner.intLargeurTab)] = 8;
+                intTemp = intSecTrou;
+                initTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab), Math.ceil(objRunner.intX / 30 + objRunner.intLargeurTab), intTemp);
                 //dessinerTrou(Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab), Math.floor(objRunner.intX / 30 - objRunner.intLargeurTab))
 
             }
