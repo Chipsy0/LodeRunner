@@ -5,6 +5,7 @@ function verifNiveauReussi() {
     if (Math.floor(objRunner.intY / 30) == 0 && Math.floor(objRunner.intX / 30) == 19) {
         intScore += 1500;
         intNiveau++;
+        intNbGardes++;
         tabTableau[1][19] = 0;
         tabTableau[2][19] = 0;
         tabTableau[3][19] = 0;
