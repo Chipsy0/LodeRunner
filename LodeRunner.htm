@@ -43,9 +43,10 @@
         var binSurCorde = false;
         var intnbLingot = 0;
         var binTrouLeft = false;
-        var binTrouRight = false;    
-        var tabTrou = null;   
-        var objSons = null; 
+        var binTrouRight = false;
+        var tabTrou = null;
+        var objSons = null;
+        var binMort = false;
 
         function initAnimation() {
             objCanvas = document.getElementById('monCanvas');
@@ -118,8 +119,8 @@
                             dessinerPanneau(i, j);
                             break;
                         case 8:
-                           dessinerTrou(i,j);
-                           break;
+                            dessinerTrou(i, j);
+                            break;
                     }
                 }
             }
@@ -324,7 +325,7 @@
             }
 
             //mouvement 
-            if (binFall == false) {
+            if (binFall == false && binMort == false) {
 
                 //check if won
                 if (Math.floor(objRunner.intY / 30) == 0 && Math.floor(objRunner.intX / 30) == 19) {
@@ -344,7 +345,15 @@
                     initTableau();
                     intnbLingot = 0;
                 }
-                
+
+                //check if dead
+                if (tabTableau[Math.floor(objRunner.intY / 30 )][Math.floor(objRunner.intX / 30)] == 1
+                    && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 1) {
+                    objSons.dead.play();
+                    binMort = true;
+
+                }
+
                 //collect lingot 
                 if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 3
                     || tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 3)) {
@@ -397,7 +406,7 @@
                     }
 
                 }
-                
+
                 //mouvement gauche
                 if (binMouvementLeft == true) {
                     if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 6
@@ -426,7 +435,7 @@
                             && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 2)) {
 
                         binDansEchelle = true
-                        
+
                         //mouvement en haut
                         if (binMouvementUP == true) {
                             if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2
@@ -457,7 +466,9 @@
                 }
 
                 //tomber
-            } else {
+            }
+
+            if (binFall == true) {
                 objSons.falling.play();
                 objRunner.intY += 1 * objRunner.intVitesse;
 
@@ -471,6 +482,7 @@
                         && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 8)) {
                     binFall = false;
                     objSons.falling.pause();
+                    objSons.currentTime = 0;
                 }
 
                 if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
@@ -479,8 +491,14 @@
                     if (Math.floor(objRunner.intY) == locY * 30 + 2) {
                         binFall = false;
                         objSons.falling.pause();
+                        objSons.currentTime = 0;
                     }
                 }
+            }
+
+            if (binMort == true) {
+                objRunner.intY += 1 * objRunner.intVitesse;
+
             }
         }
 

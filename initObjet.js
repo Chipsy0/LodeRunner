@@ -122,10 +122,15 @@ function initSons() {
     objSon.load();
     objSons.digging = objSon;
 
-    /*objSon = document.createElement('audio');
-    objSon.setAttribute('src', 'SonBalleBaton.mp3');
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'fillingup.mp3');
     objSon.load();
-    objSons.balleBaton = objSon;*/
+    objSons.filling = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'dead.mp3');
+    objSon.load();
+    objSons.dead = objSon;
 
     
 }
