@@ -1,4 +1,4 @@
-/* Toutes les fonctions en lien avec la gestion des tableaux */
+/* Toutes les fonctions en lien avec la gestion du tableau */
 
 function initTableau() {
     /*0 rien, 1 passerelles, 2 échelles, 3 lingots, 
