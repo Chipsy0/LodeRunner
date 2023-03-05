@@ -57,6 +57,18 @@ function checkTrou() {
 
 //verifie pour allez correctement sur corde
 function checkCorde() {
+    //verify pour allez correctement sur corde
+    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
+        && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
+        // vérifie pour animation si le bloc en dessous est une passerelle ou une échelle
+        if (tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30)] != 1
+            && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1
+            && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30)] != 2
+            && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 2) {
+            binSurCorde = true;
+        }
+    }
+
     if (binMouvementLeft == true || binMouvementRight == true) {
         //verify pour allez correctement sur corde
         if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
@@ -64,14 +76,7 @@ function checkCorde() {
             var locY = Math.floor(objRunner.intY / 30);
             if (Math.floor(objRunner.intY) != locY * 30 + 2) {
                 binFall = true;
-            }
-            // vérif pour animation si le bloc en dessous est une passerelle ou une échelle
-            if (tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30)] != 1
-                && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1
-                && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30)] != 2
-                && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 2) {
-                binSurCorde = true;
-            }
+            }           
         }
 
     }

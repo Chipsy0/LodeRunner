@@ -22,6 +22,8 @@
     <script type="text/javascript" src="trou.js"></script>
     <script type="text/javascript" src="mouvementLodeRunner.js"></script>
     <script type="text/javascript" src="check.js"></script>
+    <script type="text/javascript" src="tomber.js"></script>
+    <script type="text/javascript" src="mort.js"></script>
     <script type="text/javascript">
         var objCanvas = null;
         var objC2D = null;
@@ -108,7 +110,7 @@
                 objSons.gameover.play();
             }
 
-            //mouvement 
+            //mouvement && checks pour annimation && collect lingot
             if (binFall == false && binMort == false) {
                 checkWin();
                 checkDead();
@@ -120,51 +122,11 @@
                 binDansEchelle = false;
                 mouvementY();
             }
-             //tomber
-            if (binFall == true) {
-                objSons.falling.play();
-                objRunner.intY += 1 * objRunner.intVitesse;
-
-                if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 0
-                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 0)
-                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 3
-                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 3)
-                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 5
-                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 5)
-                    && (tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 8
-                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 8)) {
-                    binFall = false;
-                    objSons.falling.pause();
-                    objSons.currentTime = 0;
-                }
-
-                if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
-                    && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
-                    var locY = Math.floor(objRunner.intY / 30);
-                    if (Math.floor(objRunner.intY) == locY * 30 + 2) {
-                        binFall = false;
-                        objSons.falling.pause();
-                        objSons.currentTime = 0;
-                    }
-                }
-            }
+            //tomber
+            tomber();
             
-            //si Lode runenr mort
-            if (binMort == true) {
-                objRunner.intY -= 1 * objRunner.intVitesse;
-                if (Math.floor(objRunner.intY / 30) == 0){
-                    intNbVies--;
-                    binMort = false;
-                    initRunner();
-                    initTableau();
-                    intnbLingot = 0;
-                    debutChrono();
-                    binCommence = false;                    
-                    intScore -= intScoreNiveau;
-                    intScoreNiveau = 0;
-
-                }
-            }
+            //mort
+            briquedeath();
         }
 
     </script>
