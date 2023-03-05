@@ -2,7 +2,7 @@
 
 function initTableau() {
     /*0 rien, 1 passerelles, 2 échelles, 3 lingots, 
-    4 sol, 5 cordes,  6 murs, 7 interface (noir), 8 trou*/
+    4 sol, 5 cordes,  6 murs, 7 interface (noir), 8 trou, 9 garde tombe*/
 
     tabTableau = new Array();
     tabTableau.push([6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]);
