@@ -307,42 +307,74 @@
                 objC2D.fillRect(objRunner.intLargeur / 2 + 5 + fltAnim / 2, 7 + fltAnim / 2, 4, 4); // bras droit
                 objC2D.restore();
             }
-            else if (binSurCorde == true && (binMouvementRight || binMouvementLeft)) {
-                objC2D.translate(intPosX, intPosY);
-                objC2D.fillStyle = 'white';
-                objC2D.fillRect(objRunner.intLargeur / 2 - 1.5, 6, 3, 2); // cou
-                objC2D.fillRect(objRunner.intLargeur / 2 - 3, 0, 6, 6); // tête
-                objC2D.fillRect(objRunner.intLargeur / 2 - 3, 8, 6, 13); // corps
-                objC2D.fillStyle = '#FF1A1A';
-                objC2D.fillRect(objRunner.intLargeur / 2 - 3, 0, 6, 3); // casquette
-                objC2D.fillRect(3, 17 + fltAnim / 2, 4, 4); // jambe gauche
-                objC2D.fillRect(0, 21 + fltAnim / 2, 4, 4); // jambe gauche
-                objC2D.fillRect(objRunner.intLargeur - 7, 17 - fltAnim / 2, 4, 4); // jambe droite
-                objC2D.fillRect(objRunner.intLargeur - 4, 21 - fltAnim / 2, 4, 4); // jambe droite
-                objC2D.fillRect(objRunner.intLargeur / 2 - 6, 8, 4, 4); // bras gauche
-                objC2D.fillRect(0, 7 - fltAnim, 4, 4); // bras gauche
-                objC2D.fillRect(objRunner.intLargeur / 2 + 2, 8, 4, 4); // bras droit
-                objC2D.fillRect(objRunner.intLargeur - 4, 7 + fltAnim, 4, 4); // bras droit
-                objC2D.restore();
-            }
-            else if (binSurCorde == true){
-                objC2D.translate(intPosX, intPosY);
-                objC2D.fillStyle = 'white';
-                objC2D.fillRect(objRunner.intLargeur / 2 - 1.5, 5, 3, 4); // cou
-                objC2D.fillRect(objRunner.intLargeur / 2 - 3, 1, 6, 5); // tête
-                objC2D.fillRect(objRunner.intLargeur / 2 - 3, 8, 6, 10); // corps
-                objC2D.fillStyle = '#FF1A1A';
-                objC2D.fillRect(objRunner.intLargeur / 2 - 3, 0, 6, 3); // casquette
-                objC2D.fillRect(objRunner.intLargeur / 2 - 5, 3 / 2, 6, 2); // casquette
-                objC2D.fillRect(3, 17 + fltAnim / 2, 4, 4); // jambe gauche
-                objC2D.fillRect(0, 21 + fltAnim / 2, 4, 4); // jambe gauche
-                objC2D.fillRect(objRunner.intLargeur - 7, 17 - fltAnim / 2, 4, 4); // jambe droite
-                objC2D.fillRect(objRunner.intLargeur - 4, 21 - fltAnim / 2, 4, 4); // jambe droite
-                objC2D.fillRect(objRunner.intLargeur / 2 - 6, 8, 4, 4); // bras gauche
-                objC2D.fillRect(0, 4, 4, 4); // bras gauche
-                objC2D.fillRect(objRunner.intLargeur / 2 + 2, 8, 4, 4); // bras droit
-                objC2D.fillRect(objRunner.intLargeur - 4, 4, 4, 4); // bras droit
-                objC2D.restore();
+            else if (binSurCorde == true) {
+                if (binMouvementRight == true) {
+                    objC2D.translate(intPosX, intPosY);
+                    objC2D.fillStyle = '#C91515';
+
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 1, 6, 4, 4); // bras droit
+                    objC2D.fillRect(objRunner.intLargeur - 9 - fltAnim, 3, 4, 4); // bras droit
+
+                    objC2D.fillRect(3, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe gauche
+                    objC2D.fillRect(2 - fltAnim / 3, 23 + fltAnim / 6, 4, 4); // jambe gauche
+                    objC2D.fillStyle = 'white';
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 4.5, 6, 3, 4); // cou
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 6, 8 + fltAnim / 6, 6, 12); // corps
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 6, 1 / 2 + fltAnim / 6, 6, 6); // tête
+                    objC2D.fillStyle = '#FF1A1A';
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 6, 1 / 2 + fltAnim / 6, 6, 3); // casquette
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 2, 3 / 2 + fltAnim / 6, 6, 2); // casquette
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 6, 6, 4, 4); // bras gauche
+                    objC2D.fillRect(1 + fltAnim, 3, 4, 4); // bras gauche
+
+                    objC2D.fillRect(7, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe droite
+                    objC2D.fillRect(6 + fltAnim / 3, 23 + fltAnim / 6, 4, 4); // jambe droite
+                    objC2D.fillStyle = 'black';
+                    objC2D.restore();
+                }
+                else if (binMouvementLeft == true) {
+                    objC2D.translate(intPosX, intPosY);
+                    objC2D.fillStyle = '#C91515';
+
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 4, 6, 4, 4); // bras gauche
+                    objC2D.fillRect(5 + fltAnim, 3, 4, 4); // bras gauche
+                    objC2D.fillRect(objRunner.intLargeur - 7, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe droite
+                    objC2D.fillRect(objRunner.intLargeur - 6 + fltAnim / 3, 23 + fltAnim / 6, 4, 4); // jambe droite
+
+                    objC2D.fillStyle = 'white';
+                    objC2D.fillRect(objRunner.intLargeur / 2 + 0.5, 6, 3, 2); // cou
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 1, 8 + fltAnim / 6, 6, 12); // corps
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 1, 1 / 2 + fltAnim / 6, 6, 6); // tête
+                    objC2D.fillStyle = '#FF1A1A';
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 1, 1 / 2 + fltAnim / 6, 6, 3); // casquette
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 5, 3 / 2 + fltAnim / 6, 6, 2); // casquette
+                    objC2D.fillRect(objRunner.intLargeur / 2 + 2, 6, 4, 4); // bras droit
+                    objC2D.fillRect(objRunner.intLargeur - 7 - fltAnim, 3, 4, 4); // bras droit
+
+                    objC2D.fillRect(7, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe gauche
+                    objC2D.fillRect(8 - fltAnim / 3, 23 + fltAnim / 6, 4, 4); // jambe gauche
+                    objC2D.fillStyle = 'black';
+                    objC2D.restore();
+                }
+                else {
+                    objC2D.translate(intPosX, intPosY);
+                    objC2D.fillStyle = 'white';
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 1.5, 5, 3, 4); // cou
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 3, 1, 6, 5); // tête
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 3, 8, 6, 12); // corps
+                    objC2D.fillStyle = '#FF1A1A';
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 3, 0, 6, 3); // casquette
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 5, 3 / 2, 6, 2); // casquette
+                    objC2D.fillRect(3, 19 + fltAnim / 4, 4, 4); // jambe gauche
+                    objC2D.fillRect(0, 23 + fltAnim / 4, 4, 4); // jambe gauche
+                    objC2D.fillRect(objRunner.intLargeur - 7, 19 - fltAnim / 8, 4, 4); // jambe droite
+                    objC2D.fillRect(objRunner.intLargeur - 4, 23 - fltAnim / 8, 4, 4); // jambe droite
+                    objC2D.fillRect(objRunner.intLargeur / 2 - 6, 8, 4, 4); // bras gauche
+                    objC2D.fillRect(0, 4, 4, 4); // bras gauche
+                    objC2D.fillRect(objRunner.intLargeur / 2 + 2, 8, 4, 4); // bras droit
+                    objC2D.fillRect(objRunner.intLargeur - 4, 4, 4, 4); // bras droit
+                    objC2D.restore();
+                }
             }
             else if (binDansEchelle == true) {
                 objC2D.translate(intPosX, intPosY);
@@ -352,10 +384,10 @@
                 objC2D.fillRect(objRunner.intLargeur / 2 - 3, 8, 6, 13); // corps
                 objC2D.fillStyle = '#FF1A1A';
                 objC2D.fillRect(objRunner.intLargeur / 2 - 3, 0, 6, 3); // casquette
-                objC2D.fillRect(3, 17 + fltAnim / 2, 4, 4); // jambe gauche
-                objC2D.fillRect(0, 21 + fltAnim / 2, 4, 4); // jambe gauche
-                objC2D.fillRect(objRunner.intLargeur - 7, 17 - fltAnim / 2, 4, 4); // jambe droite
-                objC2D.fillRect(objRunner.intLargeur - 4, 21 - fltAnim / 2, 4, 4); // jambe droite
+                objC2D.fillRect(4 - fltAnim / 3, 17 + fltAnim / 2, 4, 4); // jambe gauche
+                objC2D.fillRect(1 - fltAnim / 3, 21 + fltAnim / 2, 4, 4); // jambe gauche
+                objC2D.fillRect(objRunner.intLargeur - 8 - fltAnim / 3, 17 - fltAnim / 2, 4, 4); // jambe droite
+                objC2D.fillRect(objRunner.intLargeur - 5 - fltAnim / 3, 21 - fltAnim / 2, 4, 4); // jambe droite
                 objC2D.fillRect(objRunner.intLargeur / 2 - 6, 8, 4, 4); // bras gauche
                 objC2D.fillRect(0, 7 - fltAnim, 4, 4); // bras gauche
                 objC2D.fillRect(objRunner.intLargeur / 2 + 2, 8, 4, 4); // bras droit
@@ -390,11 +422,11 @@
                 objC2D.translate(intPosX, intPosY);
                 objC2D.fillStyle = '#C91515';
 
-                objC2D.fillRect(objRunner.intLargeur / 2 - 5 - fltAnim, 8 - 3 / 4 - fltAnim / 4, 4, 4); // bras gauche
-                objC2D.fillRect(objRunner.intLargeur / 2 - 5 - 2.5 * fltAnim, 12 - fltAnim / 2, 4, 4); // bras gauche
+                objC2D.fillRect(objRunner.intLargeur / 2 - 5 + fltAnim, 8 + 3 / 4 + fltAnim / 4, 4, 4); // bras droit
+                objC2D.fillRect(objRunner.intLargeur / 2 - 5 + 2.5 * fltAnim, 12 + fltAnim / 2, 4, 4); // bras droit
 
-                objC2D.fillRect(objRunner.intLargeur / 2 - 4 + fltAnim, 18 - fltAnim / 3, 4, 6); // jambe gauche
-                objC2D.fillRect(objRunner.intLargeur / 2 - 4 + 2 * fltAnim, 24 - 2 - 2 * fltAnim / 3, 4, 4); // jambe gauche
+                objC2D.fillRect(objRunner.intLargeur / 2 - 4 - fltAnim, 18 - fltAnim / 3, 4, 6); // jambe droite
+                objC2D.fillRect(objRunner.intLargeur / 2 - 4 - 2 * fltAnim, 24 - 2 - 2 * fltAnim / 3, 4, 4); // jambe droite
                 objC2D.fillStyle = 'white';
                 objC2D.fillRect(objRunner.intLargeur / 2 - 4.5, 6, 3, 4); // cou
                 objC2D.fillRect(objRunner.intLargeur / 2 - 6, 8 + fltAnim / 6, 6, 12); // corps
@@ -402,11 +434,12 @@
                 objC2D.fillStyle = '#FF1A1A';
                 objC2D.fillRect(objRunner.intLargeur / 2 - 6, 1 / 2 + fltAnim / 6, 6, 3); // casquette
                 objC2D.fillRect(objRunner.intLargeur / 2 - 2, 3 / 2 + fltAnim / 6, 6, 2); // casquette
-                objC2D.fillRect(objRunner.intLargeur / 2 - 5 + fltAnim, 8 + 3 / 4 + fltAnim / 4, 4, 4); // bras droit
-                objC2D.fillRect(objRunner.intLargeur / 2 - 5 + 2.5 * fltAnim, 12 + fltAnim / 2, 4, 4); // bras droit
+                objC2D.fillRect(objRunner.intLargeur / 2 - 5 - fltAnim, 8 + 3 / 4 - fltAnim / 4, 4, 4); // bras gauche
+                objC2D.fillRect(objRunner.intLargeur / 2 - 5 - 2.5 * fltAnim, 12 - fltAnim / 2, 4, 4); // bras gauche
+                objC2D.fillRect(objRunner.intLargeur / 2 - 6 + fltAnim, 18 - fltAnim / 3, 4, 6); // jambe gauche
+                objC2D.fillRect(objRunner.intLargeur / 2 - 6 + 2 * fltAnim, 24 - 2 - 2 * fltAnim / 3, 4, 4); // jambe gauche
 
-                objC2D.fillRect(objRunner.intLargeur / 2 - 4 - fltAnim, 18 - fltAnim / 3, 4, 6); // jambe droite
-                objC2D.fillRect(objRunner.intLargeur / 2 - 4 - 2 * fltAnim, 24 - 2 - 2 * fltAnim / 3, 4, 4); // jambe droite
+
                 objC2D.fillStyle = 'black';
                 objC2D.restore();
             }
@@ -516,7 +549,6 @@
                     intnbLingot++;
 
                 }
-
                 if (((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] == 0
                     && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 0)
                     && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 0
@@ -527,10 +559,17 @@
                         && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 8)) {
                     binFall = true;
                 }
+                binSurCorde = false;
                 if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
                     && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 5) {
                     var locY = Math.floor(objRunner.intY / 30);
-                    binSurCorde = true;
+                    // vérif pour animation si le bloc en dessous est une passerelle ou une échelle
+                    if (tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30)] != 1
+                        && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1
+                        && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30)] != 2
+                        && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 2) {
+                        binSurCorde = true;
+                    }
                 }
                 if (binMouvementLeft == true || binMouvementRight == true) {
                     if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 5
@@ -539,28 +578,33 @@
                         if (Math.floor(objRunner.intY) != locY * 30 + 2) {
                             binFall = true;
                         }
-                        binSurCorde = true;
-                    }
-
-                    }
-
-                    if (binMouvementLeft == true) {
-                        if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 6
-                            && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 1
-                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30)] != 1) {
-                            objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
-                        }
-                    }
-                    if (binMouvementRight == true) {
-                        if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 6
-                            && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1
-                                && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1)) {
-
-                            objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
+                        // vérif pour animation si le bloc en dessous est une passerelle ou une échelle
+                        if (tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30)] != 1
+                            && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1
+                            && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30)] != 2
+                            && tabTableau[Math.floor(objRunner.intY / 30) + 1][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 2) {
+                            binSurCorde = true;
                         }
                     }
 
-                
+                }
+
+                if (binMouvementLeft == true) {
+                    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 6
+                        && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] != 1
+                        && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30)] != 1) {
+                        objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
+                    }
+                }
+                if (binMouvementRight == true) {
+                    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 6
+                        && (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1
+                            && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab - 1 / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 1)) {
+
+                        objRunner.intX += objRunner.intDirectionX * objRunner.intVitesse;
+                    }
+                }
+
                 //mouvement bas et haut
                 binDansEchelle = false;
                 if (binMouvementUP == true || binMouvementDOWN == true) {

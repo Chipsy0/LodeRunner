@@ -1,5 +1,5 @@
 function initTableau() {
-    /*0 rien, 1 briques, 2 échelles, 3 lingots, 
+    /*0 rien, 1 passerelles, 2 échelles, 3 lingots, 
     4 sol, 5 cordes,  6 murs, 7 interface (noir), 8 trou*/
 
     tabTableau = new Array();
