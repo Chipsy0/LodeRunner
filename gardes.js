@@ -13,39 +13,54 @@ function initGardes() {
         var tabOptionsDePosition = null;
         switch (intNoPasserelle) {
             case 1:
-                objGarde.intY = (2 * 30) - objGarde.intHauteur;
-                tabOptionsDePosition = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15];
+                objGarde.intY = (3 * 30) - objGarde.intHauteur;
+                tabOptionsDePosition = [1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15];
                 break;
             case 2:
-                objGarde.intY = (4 * 30) - objGarde.intHauteur;
-                tabOptionsDePosition = [19, 20, 21, 22, 23, 24, 25, 27, 28];
+                objGarde.intY = (5 * 30) - objGarde.intHauteur;
+                tabOptionsDePosition = [19, 20, 21, 22, 23, 25, 27, 28];
                 break;
             case 3:
-                objGarde.intY = (7 * 30) - objGarde.intHauteur;
-                tabOptionsDePosition = [1,2,4,5,6,7,16,17,18,19,20,22,23,24,25,26,27,28];
+                objGarde.intY = (8 * 30) - objGarde.intHauteur;
+                tabOptionsDePosition = [1,2,4,5,6,7,16,17,18,19,20,22,24,25,27,28];
                 break;
             case 4:
-                objGarde.intY = (10 * 30) - objGarde.intHauteur;
-                tabOptionsDePosition = [1, 2, ];
+                objGarde.intY = (11 * 30) - objGarde.intHauteur;
+                tabOptionsDePosition = [1,2,4,5,6,7,8,10,11,12,13,14,15,16,17,18,19,20];
                 break;
             case 5:
-                objGarde.intY = (13 * 30) - objGarde.intHauteur;
+                objGarde.intY = (14 * 30) - objGarde.intHauteur;
+                tabOptionsDePosition = [6,8,22,23,24,26,27];
                 break;
         }
-        var intIndexAleatoireTab = objGarde.intX = Math.floor(Math.random() * tabOptionsDePosition.length) + 1;
-        objGarde.intX = tabOptionsDePosition[intIndexAleatoireTab];
+        var intIndexAleatoireTab = objGarde.intX = Math.floor(Math.random() * tabOptionsDePosition.length);
+        objGarde.intX = tabOptionsDePosition[intIndexAleatoireTab] * 30 + 4;
+        // vérifie que 2 gardes ne sont pas au même endroit
+        var binMemePos = false;
+        for (var j = 0 ; j < tabGardes.length; j++){
+            if (tabGardes[j].intX == objGarde.intX && tabGardes[j].intY == objGarde.intY){
+                i--;
+                binMemePos = true;
+            }
+        }
         objGarde.intDirectionX = 1;
         objGarde.intDirectionY = 1;
         objGarde.intLargeurTab = (objRunner.intLargeur) / 30;
         objGarde.intHauteurTab = (objRunner.intHauteur) / 30;
-        objGarde.intVitesse = objCanvas.width / 1300;
-        tabGardes.push(objGarde);
+        objGarde.intVitesse = objCanvas.width / 1500;
+        if (binMemePos == false){
+            tabGardes.push(objGarde);
+        }
     }
 }
 
 // Pour dessiner les gardes (+animations)
 function dessinerGardes() {
     for (var i = 0; i < tabGardes.length; i++) {
+        objC2D.save();
+        var objGardeCourant = tabGardes[i];
+        intPosX = objGardeCourant.intX;
+        intPosY = objGardeCourant.intY;
         objC2D.translate(intPosX, intPosY);
         objC2D.fillStyle = 'white';
         objC2D.fillRect(objRunner.intLargeur / 2 - 1.5, 6 + fltAnim / 6, 3, 4); // cou
