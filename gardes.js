@@ -65,3 +65,44 @@ function dessinerGardes() {
         objC2D.restore();
     }
 }
+
+
+
+// init garde trou
+function initGardeTrou(intY, intX) {
+    objGardeTrou = new Object();
+    objGardeTrou.strCouleur = 'black';
+    objGardeTrou.intX = intX;
+    objGardeTrou.intY = intY;
+    objGardeTrou.intLargeur = 30;
+    objGardeTrou.intHauteur = 30;
+    objGardeTrou.objTemps = new Date();
+    tabObjets[intY][intX] = objGardeTrou;
+}
+
+// Pour dessiner les garde trou
+function dessinerGardeTrou(intY, intX) {
+    objC2D.save();
+    var objGardeTrou = tabObjets[intY][intX];
+    intPosX = objGardeTrou.intX * 30;
+    intPosY = objGardeTrou.intY * 30;
+    objC2D.fillStyle = objGardeTrou.strCouleur;
+    objC2D.fillRect(intPosX, intPosY, objGardeTrou.intLargeur, objGardeTrou.intHauteur);
+    objC2D.restore();
+}
+
+// Pour vérifier si il faut remplir le garde trou 
+function verifDureeGardeTrou(intY, intX){
+    var objVerifTrou = tabObjets[intY][intX];
+    var objTempsDebut = objVerifTrou.objTemps;
+    var objTempsMaintenant = new Date();
+    var intNbSec = (objTempsMaintenant - objTempsDebut)/1000;
+    if (intNbSec >= 8){
+        tabTableau[intY][intX] = 1;
+        initPasserelles(intY,intX);
+        objSons.filling.play();
+    }
+    else{
+        dessinerGardeTrou(intY,intX);        
+    }
+}
