@@ -19,6 +19,7 @@ function checkWin() {
         debutChrono();
         binCommence = false;
         intScoreNiveau = 0;
+        objSons.levelup.play();
     }
 }
 

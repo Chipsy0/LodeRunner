@@ -33,4 +33,9 @@ function initSons() {
     objSon.setAttribute('src', 'gameover.mp3');
     objSon.load();
     objSons.gameover = objSon;
+
+    objSon = document.createElement('audio');
+    objSon.setAttribute('src', 'levelup.mp3');
+    objSon.load();
+    objSons.levelup = objSon;
 }
