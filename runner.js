@@ -137,7 +137,7 @@ function dessinerRunner() {
         objC2D.fillRect(objRunner.intLargeur - 4, 7 + fltAnim, 4, 4); // bras droit
         objC2D.restore();
     }
-    else if (binMouvementLeft == true) {
+    else if (binMouvementLeft == true && binMort == false && binGameOver == false) {
         objC2D.translate(intPosX, intPosY);
         objC2D.fillStyle = '#C91515';
 
@@ -161,7 +161,7 @@ function dessinerRunner() {
         objC2D.fillStyle = 'black';
         objC2D.restore();
     }
-    else if (binMouvementRight == true) {
+    else if (binMouvementRight == true && binMort == false && binGameOver == false) {
         objC2D.translate(intPosX, intPosY);
         objC2D.fillStyle = '#C91515';
 
