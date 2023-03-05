@@ -3,7 +3,6 @@
 // Pour construire le runner
 function initRunner() {
     objRunner = new Object();
-    objRunner.strCouleur = 'black';
     objRunner.intLargeur = 18;
     objRunner.intHauteur = 28;
     objRunner.intX = 15 * 30;
@@ -15,12 +14,11 @@ function initRunner() {
     objRunner.intVitesse = objCanvas.width / 1300;
 }
 
-// Pour dessiner le runner
+// Pour dessiner le runner (+animations)
 function dessinerRunner() {
     objC2D.save();
     intPosX = objRunner.intX;
     intPosY = objRunner.intY;
-    objC2D.fillStyle = objRunner.strCouleur;
     if (fltAnim > 3) {
         binInverseAnim = true;
     }

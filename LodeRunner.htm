@@ -8,13 +8,17 @@
     <title>Lode Runner par Caroline Chagnon et Razvan Pruteanu</title>
     <link rel="stylesheet" type="text/css" href="StyleProjet1.css" />
     <!-- Code JavaScript local -->
-    <script type="text/javascript" src="initTableau.js"></script>
-    <script type="text/javascript" src="initObjet.js"></script>
-    <script type="text/javascript" src="trou.js"></script>
-    <script type="text/javascript" src="runner.js"></script>
-    <script type="text/javascript" src="passerelles.js"></script>
+    <script type="text/javascript" src="cordes.js"></script>
+    <script type="text/javascript" src="creerSons.js"></script>
     <script type="text/javascript" src="echelles.js"></script>
+    <script type="text/javascript" src="initTableau.js"></script>
     <script type="text/javascript" src="lingots.js"></script>
+    <script type="text/javascript" src="murs.js"></script>
+    <script type="text/javascript" src="panneau.js"></script>
+    <script type="text/javascript" src="passerelles.js"></script>
+    <script type="text/javascript" src="runner.js"></script>
+    <script type="text/javascript" src="sol.js"></script>
+    <script type="text/javascript" src="trou.js"></script>
     <script type="text/javascript">
         var objCanvas = null;
         var objC2D = null;
@@ -84,155 +88,7 @@
         function effacerDessin() {
             objC2D.clearRect(0, 0, objCanvas.width, objCanvas.height);
         }
-
-        // Pour dessiner le tableau
-        function dessiner() {
-            for (var i = 0; i < tabTableau.length; i++) {
-                for (var j = 0; j < tabTableau[i].length; j++) {
-                    switch (tabTableau[i][j]) {
-                        case 1:
-                            dessinerPasserelles(i, j);
-                            break;
-
-                        case 2:
-                            dessinerEchelles(i, j);
-                            break;
-
-                        case 3:
-                            dessinerLingots(i, j);
-                            break;
-
-                        case 4:
-                            dessinerSol(i, j);
-                            break;
-
-                        case 5:
-                            dessinerCordes(i, j);
-                            break;
-
-                        case 6:
-                            dessinerMurs(i, j);
-                            break;
-
-                        case 7:
-                            dessinerPanneau(i, j);
-                            break;
-                        case 8:
-                           verifTrou(i,j);
-                           break;
-                    }
-                }
-            }
-            dessinerTitre();
-            dessinerDonnees();
-            dessinerRunner();
-
-        }
-
-        // Pour dessiner les cordes
-        function dessinerCordes(intY, intX) {
-            objC2D.save();
-            var objCorde = tabObjets[intY][intX];
-            intPosX = objCorde.intX * 30;
-            intPosY = objCorde.intY * 30;
-            objC2D.fillStyle = objCorde.strCouleur;
-            objC2D.fillRect(intPosX, intPosY + 4, objCorde.intLargeur, objCorde.intHauteur);
-            objC2D.restore();
-        }
-
-
-        // Pour dessiner le sol
-        function dessinerSol(intY, intX) {
-            objC2D.save();
-            var objSol = tabObjets[intY][intX];
-            intPosX = objSol.intX * 30;
-            intPosY = objSol.intY * 30;
-            objC2D.strokeStyle = '#3d3c3b';
-            objC2D.lineWidth = 2;
-            objC2D.fillStyle = objSol.strCouleur;
-            objC2D.beginPath();
-            objC2D.fillRect(intPosX, intPosY, objSol.intLargeur, objSol.intHauteur);
-            objC2D.strokeRect(intPosX + 1, intPosY + 1, objSol.intLargeur - 2, objSol.intHauteur - 2);
-            objC2D.closePath();
-            objC2D.restore();
-        }
-
-        // Pour dessiner les murs
-        function dessinerMurs(intY, intX) {
-            objC2D.save();
-            var objMur = tabObjets[intY][intX];
-            intPosX = objMur.intX * 30;
-            intPosY = objMur.intY * 30;
-            objC2D.fillStyle = objMur.strCouleur;
-            objC2D.fillRect(intPosX, intPosY, objMur.intLargeur, objMur.intHauteur);
-            objC2D.restore();
-        }
-
-        // Pour dessiner le panneau
-        function dessinerPanneau(intY, intX) {
-            objC2D.save();
-            var objPanneau = tabObjets[intY][intX];
-            intPosX = objPanneau.intX * 30;
-            intPosY = objPanneau.intY * 30;
-            objC2D.fillStyle = objPanneau.strCouleur;
-            objC2D.fillRect(intPosX, intPosY, objPanneau.intLargeur, objPanneau.intHauteur);
-            objC2D.restore();
-        }
-
-        // Pour inscrire le titre
-        function dessinerTitre() {
-            objC2D.save();
-            objC2D.fillStyle = "#46753e";
-            objC2D.font = '30px Impact';
-            objC2D.textAlign = 'center';
-            objC2D.fillText("Lode Runner", objCanvas.width / 2, 26);
-            objC2D.fillText("par Caroline Chagnon et Razvan Pruteanu", objCanvas.width / 2, objCanvas.height - 4);
-            objC2D.restore();
-        }
-
-        // Pour incrire les données
-        function dessinerDonnees() {
-            objC2D.save();
-            objC2D.fillStyle = "#ffd900";
-            objC2D.font = '35px Impact';
-            objC2D.textAlign = 'left';
-            objC2D.fillText("Score: " + intScore.toString().padStart(7, '0'), 60, objCanvas.height - 60);
-            objC2D.fillText("Temps: " + intMinutes.toString().padStart(2, '0') + ':' + intSecondes.toString().padStart(2, '0'), 330, objCanvas.height - 60);
-            objC2D.fillText("Niveau: " + intNiveau, 570, objCanvas.height - 60);
-            objC2D.fillText("Vies: " + intNbVies, 740, objCanvas.height - 60);
-            objC2D.restore();
-        }
-
-        // Pour debuter le chrono
-        function debutChrono() {
-            objDateDebut = new Date();
-            binCommence = true;
-            intMillisecondesTot = 0;
-        }
-
-        // Un cycle d'animation	
-        function animer() {
-            // Requête pour le prochain cycle
-            objCycleAnimation = requestAnimationFrame(animer);
-
-            // Le cycle d'animation
-            effacerDessin();
-            mettreAjourAnimation();
-            dessiner();
-        }
-
-        // Arrêter l'animation
-        function arreterAnimation() {
-            if (objCycleAnimation != null)
-                cancelAnimationFrame(objCycleAnimation);
-            objCycleAnimation = null;
-        }
-
-        // Pour effacer le dessin
-        function effacerDessin() {
-            objC2D.clearRect(0, 0, objCanvas.width, objCanvas.height);
-        }
-
+        
         // Pour mettre à jour l'animation
         function mettreAjourAnimation() {
 
