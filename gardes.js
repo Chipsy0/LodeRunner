@@ -450,13 +450,14 @@ function mortGarde() {
 
 // initialise le trou rempli par un garde
 function initGardeTrou(intY, intX) {
+    var objTrou = tabObjets[intY][intX];
     objGardeTrou = new Object();
     objGardeTrou.strCouleur = 'black';
     objGardeTrou.intX = intX;
     objGardeTrou.intY = intY;
     objGardeTrou.intLargeur = 30;
     objGardeTrou.intHauteur = 30;
-    objGardeTrou.objTemps = new Date();
+    objGardeTrou.objTemps = objTrou.objTemps;
     tabObjets[intY][intX] = objGardeTrou;
 }
 
@@ -477,7 +478,7 @@ function verifDureeGardeTrou(intY, intX) {
     var objTempsDebut = objVerifTrou.objTemps;
     var objTempsMaintenant = new Date();
     var intNbSec = (objTempsMaintenant - objTempsDebut) / 1000;
-    if (intNbSec >= 4) {
+    if (intNbSec >= 8) {
         tabTableau[intY][intX] = 1;
         initPasserelles(intY, intX);
         objSons.filling.play();
