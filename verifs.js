@@ -38,10 +38,13 @@ function verifMort() {
 
 // vérifie si le lode runner collecte un lingot 
 function verifCollecterLingot() {
-    if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 3
-        || tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 3)) {
+    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 3) {
         collecterLingot(Math.floor(objRunner.intY / 30), Math.floor(objRunner.intX / 30));
     }
+
+    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 3) {
+    collecterLingot(Math.floor(objRunner.intY / 30), Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab));
+}
 }
 
 // vérifie si il y a un trou pour tomber

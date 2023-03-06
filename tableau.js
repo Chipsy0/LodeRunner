@@ -65,6 +65,10 @@ function initialiseObjects() {
                 case 8:
                     initTrou(i, j);
                     break;
+
+                case 9:
+                    initGardeTrou(i, j)
+                    break;
             }
         }
     }
@@ -106,7 +110,7 @@ function dessiner() {
                     verifDureeTrou(i, j);
                     break;
                 case 9:
-                    dessinerGardeTrou(i, j)
+                    verifDureeGardeTrou(i, j)
                     break;
             }
         }
