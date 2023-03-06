@@ -17,7 +17,7 @@ function mort() {
 }
 
 //si Lode runner meurt grace à une garde
-function mortGarde(){
+function mortParGarde(){
     for (var i = 0; i < intNbGardes; i++){
         var objGarde = tabGardes[i];
         intPosX = objGarde.intX;
@@ -33,8 +33,7 @@ function mortGarde(){
            || ((((Math.floor(objRunner.intY) + 28)>= intPosY &&(Math.floor(objRunner.intY) + 28) <= (intPosY + intHauteur))
            && (Math.floor(objRunner.intX)         >= intPosX && Math.floor(objRunner.intX)       <= (intPosX + intLargeur)))
            || (((Math.floor(objRunner.intY) + 28) >= intPosY && (Math.floor(objRunner.intY) + 28)<= (intPosY + intHauteur))
-           && ((Math.floor(objRunner.intX) + 18)  >= intPosX && (Math.floor(objRunner.intX) + 18)<= (intPosX + intLargeur))))){
-            console.log("yes");
+           && ((Math.floor(objRunner.intX) + 18)  >= intPosX && (Math.floor(objRunner.intX) + 18)<= (intPosX + intLargeur))))){           
             binMort = true;
         }
     }
