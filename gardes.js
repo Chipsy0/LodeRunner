@@ -258,7 +258,7 @@ function deplacerGardes() {
             var objGardeCourant = tabGardes[i];
             var fltXDiff = objRunner.intX - objGardeCourant.intX;
             var fltYDiff = objRunner.intY - objGardeCourant.intY;
-            var intDeplacementAleat = Math.floor(Math.random() * 4) + 1;
+            var intDeplacementAleat = Math.floor(Math.random() * 10) + 1;
 
             if (objGardeCourant.binDansEchelle == true) {
                 if (fltYDiff > 0) {
@@ -333,8 +333,13 @@ function deplacerGardes() {
             }
             if (binBloque == true){
                 intCompte++;
-                objGardeCourant.intDirectionX = objGardeCourant.intDirectionX * -1
-                objGardeCourant.intDirectionY = objGardeCourant.intDirectionY * -1
+                objGardeCourant.intDirectionX = objGardeCourant.intDirectionX * -1;
+                objGardeCourant.intDirectionY = objGardeCourant.intDirectionY * -1;
+            }
+            else {
+                if (intDeplacementAleat == 1) {
+                    objGardeCourant.intDirectionX = objGardeCourant.intDirectionX * -1;
+                }
             }
             if (intCompte == 10){
                 intCompte = 0;
