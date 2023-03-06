@@ -113,6 +113,8 @@
                 binGameOver = true;
             }
 
+            mortGarde();
+
             // mouvements && vérifs pour animations && collecter lingots
             if (binFall == false && binMort == false) {
                 verifNiveauReussi();
@@ -128,9 +130,9 @@
                 tomber();
             }
 
-            //mort
+            //mort par brique
             else {
-                mortBrique();
+                mort();
             }
         }
 

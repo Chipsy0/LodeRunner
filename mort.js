@@ -1,7 +1,7 @@
-//si Lode runner meurt grace à une brique
-function mortBrique() {
+//si Lode runner meurt 
+function mort() {
         objRunner.intY -= 1 * objRunner.intVitesse;
-        if (Math.floor(objRunner.intY / 30) == 0) {
+        if (Math.floor(objRunner.intY / 30) == 0 ) {
             intNbVies--;
             binMort = false;
             binCommence = false;
@@ -14,4 +14,28 @@ function mortBrique() {
                 intnbLingot = 0;
             }
         }
+}
+
+//si Lode runner meurt grace à une garde
+function mortGarde(){
+    for (var i = 0; i < intNbGardes; i++){
+        var objGarde = tabGardes[i];
+        intPosX = objGarde.intX;
+        intPosY = objGarde.intY;
+        intLargeur = objGarde.intLargeur;
+        intHauteur = objGarde.intHauteur;
+
+        if ((((Math.floor(objRunner.intY) >= intPosY && Math.floor(objRunner.intY) <= (intPosY + intHauteur))
+           && (Math.floor(objRunner.intX) >= intPosX && Math.floor(objRunner.intX) <= (intPosX + intLargeur)))
+           || (((Math.floor(objRunner.intY)) >= intPosY && (Math.floor(objRunner.intY)) <= (intPosY + intHauteur))
+           && ((Math.floor(objRunner.intX) + 18) >= intPosX && (Math.floor(objRunner.intX) + 18) <= (intPosX + intLargeur))))   
+
+           || ((((Math.floor(objRunner.intY) + 28)>= intPosY &&(Math.floor(objRunner.intY) + 28) <= (intPosY + intHauteur))
+           && (Math.floor(objRunner.intX)         >= intPosX && Math.floor(objRunner.intX)       <= (intPosX + intLargeur)))
+           || (((Math.floor(objRunner.intY) + 28) >= intPosY && (Math.floor(objRunner.intY) + 28)<= (intPosY + intHauteur))
+           && ((Math.floor(objRunner.intX) + 18)  >= intPosX && (Math.floor(objRunner.intX) + 18)<= (intPosX + intLargeur))))){
+            console.log("yes");
+            binMort = true;
+        }
+    }
 }
