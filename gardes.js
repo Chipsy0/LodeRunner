@@ -45,12 +45,15 @@ function initGardes() {
         }
         objGarde.intDirectionX = 0;
         objGarde.intDirectionY = 0;
+        objGarde.intPosXActuelle = objGarde.intX;
+        objGarde.intPosYActuelle = objGarde.intY;
         objGarde.binDansEchelle = false;
+        objGarde.binSurCorde = false;
         objGarde.binFall = false;
         objGarde.binLingot = false;
-        objGarde.intLargeurTab = (objRunner.intLargeur) / 30;
-        objGarde.intHauteurTab = (objRunner.intHauteur) / 30;
-        objGarde.intVitesse = objCanvas.width / 1500;
+        objGarde.intLargeurTab = (objGarde.intLargeur) / 30;
+        objGarde.intHauteurTab = (objGarde.intHauteur) / 30;
+        objGarde.intVitesse = objCanvas.width / 2000;
         if (binMemePos == false) {
             tabGardes.push(objGarde);
         }
@@ -60,27 +63,186 @@ function initGardes() {
 // Pour dessiner les gardes (+animations)
 function dessinerGardes() {
     for (var i = 0; i < tabGardes.length; i++) {
-        objC2D.save();
+
         var objGardeCourant = tabGardes[i];
+
+        objC2D.save();
         intPosX = objGardeCourant.intX;
         intPosY = objGardeCourant.intY;
-        objC2D.translate(intPosX, intPosY);
-        objC2D.fillStyle = 'white';
-        objC2D.fillRect(objRunner.intLargeur / 2 - 1.5, 6 + fltAnim / 6, 3, 4); // cou
-        objC2D.fillRect(objRunner.intLargeur / 2 - 3, 8 + 1 / 2 + fltAnim / 6, 6, 13); // corps
-        objC2D.fillRect(objRunner.intLargeur / 2 - 3, 0 + 1 / 2 + fltAnim / 6, 6, 6); // tête
-        objC2D.fillStyle = '#88B1FF';
-        objC2D.fillRect(objRunner.intLargeur / 2 - 3, 0 + 1 / 2 + fltAnim / 6, 6, 3); // casquette
-        objC2D.fillRect(objRunner.intLargeur / 2 - 5.5, 2 + 1 / 2 + fltAnim / 6, 6, 2); // casquette
-        objC2D.fillRect(3, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe gauche
-        objC2D.fillRect(0, 23, 4, 4); // jambe gauche
-        objC2D.fillRect(objRunner.intLargeur - 7, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe droite
-        objC2D.fillRect(objRunner.intLargeur - 4, 23, 4, 4); // jambe droite
-        objC2D.fillRect(objRunner.intLargeur / 2 - 6, 8 - 1 / 2 + fltAnim / 6, 4, 4); // bras gauche
-        objC2D.fillRect(0, 11 + fltAnim / 4, 4, 4); // bras gauche
-        objC2D.fillRect(objRunner.intLargeur / 2 + 2, 8 - 1 / 2 + fltAnim / 6, 4, 4); // bras droit
-        objC2D.fillRect(objRunner.intLargeur - 4, 11 + fltAnim / 4, 4, 4); // bras droit
-        objC2D.restore();
+
+        if (objGardeCourant.binFall == true) {
+            objC2D.translate(intPosX, intPosY);
+            objC2D.fillStyle = 'white';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1.5, 6, 3, 2); // cou
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 0, 6, 6); // tête
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 8, 6, 9); // corps
+            objC2D.fillStyle = '#88B1FF';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 0, 6, 3); // casquette
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 5, 3 / 2, 6, 2); // casquette
+            objC2D.fillRect(5, 17 + fltAnim / 2, 4, 4); // jambe gauche
+            objC2D.fillRect(2, 21 + fltAnim / 2, 4, 4); // jambe gauche
+            objC2D.fillRect(objGardeCourant.intLargeur - 9, 17 - fltAnim / 2, 4, 4); // jambe droite
+            objC2D.fillRect(objGardeCourant.intLargeur - 6, 21 - fltAnim / 2, 4, 4); // jambe droite
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 8, 4, 4); // bras gauche
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 9 + fltAnim / 2, 7 - fltAnim / 2, 4, 4); // bras gauche
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 + 2, 8, 4, 4); // bras droit
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 + 5 + fltAnim / 2, 7 + fltAnim / 2, 4, 4); // bras droit
+            objC2D.restore();
+        }
+        else if (objGardeCourant.binSurCorde == true) {
+            if (objGardeCourant.intDirectionX == 1) {
+                objC2D.translate(intPosX, intPosY);
+                objC2D.fillStyle = '#6F93D9';
+
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1, 6, 4, 4); // bras droit
+                objC2D.fillRect(objGardeCourant.intLargeur - 9 - fltAnim, 3, 4, 4); // bras droit
+
+                objC2D.fillRect(3, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe gauche
+                objC2D.fillRect(2 - fltAnim / 3, 23 + fltAnim / 6, 4, 4); // jambe gauche
+                objC2D.fillStyle = 'white';
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 4.5, 6, 3, 4); // cou
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 8 + fltAnim / 6, 6, 12); // corps
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 1 / 2 + fltAnim / 6, 6, 6); // tête
+                objC2D.fillStyle = '#88B1FF';
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 1 / 2 + fltAnim / 6, 6, 3); // casquette
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 2, 3 / 2 + fltAnim / 6, 6, 2); // casquette
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 6, 4, 4); // bras gauche
+                objC2D.fillRect(1 + fltAnim, 3, 4, 4); // bras gauche
+
+                objC2D.fillRect(7, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe droite
+                objC2D.fillRect(6 + fltAnim / 3, 23 + fltAnim / 6, 4, 4); // jambe droite
+                objC2D.fillStyle = 'black';
+                objC2D.restore();
+            }
+            else if (objGardeCourant.intDirectionX == -1) {
+                objC2D.translate(intPosX, intPosY);
+                objC2D.fillStyle = '#6F93D9';
+
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 4, 6, 4, 4); // bras gauche
+                objC2D.fillRect(5 + fltAnim, 3, 4, 4); // bras gauche
+                objC2D.fillRect(objGardeCourant.intLargeur - 7, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe droite
+                objC2D.fillRect(objGardeCourant.intLargeur - 6 + fltAnim / 3, 23 + fltAnim / 6, 4, 4); // jambe droite
+
+                objC2D.fillStyle = 'white';
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 + 0.5, 6, 3, 2); // cou
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1, 8 + fltAnim / 6, 6, 12); // corps
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1, 1 / 2 + fltAnim / 6, 6, 6); // tête
+                objC2D.fillStyle = '#88B1FF';
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1, 1 / 2 + fltAnim / 6, 6, 3); // casquette
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 5, 3 / 2 + fltAnim / 6, 6, 2); // casquette
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 + 2, 6, 4, 4); // bras droit
+                objC2D.fillRect(objGardeCourant.intLargeur - 7 - fltAnim, 3, 4, 4); // bras droit
+
+                objC2D.fillRect(7, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe gauche
+                objC2D.fillRect(8 - fltAnim / 3, 23 + fltAnim / 6, 4, 4); // jambe gauche
+                objC2D.fillStyle = 'black';
+                objC2D.restore();
+            }
+            else if (objGardeCourant.intDirectionX == 1) {
+                objC2D.translate(intPosX, intPosY);
+                objC2D.fillStyle = 'white';
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1.5, 5, 3, 4); // cou
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 1, 6, 5); // tête
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 8, 6, 12); // corps
+                objC2D.fillStyle = '#88B1FF';
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 0, 6, 3); // casquette
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 5, 3 / 2, 6, 2); // casquette
+                objC2D.fillRect(3, 19 + fltAnim / 4, 4, 4); // jambe gauche
+                objC2D.fillRect(0, 23 + fltAnim / 4, 4, 4); // jambe gauche
+                objC2D.fillRect(objGardeCourant.intLargeur - 7, 19 - fltAnim / 8, 4, 4); // jambe droite
+                objC2D.fillRect(objGardeCourant.intLargeur - 4, 23 - fltAnim / 8, 4, 4); // jambe droite
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 8, 4, 4); // bras gauche
+                objC2D.fillRect(0, 4, 4, 4); // bras gauche
+                objC2D.fillRect(objGardeCourant.intLargeur / 2 + 2, 8, 4, 4); // bras droit
+                objC2D.fillRect(objGardeCourant.intLargeur - 4, 4, 4, 4); // bras droit
+                objC2D.restore();
+            }
+        }
+        else if (objGardeCourant.binDansEchelle == true) {
+            objC2D.translate(intPosX, intPosY);
+            objC2D.fillStyle = 'white';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1.5, 6, 3, 2); // cou
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 0, 6, 6); // tête
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 8, 6, 13); // corps
+            objC2D.fillStyle = '#88B1FF';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 0, 6, 3); // casquette
+            objC2D.fillRect(4 - fltAnim / 3, 17 + fltAnim / 2, 4, 4); // jambe gauche
+            objC2D.fillRect(1 - fltAnim / 3, 21 + fltAnim / 2, 4, 4); // jambe gauche
+            objC2D.fillRect(objGardeCourant.intLargeur - 8 - fltAnim / 3, 17 - fltAnim / 2, 4, 4); // jambe droite
+            objC2D.fillRect(objGardeCourant.intLargeur - 5 - fltAnim / 3, 21 - fltAnim / 2, 4, 4); // jambe droite
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 8, 4, 4); // bras gauche
+            objC2D.fillRect(0, 7 - fltAnim, 4, 4); // bras gauche
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 + 2, 8, 4, 4); // bras droit
+            objC2D.fillRect(objGardeCourant.intLargeur - 4, 7 + fltAnim, 4, 4); // bras droit
+            objC2D.restore();
+        }
+        else if (objGardeCourant.intDirectionX == -1 && binMort == false && binGameOver == false) {
+            objC2D.translate(intPosX, intPosY);
+            objC2D.fillStyle = '#6F93D9';
+
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1 - fltAnim, 8 - 3 / 4 - fltAnim / 4, 4, 4); // bras gauche
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1 - 2.5 * fltAnim, 12 - fltAnim / 2, 4, 4); // bras gauche
+
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 + fltAnim, 18 - fltAnim / 3, 4, 6); // jambe gauche
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 + 2 * fltAnim, 24 - 2 - 2 * fltAnim / 3, 4, 4); // jambe gauche
+            objC2D.fillStyle = 'white';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 + 0.5, 6, 3, 2); // cou
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1, 8 + fltAnim / 6, 6, 12); // corps
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1, 1 / 2 + fltAnim / 6, 6, 6); // tête
+            objC2D.fillStyle = '#88B1FF';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1, 1 / 2 + fltAnim / 6, 6, 3); // casquette
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 5, 3 / 2 + fltAnim / 6, 6, 2); // casquette
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1 + fltAnim, 8 + 3 / 4 + fltAnim / 4, 4, 4); // bras droit
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1 + 2.5 * fltAnim, 12 + fltAnim / 2, 4, 4); // bras droit
+
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - fltAnim, 18 - fltAnim / 3, 4, 6); // jambe droite
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 2 * fltAnim, 24 - 2 - 2 * fltAnim / 3, 4, 4); // jambe droite
+            objC2D.fillStyle = 'black';
+            objC2D.restore();
+        }
+        else if (objGardeCourant.intDirectionX == 1 && binMort == false && binGameOver == false) {
+            objC2D.translate(intPosX, intPosY);
+            objC2D.fillStyle = '#6F93D9';
+
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 5 + fltAnim, 8 + 3 / 4 + fltAnim / 4, 4, 4); // bras droit
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 5 + 2.5 * fltAnim, 12 + fltAnim / 2, 4, 4); // bras droit
+
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 4 - fltAnim, 18 - fltAnim / 3, 4, 6); // jambe droite
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 4 - 2 * fltAnim, 24 - 2 - 2 * fltAnim / 3, 4, 4); // jambe droite
+            objC2D.fillStyle = 'white';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 4.5, 6, 3, 4); // cou
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 8 + fltAnim / 6, 6, 12); // corps
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 1 / 2 + fltAnim / 6, 6, 6); // tête
+            objC2D.fillStyle = '#88B1FF';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 1 / 2 + fltAnim / 6, 6, 3); // casquette
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 2, 3 / 2 + fltAnim / 6, 6, 2); // casquette
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 5 - fltAnim, 8 + 3 / 4 - fltAnim / 4, 4, 4); // bras gauche
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 5 - 2.5 * fltAnim, 12 - fltAnim / 2, 4, 4); // bras gauche
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6 + fltAnim, 18 - fltAnim / 3, 4, 6); // jambe gauche
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6 + 2 * fltAnim, 24 - 2 - 2 * fltAnim / 3, 4, 4); // jambe gauche
+
+            objC2D.fillStyle = 'black';
+            objC2D.restore();
+        }
+        else {
+            objC2D.translate(intPosX, intPosY);
+            objC2D.fillStyle = 'white';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1.5, 6 + fltAnim / 6, 3, 4); // cou
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 8 + 1 / 2 + fltAnim / 6, 6, 13); // corps
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 0 + 1 / 2 + fltAnim / 6, 6, 6); // tête
+            objC2D.fillStyle = '#88B1FF';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 0 + 1 / 2 + fltAnim / 6, 6, 3); // casquette
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 5.5, 2 + 1 / 2 + fltAnim / 6, 6, 2); // casquette
+            objC2D.fillRect(3, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe gauche
+            objC2D.fillRect(0, 23, 4, 4); // jambe gauche
+            objC2D.fillRect(objGardeCourant.intLargeur - 7, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe droite
+            objC2D.fillRect(objGardeCourant.intLargeur - 4, 23, 4, 4); // jambe droite
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 8 - 1 / 2 + fltAnim / 6, 4, 4); // bras gauche
+            objC2D.fillRect(0, 11 + fltAnim / 4, 4, 4); // bras gauche
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 + 2, 8 - 1 / 2 + fltAnim / 6, 4, 4); // bras droit
+            objC2D.fillRect(objGardeCourant.intLargeur - 4, 11 + fltAnim / 4, 4, 4); // bras droit
+            objC2D.restore();
+        }
     }
 }
 
@@ -88,8 +250,40 @@ function dessinerGardes() {
 function deplacerGardes() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGardeCourant = tabGardes[i];
-        objGardeCourant.intDirectionX = 1;
-        objGardeCourant.intDirectionY = 0;
+        var fltXDiff = objRunner.intX - objGardeCourant.intX;
+        var fltYDiff = objRunner.intY - objGardeCourant.intX;
+        if (objGardeCourant.binDansEchelle == true) {
+            if (fltYDiff + 1 > 0) {
+                objGardeCourant.intDirectionY = 1;
+                objGardeCourant.intDirectionX = 0;
+            }
+            else if (fltYDiff -1 < 0) {
+                objGardeCourant.intDirectionY = -1;
+                objGardeCourant.intDirectionX = 0;
+            }
+            else {
+                if (fltXDiff > 0) {
+                    objGardeCourant.intDirectionX = 1;
+                    objGardeCourant.intDirectionY = 0;
+                }
+                else if (fltXDiff < 0) {
+                    objGardeCourant.intDirectionX = -1;
+                    objGardeCourant.intDirectionY = 0;
+                }
+            }
+        }
+        else {
+            if (fltXDiff > 0) {
+                objGardeCourant.intDirectionX = 1;
+                objGardeCourant.intDirectionY = 0;
+            }
+            else if (fltXDiff < 0) {
+                objGardeCourant.intDirectionX = -1;
+                objGardeCourant.intDirectionY = 0;
+            }
+        }
+        objGardeCourant.intPosXActuelle = objGardeCourant.intX;
+        objGardeCourant.intPosYActuelle = objGardeCourant.intY;
     }
 }
 
