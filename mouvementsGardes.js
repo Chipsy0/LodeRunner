@@ -56,7 +56,6 @@ function mouvementsGardesY() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGarde = tabGardes[i];
         objGarde.binDansEchelle = false;
-        if (objGarde.intDirectionY != 0) {
             //check s'il est dans l'echelle
             if ((tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 2
                 && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)
@@ -75,10 +74,10 @@ function mouvementsGardesY() {
 
                 } else {
                     //mouvement en bas
-                    if ((tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab + 3 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] != 2
+                    if (((tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab + 3 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] != 2
                         && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2)
-                        || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab + 3 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2) {
-
+                        || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab + 3 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2)
+                        && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab + 3 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] != 1) {
                         objGarde.intY += objGarde.intDirectionY * objGarde.intVitesse;
                     }
                 }
@@ -92,7 +91,6 @@ function mouvementsGardesY() {
                     objGarde.binFall = true;
                 }
             }
-        }
     }
 }
 
