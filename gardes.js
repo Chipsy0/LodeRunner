@@ -513,6 +513,7 @@ function verifDureeGardeTrou(intY, intX) {
     else if (intNbSecTrou >= 4){
         objGarde.intY = intY*30 - 30;
         objGarde.intX = intX*30;
+        objGarde.binStopAnimation = false;
         tabTableau[intY][intX] = 1;
         initPasserelles(intY, intX);
         objSons.filling.play();
