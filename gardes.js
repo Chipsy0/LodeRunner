@@ -34,7 +34,7 @@ function initGardes() {
                 break;
         }
         var intIndexAleatoireTab = objGarde.intX = Math.floor(Math.random() * tabOptionsDePosition.length);
-        objGarde.intX = tabOptionsDePosition[intIndexAleatoireTab] * 30 + 4;
+        objGarde.intX = tabOptionsDePosition[intIndexAleatoireTab] * 30 + 6;
         // vérifie que 2 gardes ne sont pas au même endroit
         var binMemePos = false;
         for (var j = 0 ; j < tabGardes.length; j++){
@@ -43,8 +43,10 @@ function initGardes() {
                 binMemePos = true;
             }
         }
-        objGarde.intDirectionX = 1;
-        objGarde.intDirectionY = 1;
+        objGarde.intDirectionX = 0;
+        objGarde.intDirectionY = 0;
+        objGarde.binDansEchelle = false;
+        objGarde.binFall = false;
         objGarde.intLargeurTab = (objRunner.intLargeur) / 30;
         objGarde.intHauteurTab = (objRunner.intHauteur) / 30;
         objGarde.intVitesse = objCanvas.width / 1500;
@@ -66,7 +68,7 @@ function dessinerGardes() {
         objC2D.fillRect(objRunner.intLargeur / 2 - 1.5, 6 + fltAnim / 6, 3, 4); // cou
         objC2D.fillRect(objRunner.intLargeur / 2 - 3, 8 + 1 / 2 + fltAnim / 6, 6, 13); // corps
         objC2D.fillRect(objRunner.intLargeur / 2 - 3, 0 + 1 / 2 + fltAnim / 6, 6, 6); // tête
-        objC2D.fillStyle = '#FF1A1A';
+        objC2D.fillStyle = '#88B1FF';
         objC2D.fillRect(objRunner.intLargeur / 2 - 3, 0 + 1 / 2 + fltAnim / 6, 6, 3); // casquette
         objC2D.fillRect(objRunner.intLargeur / 2 - 5.5, 2 + 1 / 2 + fltAnim / 6, 6, 2); // casquette
         objC2D.fillRect(3, 20 - 1 / 2 + fltAnim / 6, 4, 4); // jambe gauche
@@ -81,9 +83,16 @@ function dessinerGardes() {
     }
 }
 
+// Pour déplacer les gardes
+function deplacerGardes () {
+    for (var i = 0; i < tabGardes.length; i++) {
+        var objGardeCourant = tabGardes[i];
+        objGardeCourant.intDirectionX = 1;
+        objGardeCourant.intDirectionY = 0;
+    }
+}
 
-
-// init garde trou
+// initialise le trou rempli par un garde
 function initGardeTrou(intY, intX) {
     objGardeTrou = new Object();
     objGardeTrou.strCouleur = 'black';
@@ -95,7 +104,7 @@ function initGardeTrou(intY, intX) {
     tabObjets[intY][intX] = objGardeTrou;
 }
 
-// Pour dessiner les garde trou
+// Pour dessiner les trous remplis par un garde
 function dessinerGardeTrou(intY, intX) {
     objC2D.save();
     var objGardeTrou = tabObjets[intY][intX];
@@ -106,7 +115,7 @@ function dessinerGardeTrou(intY, intX) {
     objC2D.restore();
 }
 
-// Pour vérifier si il faut remplir le garde trou 
+// Pour vérifier s'il faut remplir le trou rempli par un garde
 function verifDureeGardeTrou(intY, intX){
     var objVerifTrou = tabObjets[intY][intX];
     var objTempsDebut = objVerifTrou.objTemps;
