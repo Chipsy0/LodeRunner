@@ -110,7 +110,7 @@ function dessiner() {
                     verifDureeTrou(i, j);
                     break;
                 case 9:
-                    dessinerGardeTrou(i, j)
+                    verifDureeGardeTrou(i, j)
                     break;
             }
         }
