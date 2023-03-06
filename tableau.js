@@ -105,6 +105,9 @@ function dessiner() {
                 case 8:
                     verifDureeTrou(i, j);
                     break;
+                case 9:
+                    dessinerGardeTrou(i, j)
+                    break;
             }
         }
     }

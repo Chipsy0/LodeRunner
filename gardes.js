@@ -93,7 +93,7 @@ function deplacerGardes() {
     }
 }
 
-// Pour déplacer les gardes
+// vérifie si le garde peut collecter un lingot et pour collecter un lingot
 function collectLingotGarde() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGarde = tabGardes[i];
@@ -105,10 +105,38 @@ function collectLingotGarde() {
                 objGarde.binLingot = true;
             }
         }
-
     }
-
 }
+
+// echapper le lingot
+function dropLingot() {
+    for (var i = 0; i < tabGardes.length; i++) {
+        var objGarde = tabGardes[i];
+        if ((tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur)][Math.floor(objGarde.intX / 30)] == 4 
+        || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 4)){
+            initGardeTrou(Math.floor(objGarde.intY / 30), Math.floor(objGarde.intX / 30));
+            tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] = 9;
+            if (objGarde.binLingot == true){
+                objGarde.binLingot = false;
+                tabTableau[Math.floor(objGarde.intY / 30 - 1)][Math.floor(objGarde.intX / 30)] = 3;
+            }
+        }   
+
+        if (objGarde.binLingot == true) {
+            if (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur)][Math.floor(objGarde.intX / 30)] == 1) {
+                    if (Math.floor(Math.random() * 100) == 1){
+                        objGarde.binLingot = false;
+                        tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur)][Math.floor(objGarde.intX / 30)] = 3;
+                    }                
+            }
+        }
+    }
+}
+
+
+
+
+
 
 // initialise le trou rempli par un garde
 function initGardeTrou(intY, intX) {
