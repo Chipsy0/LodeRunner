@@ -69,7 +69,7 @@ function mouvementsGardesY() {
             if (objGarde.intDirectionY == -1) {
                 if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2
                     || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2) {
-                    objGarde.intY -= objGarde.intDirectionY * objGarde.intVitesse;
+                    objGarde.intY += objGarde.intDirectionY * objGarde.intVitesse;
                 }
 
             } else {
