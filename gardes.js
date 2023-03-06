@@ -314,15 +314,18 @@ function dropLingot() {
             if (objGarde.binLingot == true){
                 objGarde.binLingot = false;
                 tabTableau[Math.floor(objGarde.intY / 30 - objGarde.intHauteur/30)][Math.floor(objGarde.intX / 30)] = 3;
+                initLingots((Math.floor(objGarde.intY / 30 - objGarde.intHauteur/30)),(Math.floor(objGarde.intX / 30)));
+               
             }
         }   
 
         if (objGarde.binLingot == true) {
             if (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur/30)][Math.floor(objGarde.intX / 30)] == 1 
                && tabTableau[Math.floor(objGarde.intY / 30 )][Math.floor(objGarde.intX / 30)] == 0 ) {
-                    if (Math.floor(Math.random() * 1200) == 1){
+                    if (Math.floor(Math.random() * 2000) == 1){
                         objGarde.binLingot = false;
                         tabTableau[Math.floor(objGarde.intY / 30 )][Math.floor(objGarde.intX / 30)] = 3;
+                        initLingots((Math.floor(objGarde.intY / 30 )),(Math.floor(objGarde.intX / 30)));
                         
                     }                
             }
@@ -332,13 +335,14 @@ function dropLingot() {
 
 // initialise le trou rempli par un garde
 function initGardeTrou(intY, intX) {
+    var objTrou = tabObjets[intY][intX];
     objGardeTrou = new Object();
     objGardeTrou.strCouleur = 'black';
     objGardeTrou.intX = intX;
     objGardeTrou.intY = intY;
     objGardeTrou.intLargeur = 30;
     objGardeTrou.intHauteur = 30;
-    objGardeTrou.objTemps = new Date();
+    objGardeTrou.objTemps = objTrou.objTemps;
     tabObjets[intY][intX] = objGardeTrou;
 }
 
