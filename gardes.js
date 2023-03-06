@@ -22,23 +22,23 @@ function initGardes() {
                 break;
             case 3:
                 objGarde.intY = (8 * 30) - objGarde.intHauteur;
-                tabOptionsDePosition = [1,2,4,5,6,7,16,17,18,19,20,22,24,25,27,28];
+                tabOptionsDePosition = [1, 2, 4, 5, 6, 7, 16, 17, 18, 19, 20, 22, 24, 25, 27, 28];
                 break;
             case 4:
                 objGarde.intY = (11 * 30) - objGarde.intHauteur;
-                tabOptionsDePosition = [1,2,4,5,6,7,8,10,11,12,13,14,15,16,17,18,19,20];
+                tabOptionsDePosition = [1, 2, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
                 break;
             case 5:
                 objGarde.intY = (14 * 30) - objGarde.intHauteur;
-                tabOptionsDePosition = [6,8,22,23,24,26,27];
+                tabOptionsDePosition = [6, 8, 22, 23, 24, 26, 27];
                 break;
         }
         var intIndexAleatoireTab = objGarde.intX = Math.floor(Math.random() * tabOptionsDePosition.length);
         objGarde.intX = tabOptionsDePosition[intIndexAleatoireTab] * 30 + 6;
         // vérifie que 2 gardes ne sont pas au même endroit
         var binMemePos = false;
-        for (var j = 0 ; j < tabGardes.length; j++){
-            if (tabGardes[j].intX == objGarde.intX && tabGardes[j].intY == objGarde.intY){
+        for (var j = 0; j < tabGardes.length; j++) {
+            if (tabGardes[j].intX == objGarde.intX && tabGardes[j].intY == objGarde.intY) {
                 i--;
                 binMemePos = true;
             }
@@ -47,10 +47,11 @@ function initGardes() {
         objGarde.intDirectionY = 0;
         objGarde.binDansEchelle = false;
         objGarde.binFall = false;
+        objGarde.binLingot = false;
         objGarde.intLargeurTab = (objRunner.intLargeur) / 30;
         objGarde.intHauteurTab = (objRunner.intHauteur) / 30;
         objGarde.intVitesse = objCanvas.width / 1500;
-        if (binMemePos == false){
+        if (binMemePos == false) {
             tabGardes.push(objGarde);
         }
     }
@@ -84,12 +85,29 @@ function dessinerGardes() {
 }
 
 // Pour déplacer les gardes
-function deplacerGardes () {
+function deplacerGardes() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGardeCourant = tabGardes[i];
         objGardeCourant.intDirectionX = 1;
         objGardeCourant.intDirectionY = 0;
     }
+}
+
+// Pour déplacer les gardes
+function collectLingotGarde() {
+    for (var i = 0; i < tabGardes.length; i++) {
+        var objGarde = tabGardes[i];
+        if (objGarde.binLingot == false) {
+            if ((tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 3
+                || tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 3)) {
+                tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] = 0;
+                tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] = 0;
+                objGarde.binLingot = true;
+            }
+        }
+
+    }
+
 }
 
 // initialise le trou rempli par un garde
@@ -116,17 +134,17 @@ function dessinerGardeTrou(intY, intX) {
 }
 
 // Pour vérifier s'il faut remplir le trou rempli par un garde
-function verifDureeGardeTrou(intY, intX){
+function verifDureeGardeTrou(intY, intX) {
     var objVerifTrou = tabObjets[intY][intX];
     var objTempsDebut = objVerifTrou.objTemps;
     var objTempsMaintenant = new Date();
-    var intNbSec = (objTempsMaintenant - objTempsDebut)/1000;
-    if (intNbSec >= 8){
+    var intNbSec = (objTempsMaintenant - objTempsDebut) / 1000;
+    if (intNbSec >= 8) {
         tabTableau[intY][intX] = 1;
-        initPasserelles(intY,intX);
+        initPasserelles(intY, intX);
         objSons.filling.play();
     }
-    else{
-        dessinerGardeTrou(intY,intX);        
+    else {
+        dessinerGardeTrou(intY, intX);
     }
 }
