@@ -43,7 +43,8 @@ function mouvementY() {
             } else {
                 //mouvement en bas
                 if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab + 3 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] != 2
-                    && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2)
+                    && ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor((objRunner.intX + 1) / 30 + (objRunner.intLargeurTab / 2))] == 2)
+                    || tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor((objRunner.intX - 1) / 30 + (objRunner.intLargeurTab / 2))] == 2))
                     || tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab + 3 / 30)][Math.floor(objRunner.intX / 30 + (objRunner.intLargeur / 2) / 30)] == 2) {
 
                     objRunner.intY += objRunner.intDirectionY * objRunner.intVitesse;

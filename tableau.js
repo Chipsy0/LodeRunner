@@ -117,8 +117,8 @@ function dessiner() {
     }
     dessinerTitre();
     dessinerDonnees();
-    dessinerRunner();
     dessinerGardes();
+    dessinerRunner();
     if (binGameOver == true){
         dessinerGameOver();
     }
