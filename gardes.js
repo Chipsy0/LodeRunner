@@ -458,6 +458,7 @@ function initGardeTrou(intY, intX) {
     objGardeTrou.intLargeur = 30;
     objGardeTrou.intHauteur = 30;
     objGardeTrou.objTemps = objTrou.objTemps;
+    objGardeTrou.objTempsTrou = new Date();
     tabObjets[intY][intX] = objGardeTrou;
 }
 
@@ -476,9 +477,19 @@ function dessinerGardeTrou(intY, intX) {
 function verifDureeGardeTrou(intY, intX) {
     var objVerifTrou = tabObjets[intY][intX];
     var objTempsDebut = objVerifTrou.objTemps;
+    var objTempsDebutTrou = objVerifTrou.objTempsTrou;
     var objTempsMaintenant = new Date();
     var intNbSec = (objTempsMaintenant - objTempsDebut) / 1000;
-    if (intNbSec >= 8) {
+    var intNbSecTrou = (objTempsMaintenant - objTempsDebutTrou) / 1000;
+    
+    if (intNbSec >= 8) {     
+        tabTableau[intY][intX] = 1;
+        initPasserelles(intY, intX);
+        objSons.filling.play();
+    }
+    else if (intNbSecTrou >= 4){
+        objGarde.intY = intY*30 - 30;
+        objGarde.intX = intX*30;
         tabTableau[intY][intX] = 1;
         initPasserelles(intY, intX);
         objSons.filling.play();
