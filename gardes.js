@@ -247,22 +247,45 @@ function dessinerGardes() {
 // Pour déplacer les gardes
 var binBloque = false;
 var intDelais = 0;
+var intAnciennePosX = 0;
+var intAnciennePosY = 0;
+var intCompte = 0
 function deplacerGardes() {
     for (var i = 0; i < tabGardes.length; i++) {
         intDelais++;
-        if (intDelais % 31 == 0) {
+        if (intDelais % 61 == 0) {
+
             var objGardeCourant = tabGardes[i];
             var fltXDiff = objRunner.intX - objGardeCourant.intX;
             var fltYDiff = objRunner.intY - objGardeCourant.intY;
-            var intDeplacementAleat = Math.floor(Math.random() * 5) + 1;
+            var intDeplacementAleat = Math.floor(Math.random() * 10) + 1;
+
             if (objGardeCourant.binDansEchelle == true) {
                 if (fltYDiff > 0) {
-                    objGardeCourant.intDirectionY = 1;
-                    objGardeCourant.intDirectionX = 0;
+                    if (fltXDiff > 0) {
+                        objGardeCourant.intDirectionY = 1;
+                        objGardeCourant.intDirectionX = 0;
+                        if (intDeplacementAleat == 3){
+                            objGardeCourant.intDirectionX = 1;
+                        }
+                    }
+                    else if (fltXDiff < 0) {
+                        objGardeCourant.intDirectionX = 0;
+                        objGardeCourant.intDirectionY = 1;
+                        if (intDeplacementAleat == 3){
+                            objGardeCourant.intDirectionX = -1;
+                        }
+                    }
                 }
                 else if (fltYDiff < 0) {
-                    objGardeCourant.intDirectionY = -1;
-                    objGardeCourant.intDirectionX = 0;
+                    if (fltXDiff > 0) {
+                        objGardeCourant.intDirectionX = 1;
+                        objGardeCourant.intDirectionY = -1;
+                    }
+                    else if (fltXDiff < 0) {
+                        objGardeCourant.intDirectionX = -1;
+                        objGardeCourant.intDirectionY = -1;
+                    }
                 }
                 else {
                     if (fltXDiff > 0) {
@@ -305,6 +328,25 @@ function deplacerGardes() {
                     objGardeCourant.intDirectionY = 0
                 }
             }
+            if (Math.round(objGardeCourant.intX) == Math.round(intAnciennePosX) && Math.round(objGardeCourant.intY) == Math.round(intAnciennePosY)){
+                binBloque = true;
+            }
+            if (binBloque == true){
+                intCompte++;
+                objGardeCourant.intDirectionX = objGardeCourant.intDirectionX * -1;
+                objGardeCourant.intDirectionY = objGardeCourant.intDirectionY * -1;
+            }
+            else {
+                if (intDeplacementAleat == 1) {
+                    objGardeCourant.intDirectionX = objGardeCourant.intDirectionX * -1;
+                }
+            }
+            if (intCompte == 10){
+                intCompte = 0;
+                binBloque = false;
+            }
+            intAnciennePosX = objGardeCourant.intX;
+            intAnciennePosY = objGardeCourant.intY;
         }
     }
 }
