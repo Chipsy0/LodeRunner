@@ -258,7 +258,7 @@ function deplacerGardes() {
             var objGardeCourant = tabGardes[i];
             var fltXDiff = objRunner.intX - objGardeCourant.intX;
             var fltYDiff = objRunner.intY - objGardeCourant.intY;
-            var intDeplacementAleat = Math.floor(Math.random() * 10) + 1;
+            var intDeplacementAleat = Math.floor(Math.random() * 7) + 1;
 
             if (objGardeCourant.binDansEchelle == true) {
                 if (fltYDiff > 0) {
