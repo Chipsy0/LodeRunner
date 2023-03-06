@@ -126,21 +126,22 @@
                 verifCorde();
                 mouvementX();
                 mouvementY();
+            }
+            //tomber
+            if (binFall == true){
+                tomber();
+            }
+            //mort 
+            if (binMort == true) {
+                mort();
+            }
+            if (binMort == false) {
                 mouvementsGardesX();
                 mouvementsGardesY();
                 collectLingotGarde();
                 dropLingot();
                 tomberGardes();
                 mortGarde();
-            }
-            //tomber
-            else if (binFall == true){
-                tomber();
-            }
-
-            //mort 
-            else {
-                mort();
             }
         }
 
