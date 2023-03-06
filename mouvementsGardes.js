@@ -77,25 +77,42 @@ function mouvementsGardesY() {
 
             //mouvement en haut
             if (objGarde.intY > objRunner.intY
-                && (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 2
-                    && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)) {
+                && ((tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 2
+                    && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)
+                    || (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 0
+                        && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 0))) {
                 objGarde.intDirectionX = 0;
                 if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2
                     || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2) {
                     objGarde.intY += objGarde.intDirectionY * objGarde.intVitesse;
-                } else {
+                }
+                if ((tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 0
+                    && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 0)) {
                     if (objGarde.intX < objRunner.intX) {
                         objGarde.intDirectionX = 1;
-                    } else {
-                        objGarde.intDirectionX = -1;
                     }
-
+                    else if (objGarde.intX > objRunner.intX) {
+                        objGarde.intDirectionX = -1;
+                    } else {
+                        if (Math.floor(Math.random() * 2) == 1) {
+                            objGarde.intDirectionX = 1;
+                        } else {
+                            objGarde.intDirectionX = -1;
+                        }
+                    }
                 }
             } else {
                 if (objGarde.intX < objRunner.intX) {
                     objGarde.intDirectionX = 1;
-                } else {
+                }
+                else if (objGarde.intX > objRunner.intX) {
                     objGarde.intDirectionX = -1;
+                } else {
+                    if (Math.floor(Math.random() * 2) == 1) {
+                        objGarde.intDirectionX = 1;
+                    } else {
+                        objGarde.intDirectionX = -1;
+                    }
                 }
 
             }
