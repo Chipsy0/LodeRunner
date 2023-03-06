@@ -36,6 +36,9 @@ function mouvementsGardesX() {
                     && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30)] != 1) {
                     objGarde.intX += objGarde.intDirectionX * objGarde.intVitesse;
                 }
+                else {
+                    objGarde.binBloque = true;
+                }
             }
             //mouvement droit
             if (objGarde.intDirectionX == 1) {
@@ -44,6 +47,9 @@ function mouvementsGardesX() {
                         && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] != 1)) {
 
                     objGarde.intX += objGarde.intDirectionX * objGarde.intVitesse;
+                }
+                else {
+                    objGarde.binBloque = true;
                 }
             }
         }
