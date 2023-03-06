@@ -23,9 +23,9 @@ function mouvementsGardesX() {
                 var locY = Math.floor(objGarde.intY / 30);
                 if (Math.floor(objGarde.intY) != locY * 30 + 2) {
                     objGarde.binFall = true;
-                }           
+                }
             }
-    
+
         }
 
         if (objGarde.binFall != true) {
@@ -56,41 +56,41 @@ function mouvementsGardesY() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGarde = tabGardes[i];
         objGarde.binDansEchelle = false;
-            //check s'il est dans l'echelle
-            if ((tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 2
-                && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)
-                || (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] == 2
-                    && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)
-                    || (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab/2)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab/2)] == 2)) {
+        //check s'il est dans l'echelle
+        if ((tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 2
+            && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)
+            || (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] == 2
+                && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)
+            || (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab / 2)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab / 2)] == 2)) {
 
-                objGarde.binDansEchelle = true
+            objGarde.binDansEchelle = true
 
-                //mouvement en haut
-                if (objGarde.intDirectionY == -1) {
-                    if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2
-                        || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2) {
-                        objGarde.intY -= objGarde.intDirectionY * objGarde.intVitesse;
-                    }
+            //mouvement en haut
+            if (objGarde.intDirectionY == -1) {
+                if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2
+                    || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2) {
+                    objGarde.intY -= objGarde.intDirectionY * objGarde.intVitesse;
+                }
 
-                } else {
-                    //mouvement en bas
-                    if (((tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab + 3 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] != 2
-                        && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2)
-                        || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab + 3 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2)
-                        && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab + 3 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] != 1) {
-                        objGarde.intY += objGarde.intDirectionY * objGarde.intVitesse;
-                    }
+            } else {
+                //mouvement en bas
+                if ((tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab + 3 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] != 2
+                    && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2)
+                    || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab + 3 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2) {
+
+                    objGarde.intY += objGarde.intDirectionY * objGarde.intVitesse;
                 }
             }
-            //mouvement en bas check s'il y a un trou
-            if (objGarde.intDirectionY == 1) {
-                if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 5
-                    && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 5
-                    && (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] == 0
-                        && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 0)) {
-                    objGarde.binFall = true;
-                }
+        }
+        //mouvement en bas check s'il y a un trou
+        if (objGarde.intDirectionY == 1) {
+            if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 5
+                && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 5
+                && (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] == 0
+                    && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 0)) {
+                objGarde.binFall = true;
             }
+        }
     }
 }
 
@@ -113,7 +113,7 @@ function tomberGardes() {
                 && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] != 4)) {
             objGarde.binFall = true;
         }
-        
+
         if (objGarde.binFall == true) {
             objGarde.intY += 1 * objGarde.intVitesse;
             // vérifie si le garde a fini de tomber
@@ -129,7 +129,7 @@ function tomberGardes() {
                 objSons.falling.pause();
                 objSons.falling.currentTime = 0;
             }
-            
+
             if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 5
                 && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 5) {
                 var locY = Math.floor(objGarde.intY / 30);

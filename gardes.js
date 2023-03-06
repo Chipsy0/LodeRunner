@@ -51,7 +51,7 @@ function initGardes() {
         objGarde.binLingot = false;
         objGarde.intLargeurTab = (objGarde.intLargeur) / 30;
         objGarde.intHauteurTab = (objGarde.intHauteur) / 30;
-        objGarde.intVitesse = objCanvas.width / 2000;
+        objGarde.intVitesse = objCanvas.width / 1200;
         if (binMemePos == false) {
             tabGardes.push(objGarde);
         }
