@@ -292,13 +292,15 @@ function collectLingotGarde() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGarde = tabGardes[i];
         if (objGarde.binLingot == false) {
-            if ((tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 3
-                || tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 3)) {
+            if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 3) {
                 tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] = 0;
-                tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] = 0;
                 objGarde.binLingot = true;
-
             }
+            if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 3) {
+            tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] = 0;
+            objGarde.binLingot = true;
+
+        }
         }
     }
 }
@@ -338,13 +340,14 @@ function dropLingot() {
 function mortGarde() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGarde = tabGardes[i];
-        if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 1) {
+        if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 1 ) {
             intScoreNiveau += 75;
             intScore += 75;
             objGarde.intY = (3 * 30) - objGarde.intHauteur;
             tabOptionsDePosition = [1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15];
             var intIndexAleatoireTab = objGarde.intX = Math.floor(Math.random() * tabOptionsDePosition.length);
             objGarde.intX = tabOptionsDePosition[intIndexAleatoireTab] * 30 + 6;
+
         }
     }
 
