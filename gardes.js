@@ -48,6 +48,7 @@ function initGardes() {
         objGarde.binDansEchelle = false;
         objGarde.binSurCorde = false;
         objGarde.binFall = false;
+        objGarde.binBloque = false;
         objGarde.binLingot = false;
         objGarde.intLargeurTab = (objGarde.intLargeur) / 30;
         objGarde.intHauteurTab = (objGarde.intHauteur) / 30;
@@ -245,7 +246,6 @@ function dessinerGardes() {
 }
 
 // Pour déplacer les gardes
-var binBloque = false;
 var intDelais = 0;
 var intAnciennePosX = 0;
 var intAnciennePosY = 0;
@@ -329,12 +329,14 @@ function deplacerGardes() {
                 }
             }
             if (Math.round(objGardeCourant.intX) == Math.round(intAnciennePosX) && Math.round(objGardeCourant.intY) == Math.round(intAnciennePosY)){
-                binBloque = true;
+                objGardeCourant.binBloque = true;
             }
-            if (binBloque == true){
+            if (objGardeCourant.binBloque == true){
                 intCompte++;
-                objGardeCourant.intDirectionX = objGardeCourant.intDirectionX * -1;
-                objGardeCourant.intDirectionY = objGardeCourant.intDirectionY * -1;
+                if (intDeplacementAleat != 5) {
+                    objGardeCourant.intDirectionX = objGardeCourant.intDirectionX * -1;
+                    objGardeCourant.intDirectionY = objGardeCourant.intDirectionY * -1;
+                }
             }
             else {
                 if (intDeplacementAleat == 1) {
@@ -343,7 +345,7 @@ function deplacerGardes() {
             }
             if (intCompte == 10){
                 intCompte = 0;
-                binBloque = false;
+                objGardeCourant.binBloque = false;
             }
             intAnciennePosX = objGardeCourant.intX;
             intAnciennePosY = objGardeCourant.intY;
