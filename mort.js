@@ -10,6 +10,7 @@ function mort() {
                 intScore -= intScoreNiveau;
                 intScoreNiveau = 0
                 initRunner();
+                initGardes();
                 initTableau();
                 intnbLingot = 0;
             }

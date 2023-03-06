@@ -45,8 +45,6 @@ function initGardes() {
         }
         objGarde.intDirectionX = 0;
         objGarde.intDirectionY = 0;
-        objGarde.intPosXActuelle = objGarde.intX;
-        objGarde.intPosYActuelle = objGarde.intY;
         objGarde.binDansEchelle = false;
         objGarde.binSurCorde = false;
         objGarde.binFall = false;
@@ -247,19 +245,51 @@ function dessinerGardes() {
 }
 
 // Pour déplacer les gardes
+var binBloque = false;
+var intDelais = 0;
 function deplacerGardes() {
     for (var i = 0; i < tabGardes.length; i++) {
-        var objGardeCourant = tabGardes[i];
-        var fltXDiff = objRunner.intX - objGardeCourant.intX;
-        var fltYDiff = objRunner.intY - objGardeCourant.intX;
-        if (objGardeCourant.binDansEchelle == true) {
-            if (fltYDiff + 1 > 0) {
-                objGardeCourant.intDirectionY = 1;
-                objGardeCourant.intDirectionX = 0;
+        intDelais++;
+        if (intDelais % 31 == 0) {
+            var objGardeCourant = tabGardes[i];
+            var fltXDiff = objRunner.intX - objGardeCourant.intX;
+            var fltYDiff = objRunner.intY - objGardeCourant.intY;
+            var intDeplacementAleat = Math.floor(Math.random() * 5) + 1;
+            if (objGardeCourant.binDansEchelle == true) {
+                if (fltYDiff > 0) {
+                    objGardeCourant.intDirectionY = 1;
+                    objGardeCourant.intDirectionX = 0;
+                }
+                else if (fltYDiff < 0) {
+                    objGardeCourant.intDirectionY = -1;
+                    objGardeCourant.intDirectionX = 0;
+                }
+                else {
+                    if (fltXDiff > 0) {
+                        objGardeCourant.intDirectionX = 1;
+                        objGardeCourant.intDirectionY = 0;
+                    }
+                    else if (fltXDiff < 0) {
+                        objGardeCourant.intDirectionX = -1;
+                        objGardeCourant.intDirectionY = 0;
+                    }
+                }
             }
-            else if (fltYDiff -1 < 0) {
-                objGardeCourant.intDirectionY = -1;
-                objGardeCourant.intDirectionX = 0;
+            else if (objGardeCourant.binSurCorde == true) {
+                if (fltYDiff > 0) {
+                    objGardeCourant.intDirectionY = 1;
+                    objGardeCourant.intDirectionX = 0;
+                }
+                else {
+                    if (fltXDiff > 0) {
+                        objGardeCourant.intDirectionX = 1;
+                        objGardeCourant.intDirectionY = 0;
+                    }
+                    else if (fltXDiff < 0) {
+                        objGardeCourant.intDirectionX = -1;
+                        objGardeCourant.intDirectionY = 0;
+                    }
+                }
             }
             else {
                 if (fltXDiff > 0) {
@@ -270,20 +300,12 @@ function deplacerGardes() {
                     objGardeCourant.intDirectionX = -1;
                     objGardeCourant.intDirectionY = 0;
                 }
+                else {
+                    objGardeCourant.intDirectionX = 0;
+                    objGardeCourant.intDirectionY = 0
+                }
             }
         }
-        else {
-            if (fltXDiff > 0) {
-                objGardeCourant.intDirectionX = 1;
-                objGardeCourant.intDirectionY = 0;
-            }
-            else if (fltXDiff < 0) {
-                objGardeCourant.intDirectionX = -1;
-                objGardeCourant.intDirectionY = 0;
-            }
-        }
-        objGardeCourant.intPosXActuelle = objGardeCourant.intX;
-        objGardeCourant.intPosYActuelle = objGardeCourant.intY;
     }
 }
 
@@ -293,9 +315,9 @@ function collectLingotGarde() {
         var objGarde = tabGardes[i];
         if (objGarde.binLingot == false) {
             if ((tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 3
-                || tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab/30)] == 3)) {
+                || tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab / 30)] == 3)) {
                 tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] = 0;
-                tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab/30)] = 0;
+                tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab / 30)] = 0;
                 objGarde.binLingot = true;
             }
         }
@@ -306,22 +328,22 @@ function collectLingotGarde() {
 function dropLingot() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGarde = tabGardes[i];
-        if ((tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur/30)][Math.floor(objGarde.intX / 30)] == 4 
-        || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur/30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab/30)] == 4)){
+        if ((tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur / 30)][Math.floor(objGarde.intX / 30)] == 4
+            || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab / 30)] == 4)) {
             initGardeTrou(Math.floor(objGarde.intY / 30), Math.floor(objGarde.intX / 30));
             tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] = 9;
-            if (objGarde.binLingot == true){
+            if (objGarde.binLingot == true) {
                 objGarde.binLingot = false;
                 tabTableau[Math.floor(objGarde.intY / 30 - 1)][Math.floor(objGarde.intX / 30)] = 3;
             }
-        }   
+        }
 
         if (objGarde.binLingot == true) {
-            if (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur/30)][Math.floor(objGarde.intX / 30)] == 1) {
-                    if (Math.floor(Math.random() * 100) == 1){
-                        objGarde.binLingot = false;
-                        tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur/30)][Math.floor(objGarde.intX / 30)] = 3;
-                    }                
+            if (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur / 30)][Math.floor(objGarde.intX / 30)] == 1) {
+                if (Math.floor(Math.random() * 100) == 1) {
+                    objGarde.binLingot = false;
+                    tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur / 30)][Math.floor(objGarde.intX / 30)] = 3;
+                }
             }
         }
     }

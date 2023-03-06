@@ -62,7 +62,7 @@ function mouvementsGardesY() {
                 && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)
                 || (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] == 2
                     && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)
-                    || (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab/2)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab/2)])) {
+                    || (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab/2)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab/2)] == 2)) {
 
                 objGarde.binDansEchelle = true
 
