@@ -50,6 +50,7 @@ function initGardes() {
         objGarde.binFall = false;
         objGarde.binBloque = false;
         objGarde.binLingot = false;
+        objGarde.binStopAnimation = false;
         objGarde.intLargeurTab = (objGarde.intLargeur) / 30;
         objGarde.intHauteurTab = (objGarde.intHauteur) / 30;
         objGarde.intVitesse = objCanvas.width / 1200;
@@ -86,6 +87,25 @@ function dessinerGardes() {
             objC2D.fillRect(objGardeCourant.intLargeur / 2 - 9 + fltAnim / 2, 7 - fltAnim / 2, 4, 4); // bras gauche
             objC2D.fillRect(objGardeCourant.intLargeur / 2 + 2, 8, 4, 4); // bras droit
             objC2D.fillRect(objGardeCourant.intLargeur / 2 + 5 + fltAnim / 2, 7 + fltAnim / 2, 4, 4); // bras droit
+            objC2D.restore();
+        }
+        else if (objGardeCourant.binStopAnimation == true) {
+            objC2D.translate(intPosX, intPosY);
+            objC2D.fillStyle = 'white';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1.5, 6, 3, 4); // cou
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 8, 6, 13); // corps
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 0, 6, 6); // tête
+            objC2D.fillStyle = '#88B1FF';
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 3, 0, 6, 3); // casquette
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 5.5, 2, 6, 2); // casquette
+            objC2D.fillRect(3, 20, 4, 4); // jambe gauche
+            objC2D.fillRect(0, 23, 4, 4); // jambe gauche
+            objC2D.fillRect(objGardeCourant.intLargeur - 7, 20, 4, 4); // jambe droite
+            objC2D.fillRect(objGardeCourant.intLargeur - 4, 23, 4, 4); // jambe droite
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 - 6, 8, 4, 4); // bras gauche
+            objC2D.fillRect(0, 11, 4, 4); // bras gauche
+            objC2D.fillRect(objGardeCourant.intLargeur / 2 + 2, 8, 4, 4); // bras droit
+            objC2D.fillRect(objGardeCourant.intLargeur - 4, 11, 4, 4); // bras droit
             objC2D.restore();
         }
         else if (objGardeCourant.binSurCorde == true) {
@@ -385,12 +405,14 @@ function collectLingotGarde() {
     }
 }
 
-// echapper le lingot
+// échapper le lingot quand le garde tombe dans un trou ou aléatoirement
 function dropLingot() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGarde = tabGardes[i];
+        // Garde tombe dans le trou et lâche lingot
         if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 8) {
             initGardeTrou(Math.floor(objGarde.intY / 30), Math.floor(objGarde.intX / 30));
+            objGarde.binStopAnimation = true;
             objGarde.intDirectionX = 0;
             tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] = 9;
             intScoreNiveau += 75;
@@ -401,7 +423,7 @@ function dropLingot() {
                 initLingots((Math.floor(objGarde.intY / 30 - objGarde.intHauteur / 30)), (Math.floor(objGarde.intX / 30)));
             }
         }
-
+        // Garde lâche le lingot qu'il possède en marchant (aléatoire)
         if (objGarde.binLingot == true) {
             if (objGarde.intDirectionX == 1) {
                 if (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur / 30)][Math.floor(objGarde.intX / 30 - objGarde.intLargeurTab)] == 1
@@ -441,6 +463,7 @@ function mortGarde() {
             tabOptionsDePosition = [1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15];
             var intIndexAleatoireTab = objGarde.intX = Math.floor(Math.random() * tabOptionsDePosition.length);
             objGarde.intX = tabOptionsDePosition[intIndexAleatoireTab] * 30 + 6;
+            objGarde.binStopAnimation = false;
             objSons.gardedeath.play();
         }
     }
