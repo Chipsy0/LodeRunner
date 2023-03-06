@@ -389,9 +389,9 @@ function collectLingotGarde() {
 function dropLingot() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGarde = tabGardes[i];
-        if (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur / 30)][Math.floor(objGarde.intX / 30)] == 4
-            && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 8) {
+        if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 8) {
             initGardeTrou(Math.floor(objGarde.intY / 30), Math.floor(objGarde.intX / 30));
+            objGarde.intDirectionX = 0;
             tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] = 9;
             intScoreNiveau += 75;
             intScore += 75;
