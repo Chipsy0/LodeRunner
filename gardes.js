@@ -297,6 +297,7 @@ function collectLingotGarde() {
                 tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] = 0;
                 tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab/30)] = 0;
                 objGarde.binLingot = true;
+                
             }
         }
     }
@@ -312,15 +313,17 @@ function dropLingot() {
             tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] = 9;
             if (objGarde.binLingot == true){
                 objGarde.binLingot = false;
-                tabTableau[Math.floor(objGarde.intY / 30 - 1)][Math.floor(objGarde.intX / 30)] = 3;
+                tabTableau[Math.floor(objGarde.intY / 30 - objGarde.intHauteur/30)][Math.floor(objGarde.intX / 30)] = 3;
             }
         }   
 
         if (objGarde.binLingot == true) {
-            if (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur/30)][Math.floor(objGarde.intX / 30)] == 1) {
-                    if (Math.floor(Math.random() * 100) == 1){
+            if (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur/30)][Math.floor(objGarde.intX / 30)] == 1 
+               && tabTableau[Math.floor(objGarde.intY / 30 )][Math.floor(objGarde.intX / 30)] == 0 ) {
+                    if (Math.floor(Math.random() * 1200) == 1){
                         objGarde.binLingot = false;
-                        tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteur/30)][Math.floor(objGarde.intX / 30)] = 3;
+                        tabTableau[Math.floor(objGarde.intY / 30 )][Math.floor(objGarde.intX / 30)] = 3;
+                        
                     }                
             }
         }
