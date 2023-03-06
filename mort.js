@@ -33,8 +33,10 @@ function mortParGarde(){
            || ((((Math.floor(objRunner.intY) + 28)>= intPosY &&(Math.floor(objRunner.intY) + 28) <= (intPosY + intHauteur))
            && (Math.floor(objRunner.intX)         >= intPosX && Math.floor(objRunner.intX)       <= (intPosX + intLargeur)))
            || (((Math.floor(objRunner.intY) + 28) >= intPosY && (Math.floor(objRunner.intY) + 28)<= (intPosY + intHauteur))
-           && ((Math.floor(objRunner.intX) + 18)  >= intPosX && (Math.floor(objRunner.intX) + 18)<= (intPosX + intLargeur))))){           
+           && ((Math.floor(objRunner.intX) + 18)  >= intPosX && (Math.floor(objRunner.intX) + 18)<= (intPosX + intLargeur))))){  
+            objSons.dead.play();       
             binMort = true;
+            
         }
     }
 }

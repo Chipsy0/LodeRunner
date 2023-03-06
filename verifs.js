@@ -29,8 +29,8 @@ function verifNiveauReussi() {
 
 // vérifie si lode runner est mort
 function verifMort() {
-    if (tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 1
-        && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 1) {
+    if ((tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30)] == 1
+        && tabTableau[Math.floor(objRunner.intY / 30)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] == 1)) {
         objSons.dead.play();
         binMort = true;
     }

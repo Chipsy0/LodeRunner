@@ -4,23 +4,41 @@
 function mouvementsGardesX() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGarde = tabGardes[i];
-        //mouvement gauche
-        if (objGarde.intDirectionX == -1) {
-            if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] != 6
-                && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] != 1
-                && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30)] != 1) {
-                objGarde.intX += objGarde.intDirectionX * objGarde.intVitesse;
-            }
-        }
-        //mouvement droit
-        if (objGarde.intDirectionX == 1) {
-            if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] != 6
-                && (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] != 1
-                    && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] != 1)) {
 
-                objGarde.intX += objGarde.intDirectionX * objGarde.intVitesse;
+        if (((tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] == 0
+            && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 0)
+            && (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 0
+                && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 0))
+            || (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] == 5
+                && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 5)
+            || (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] == 8
+                && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 8)
+            || (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 8
+                && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 8
+                && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] != 4
+                && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] != 4)) {
+            objGarde.binFall = true;
+        }
+        if (objGarde.binFall != true) {
+            //mouvement gauche
+            if (objGarde.intDirectionX == -1) {
+                if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] != 6
+                    && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] != 1
+                    && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30)] != 1) {
+                    objGarde.intX += objGarde.intDirectionX * objGarde.intVitesse;
+                }
+            }
+            //mouvement droit
+            if (objGarde.intDirectionX == 1) {
+                if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] != 6
+                    && (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] != 1
+                        && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] != 1)) {
+
+                    objGarde.intX += objGarde.intDirectionX * objGarde.intVitesse;
+                }
             }
         }
+
     }
 }
 
