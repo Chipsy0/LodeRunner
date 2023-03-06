@@ -362,7 +362,8 @@ function dropLingot() {
 function mortGarde() {
     for (var i = 0; i < tabGardes.length; i++) {
         var objGarde = tabGardes[i];
-        if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 1 ) {
+        if ((tabTableau[Math.floor(objGarde.intY / 30 )][Math.floor(objGarde.intX / 30)] == 1 
+           && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 1)) {
             intScoreNiveau += 75;
             intScore += 75;
             objGarde.intY = (3 * 30) - objGarde.intHauteur;
