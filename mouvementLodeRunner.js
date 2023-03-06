@@ -1,4 +1,6 @@
-//mouvement horizental (X)
+/* Toutes les fonctions qui gèrent le mouvement du lode runner */
+
+//mouvement horizontal (X)
 function mouvementX() {
     //mouvement gauche
     if (binMouvementLeft == true) {

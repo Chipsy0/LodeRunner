@@ -25,6 +25,7 @@
     <script type="text/javascript" src="tomber.js"></script>
     <script type="text/javascript" src="mort.js"></script>
     <script type="text/javascript" src="gardes.js"></script>
+    <script type="text/javascript" src="mouvementsGardes.js"></script>
     <script type="text/javascript">
         var objCanvas = null;
         var objC2D = null;
@@ -103,6 +104,7 @@
 
             if (binCommence == true) {
                 updateChrono();
+                deplacerGardes();
             }
 
             if (intnbLingot == 6) {
@@ -124,6 +126,9 @@
                 verifCorde();
                 mouvementX();
                 mouvementY();
+                mouvementsGardesX();
+                mouvementsGardesY();
+                tomberGardes();
             }
             //tomber
             else if (binFall == true){
