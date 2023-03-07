@@ -157,7 +157,7 @@ function dessinerGardes() {
                 objC2D.fillStyle = 'black';
                 objC2D.restore();
             }
-            else if (objGardeCourant.intDirectionX == 1) {
+            else {
                 objC2D.translate(intPosX, intPosY);
                 objC2D.fillStyle = 'white';
                 objC2D.fillRect(objGardeCourant.intLargeur / 2 - 1.5, 5, 3, 4); // cou
