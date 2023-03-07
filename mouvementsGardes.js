@@ -96,10 +96,27 @@ function mouvementsGardesY() {
                             && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 0)
                             && (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] == 2
                                 && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)))) {
-                    objGarde.intDirectionX = 0;
+
                     if (tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2
                         || tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1 / 30)][Math.floor(objGarde.intX / 30 + (objGarde.intLargeur / 2) / 30)] == 2) {
                         objGarde.intY += objGarde.intDirectionY * objGarde.intVitesse;
+                    }
+                    // vérif si le runner est en haut de l'échelle
+                    if ((tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 0
+                        && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 0)
+                        && (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1/30)][Math.floor(objGarde.intX / 30)] == 0
+                        && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1/30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 0)
+                        && (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1/30)][Math.floor(objGarde.intX / 30) - 1] != 1
+                        && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab - 1/30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab) + 1] != 1)){
+                            if (objGarde.intX < objRunner.intX) {
+                                objGarde.intDirectionX = 1;
+                            }
+                            else if (objGarde.intX > objRunner.intX) {
+                                objGarde.intDirectionX = -1;
+                        }
+                    }
+                    else {
+                        objGarde.intDirectionX = 0;
                     }
                     /*if ((tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30)] == 0
                         && tabTableau[Math.floor(objGarde.intY / 30)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 0)) {
@@ -132,7 +149,7 @@ function mouvementsGardesY() {
 
                 }
                 //mouvement en bas
-                if (objGarde.intY < objRunner.intY
+                else if (objGarde.intY < objRunner.intY
                     && (tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30)] == 2
                         && tabTableau[Math.floor(objGarde.intY / 30 + objGarde.intHauteurTab)][Math.floor(objGarde.intX / 30 + objGarde.intLargeurTab)] == 2)) {
                     objGarde.intDirectionX = 0;
