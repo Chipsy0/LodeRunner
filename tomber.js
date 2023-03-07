@@ -2,7 +2,7 @@
 function tomber() {
     if (binMort == false) {
     objSons.falling.play();
-    objRunner.intY += 2 * objRunner.intVitesse;
+    objRunner.intY += 1 * objRunner.intVitesse;
 
         if ((tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30)] != 0
             && tabTableau[Math.floor(objRunner.intY / 30 + objRunner.intHauteurTab)][Math.floor(objRunner.intX / 30 + objRunner.intLargeurTab)] != 0)

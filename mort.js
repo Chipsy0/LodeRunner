@@ -1,6 +1,6 @@
 //si Lode runner meurt 
 function mort() {
-        objRunner.intY -= 1 * objRunner.intVitesse;
+        objRunner.intY -= 2 * objRunner.intVitesse;
         if (Math.floor(objRunner.intY / 30) == 0 ) {
             intNbVies--;
             binMort = false;
